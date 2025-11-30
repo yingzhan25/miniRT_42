@@ -11,14 +11,7 @@
 //     Vector Normalization
 //     Vector Multiplication (Multiplying a Vector by a scalar)
 
-#include <math.h>
-
-typedef	struct s_vector
-{
-	float	x;
-	float	y;
-	float	z;
-}	t_vector;
+#include "vector3D.h"
 
 t_vector	addition(t_vector a, t_vector b)
 {
