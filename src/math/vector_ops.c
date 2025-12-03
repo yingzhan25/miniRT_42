@@ -40,4 +40,11 @@ t_vec3	vec_divide(t_vec3 v, double scalar)
 	return (tmp);
 }
 
+double	vec_magnit(t_vec3 v)
+{
+	double	m;
+
+	m = sqrt(v.x * v.x + v.y * v.y);
+	return (m);
+}
 
