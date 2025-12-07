@@ -30,21 +30,29 @@ t_vec3	vec_scale(t_vec3 v, double scalar)
 	return (tmp);
 }
 
+/*
+** here is the thing that if scalar value is eqaual to 0, we should 
+** return the error. its good to check before calling the function, i think so
+** it would be more safer than returning zero vector 
+*/
 t_vec3	vec_divide(t_vec3 v, double scalar)
 {
 	t_vec3	tmp;
 
+	if (scalar < EPSILON)
+		return (ZERO_VECTOR);
 	tmp.x = v.x / scalar;
 	tmp.y = v.y / scalar;
 	tmp.z = v.z / scalar;
 	return (tmp);
 }
 
-double	vec_magnit(t_vec3 v)
+t_vec3	vec_new(double x, double y, double z)
 {
-	double	m;
+	t_vec3 tmp;
 
-	m = sqrt(v.x * v.x + v.y * v.y);
-	return (m);
+	tmp.x = x;
+	tmp.y = y;
+	tmp.z = z;
+	return (tmp);
 }
-
