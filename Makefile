@@ -1,42 +1,82 @@
-NAME = minirt
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-LFLAGS = -lm
-RM = rm -f
-INCLUDES = -I./includes/ -I./libft/includes/
+# Color definitions
+RESET      = \033[0m
+RED        = \033[31m
+GREEN      = \033[32m
+YELLOW     = \033[33m
+BLUE       = \033[34m
+CYAN       = \033[36m
+BOLD       = \033[1m
+UNDERLINE  = \033[4m
 
-SRCS = src/main.c src/parser/parse_scene.c
+# Emojis
+SUCCESS			= ✅
+BUILD			= 🔨
+CLEAN			= 🧹
 
-OBJ_DIR = ./obj
+# Program name
+NAME 			= minirt
+
+# Compiler and flags
+CC 				= cc
+CFLAGS 			= -Wall -Wextra -Werror -g
+
+# Directories
+LIBFT_DIR		= Libft
+
+# Library files
+LIBFT			= $(LIBFT_DIR)/libft.a
+
+# Math library
+MATH_LIB		= -lm
+
+# Platform detection
+RM 				= rm -f
+MKDIR			= mkdir -p
+RM				= rm -rf
+
+INCLUDES 		= -I./includes/
+
+SRCS 			=
+
+OBJ_DIR 		= ./obj
 
 OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))
 
-LIBFT = ./libft/libft.a
-
 all: $(NAME)
-$(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LFLAGS) $(LIBFT) -o $(NAME)
 
-$(LIBFT):
-	make -C libft
+#  Build the executable
+$(NAME): $(OBJ_DIR) $(OBJS)
+	@echo "$(CYAN)Building $(NAME)...$(RESET)"
+	@$(CC) $(CFLAGS) $(OBJS) $(LFLAGS) -o $(NAME)
+	@echo "$(CYAN)Build complete!$(RESET)"
 
+#  Create object files directory
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)/tokenizing $(OBJ_DIR)/parsing $(OBJ_DIR)/expanding \
-	$(OBJ_DIR)/signals $(OBJ_DIR)/exec $(OBJ_DIR)/exec/built_ins \
-	$(OBJ_DIR)/env $(OBJ_DIR)/exec/expansion $(OBJ_DIR)/heredoc \
-	$(OBJ_DIR)/exec/non_builtin \
+	@echo "$(YELLOW)Creating object files directory...$(RESET)"
+	@(MKDIR) $(OBJ_DIR)
+	@echo "$(YELLOW)Directory created!$(RESET)"
 
+#  Compile source files to object files
 $(OBJ_DIR)/%.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@echo "$(BLUE)Compiling $<...$(RESET)"
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@echo "$(BLUE)Compiled $< to $@$(RESET)"
 
+# Clean up object files
 clean:
-	$(RM) -r $(OBJ_DIR)
-	make -C libft clean
+	@echo "$(RED)Cleaning object files...$(RESET)"
+	@$(RM) -r $(OBJ_DIR)
+	@echo "$(RED)Object files cleaned!$(RESET)"
 
+# Full clean up
 fclean: clean
-	$(RM) $(NAME)
-	make -C libft fclean
+	@echo "$(RED)Cleaning executable...$(RESET)"
+	@$(RM) $(NAME)
+	@echo "$(RED)Executable cleaned!$(RESET)"
 
+# Rebuild the project
 re: fclean all
+	@echo "$(GREEN)Rebuild complete!$(RESET)"
 
-.PHONY: all clean fclean re
+# Phony targets
+.PHONY: all clean fclean re valgrind

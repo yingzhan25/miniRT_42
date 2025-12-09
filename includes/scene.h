@@ -1,18 +1,12 @@
 
 #include "../libft/includes/libft.h"
 #include "../libft/includes/get_next_line.h"
+#include "vector.h"
 
 #define	RATIO_MIN 0.0
 #define	RATIO_MAX 1.0
 #define	RGB_MIN 0
 #define	RGB_MAX 255
-
-typedef struct s_vec3
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_vec3;
 
 /**
  *Struct of 3 elements
