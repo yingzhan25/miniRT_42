@@ -13,19 +13,21 @@ int check_extension(char *s1, char *s2)
 
 	if (!s1 || !s1[0])
 		return (1);
-	pos = count_dot(s1);
+	pos = check_dot(s1);
 	len = ft_strlen(s1);
 	if (!pos || pos == -1 || pos == len - 1)
 		return (1);
-	if (len <= ft_strlen(s2) || ft_strcmp(s1 + len - ft_strlen(s2), s2))
+	if (len <= (int)ft_strlen(s2) || ft_strcmp(s1 + len - (int)ft_strlen(s2), s2))
 		return (1);
 	return (0);
 }
 
 /**
  * Check whether is empty line or new line;
- * Skip empty line and multiple spaces;
- * distribute data to corresponding parser function
+ * skip empty line and multiple spaces;
+ * distribute data to corresponding parser function;
+ * once any parser fails, record FAIL flag and keep reading until GNL return NULL(avoid memory leak);
+ * clean up memory before return
  */
 void	parse_line(char *line, t_scene *scene)
 {
@@ -36,13 +38,22 @@ void	parse_line(char *line, t_scene *scene)
 	array = ft_split(line, ' ');
 	if (!array || !array[0])
 		return ;
+	//if any parser fails, should clean up array, line and the whole struct before return
 	if (!ft_strcmp(array[0], "A"))
-		parse_ambient(array, scene);
+	{
+		if (parse_ambient(array, scene))
+			scene->fail_to_parse = 1;
+	}
 	// else if (!ft_strcmp(array[0], "C"))
 	// 	parse_camera(array, scene);
 	// else if (!ft_strcmp(array[0], "L"))
 	// 	parse_light(array, scene);
 	//Parsing objects
+	else
+	{
+		ft_putstr_fd("Error/nUndefined element/object type\n", 2);
+		scene->fail_to_parse = 1;
+	}
 	clean_array(array);
 }
 
@@ -78,6 +89,7 @@ t_scene *parse_scene(int ac, char *av[])
 		line = get_next_line(fd);
 	}
 	close(fd);
-	//Validate scene data
+//	if (scene->fail_to_parse || scene->num_a != 1 || scene->num_c != 1 || scene->num_l != 1)
+//		return (free(scene), NULL);
 	return (scene);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jkubaev <jkubaev@student.42berlin.de>      +#+  +:+       +#+         #
+#    By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/17 14:50:10 by yingzhan          #+#    #+#              #
-#    Updated: 2025/09/13 16:33:58 by jkubaev          ###   ########.fr        #
+#    Updated: 2025/12/09 17:44:54 by yingzhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,8 @@ PRINTF_SRCS = ft_printf.c ft_handle_char.c \
 			ft_handle_hex.c ft_handle_percent.c \
 			utils.c
 
-GNL_SRCS = get_next_line.c get_next_line_bonus.c \
-		get_next_line_utils.c get_next_line_utils_bonus.c
+GNL_SRCS = get_next_line.c \
+		get_next_line_utils.c
 
 SRCS        = $(LIBFT_SRCS) $(PRINTF_SRCS) $(GNL_SRCS)
 OBJS        = $(SRCS:.c=.o)

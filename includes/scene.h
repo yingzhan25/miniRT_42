@@ -5,7 +5,6 @@
 
 #define	RATIO_MIN 0.0
 #define	RATIO_MAX 1.0
-#define	RGB_MIN 0
 #define	RGB_MAX 255
 
 /**
@@ -37,6 +36,7 @@ typedef struct s_light
 
 typedef	struct s_scene
 {
+	int			fail_to_parse;
 	t_ambient	ambient;
 	int			num_a;
 	t_camera	camera;
@@ -46,9 +46,12 @@ typedef	struct s_scene
 	//Objects
 }	t_scene;
 
+t_scene	*parse_scene(int ac, char *av[]);
 int		parse_ambient(char **array, t_scene *scene);
-int		parse_double(char *s, t_scene *scene);
+int		parse_doubles(char *s, t_scene *scene);
+int		parse_colors(char *s, t_scene *scene);
 
 //Utility functions
+int		count_array_element(char **array);
 void	clean_array(char **arr);
-int		count_dot(char *s);
+int		check_dot(char *s);
