@@ -5,4 +5,6 @@
 # include "scene.h"
 # include "vector.h"
 
+# define ERROR_MESSAGE   "Error/n"
+
 #endif
