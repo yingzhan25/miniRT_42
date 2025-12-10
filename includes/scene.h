@@ -55,3 +55,6 @@ int		parse_colors(char *s, t_scene *scene);
 int		count_array_element(char **array);
 void	clean_array(char **arr);
 int		check_dot(char *s);
+int 	check_extension(char *s1, char *s2);
+double	ft_atof(const char *str);
+int		check_int(char *s, char c);

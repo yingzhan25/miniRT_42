@@ -2,25 +2,6 @@
 #include "scene.h"
 #include <fcntl.h>
 
-/**
- * Check whether the scene file has a valid filename and ends with ".rt";
- * multiple entension(more than 1 dots) is forbidden
- */
-int check_extension(char *s1, char *s2)
-{
-	int pos;
-	int len;
-
-	if (!s1 || !s1[0])
-		return (1);
-	pos = check_dot(s1);
-	len = ft_strlen(s1);
-	if (!pos || pos == -1 || pos == len - 1)
-		return (1);
-	if (len <= (int)ft_strlen(s2) || ft_strcmp(s1 + len - (int)ft_strlen(s2), s2))
-		return (1);
-	return (0);
-}
 
 /**
  * Check whether is empty line or new line;

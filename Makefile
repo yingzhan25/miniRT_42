@@ -39,7 +39,8 @@ RMDIR			= rm -rf
 
 INCLUDES 		= -I./includes/ -I$(LIBFT_DIR)/includes
 
-SRCS 			= src/main.c src/parser/parse_scene.c src/parser/parse_elements.c src/parser/parse_utils.c
+SRCS 			= src/main.c src/parser/parse_scene.c src/parser/parse_elements.c src/parser/parse_utils.c \
+				src/parser/parse_ambient.c
 
 OBJ_DIR 		= ./obj
 
