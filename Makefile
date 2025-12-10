@@ -21,10 +21,13 @@ CC 				= cc
 CFLAGS 			= -Wall -Wextra -Werror -g
 
 # Directories
-LIBFT_DIR		= Libft
+LIBFT_DIR		= libft
 
 # Library files
 LIBFT			= $(LIBFT_DIR)/libft.a
+
+# Library flags
+LFLAGS      = -L$(LIBFT_DIR) -lft
 
 # Math library
 MATH_LIB		= -lm
@@ -34,7 +37,8 @@ UNAME_S 		= $(shell uname)
 RM 				= rm -rf
 MKDIR			= mkdir -p
 
-SRCS 			= 
+SRCS 			= src/main.c src/parser/parse_scene.c src/parser/parse_elements.c src/parser/parse_utils.c \
+				src/parser/parse_ambient.c
 
 OBJ_DIR 		= ./obj
 OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))
@@ -55,6 +59,11 @@ endif
 
 all: $(NAME)
 
+$(LIBFT):
+	@echo "$(GREEN)Building Libft...$(RESET)"
+	@make -C $(LIBFT_DIR)
+	@echo "$(GREEN)Libft built!$(RESET)"
+
 #  Build the executable
 $(NAME): $(LIBFT) $(OBJ_DIR) $(OBJS)
 	@echo "$(CYAN)Building $(NAME)...$(RESET)"
@@ -73,6 +82,7 @@ $(OBJ_DIR):
 
 #  Compile source files to object files
 $(OBJ_DIR)/%.o: %.c
+	@$(MKDIR) $(dir $@)
 	@echo "$(BLUE)Compiling $<...$(RESET)"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	@echo "$(BLUE)Compiled $< to $@$(RESET)"

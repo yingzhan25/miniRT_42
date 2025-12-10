@@ -1,12 +1,21 @@
 #ifndef SCENE_H
 # define SCENE_H
 
-// Core vector type for 3D coordinates, directions, and colors
-typedef struct s_vec3 {
-    double x;
-    double y;
-    double z;
-} t_vec3;
+#include "../libft/includes/libft.h"
+#include "../libft/includes/get_next_line.h"
+#include "vector.h"
+#include "stdio.h"
+
+#define	RATIO_MIN 0.0
+#define	RATIO_MAX 1.0
+#define	RGB_MAX 255
+
+// // Core vector type for 3D coordinates, directions, and colors
+// typedef struct s_vec3 {
+//     double x;
+//     double y;
+//     double z;
+// } t_vec3;
 
 // RGB color (0-255 range)
 typedef struct s_color {
@@ -83,11 +92,29 @@ typedef struct s_object {
 
 // Complete scene
 typedef struct s_scene {
-    t_ambient ambient;
-    t_camera camera;
-    t_light light;
+    int			fail_to_parse;
+	t_ambient	ambient;
+	int			num_a;
+	t_camera	camera;
+	int			num_c;
+	t_light		light;
+	int			num_l;
     t_object *objects;   // Linked list of all objects
     int obj_count;
 } t_scene;
+
+t_scene	*parse_scene(int ac, char *av[]);
+int		parse_ambient(char **array, t_scene *scene);
+int		parse_doubles(char *s, t_scene *scene);
+int		parse_colors(char *s, t_scene *scene);
+
+//Utility functions
+int		count_array_element(char **array);
+void	clean_array(char **arr);
+int		check_dot(char *s);
+int 	check_extension(char *s1, char *s2);
+double	ft_atof(const char *str);
+int		check_int(char *s, char c);
+void	error(char *str);
 
 #endif
