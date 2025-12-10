@@ -33,18 +33,29 @@ LFLAGS      = -L$(LIBFT_DIR) -lft
 MATH_LIB		= -lm
 
 # Platform detection
-RM 				= rm -f
+UNAME_S 		= $(shell uname)
+RM 				= rm -rf
 MKDIR			= mkdir -p
-RMDIR			= rm -rf
-
-INCLUDES 		= -I./includes/ -I$(LIBFT_DIR)/includes
 
 SRCS 			= src/main.c src/parser/parse_scene.c src/parser/parse_elements.c src/parser/parse_utils.c \
 				src/parser/parse_ambient.c
 
 OBJ_DIR 		= ./obj
-
 OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))
+
+LIBS := -lm
+LIBS += -L$(LIBFT_DIR) -lft
+INCLUDES += -I./includes/
+
+# Platform-specific MLX configuration
+ifeq ($(UNAME_S),Linux)
+    LIBS += -lmlx -lXext -lX11 -ldl
+endif
+
+ifeq ($(UNAME_S),Darwin)
+    LIBS += -Lmlx_macos -lmlx -framework OpenGL -framework AppKit
+    INCLUDES += -Imlx_macos
+endif
 
 all: $(NAME)
 
@@ -54,10 +65,14 @@ $(LIBFT):
 	@echo "$(GREEN)Libft built!$(RESET)"
 
 #  Build the executable
-$(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT)
+$(NAME): $(LIBFT) $(OBJ_DIR) $(OBJS)
 	@echo "$(CYAN)Building $(NAME)...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJS) $(LFLAGS) $(MATH_LIB) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 	@echo "$(CYAN)Build complete!$(RESET)"
+
+#  Building LIBFT
+$(LIBFT):
+	@$(MAKE) -C $(LIBFT_DIR)
 
 #  Create object files directory
 $(OBJ_DIR):
@@ -75,15 +90,15 @@ $(OBJ_DIR)/%.o: %.c
 # Clean up object files
 clean:
 	@echo "$(RED)Cleaning object files...$(RESET)"
-	@$(RM) -r $(OBJ_DIR)
-	@make -C $(LIBFT_DIR) clean
+	@$(RM) $(OBJ_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) clean
 	@echo "$(RED)Object files cleaned!$(RESET)"
 
 # Full clean up
 fclean: clean
 	@echo "$(RED)Cleaning executable...$(RESET)"
 	@$(RM) $(NAME)
-	@make -C $(LIBFT_DIR) fclean
+	@$(MAKE) -C $(LIBFT_DIR) fclean
 	@echo "$(RED)Executable cleaned!$(RESET)"
 
 # Rebuild the project
@@ -91,4 +106,4 @@ re: fclean all
 	@echo "$(GREEN)Rebuild complete!$(RESET)"
 
 # Phony targets
-.PHONY: all clean fclean re valgrind
+.PHONY: all clean fclean re

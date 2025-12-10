@@ -128,8 +128,14 @@ int	check_int(char *s, char c)
 	while (s[i])
 	{
 		if (!ft_isdigit(s[i]))
-			return (ft_putstr_fd("Error/nAmbient: ", 2), ft_putchar_fd(c, 2), ft_putstr_fd(": Invalid input\n", 2), 1);
+			return (error("Ambient: "), ft_putchar_fd(c, 2), error(": Invalid input\n"), 1);
 		i++;
 	}
 	return (0);
+}
+
+void	error(char *str)
+{
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(str, 2);
 }

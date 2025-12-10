@@ -13,10 +13,12 @@
 void	parse_line(char *line, t_scene *scene)
 {
 	char	**array;
+	char	*line_trim;
 
 	if (!line || !line[0] || line[0] == '\n')
 		return ;
-	array = ft_split(line, ' ');
+	line_trim = ft_strtrim(line, "\n");
+	array = ft_split(line_trim, ' ');
 	if (!array || !array[0])
 		return ;
 	//if any parser fails, should clean up array, line and the whole struct before return
@@ -32,7 +34,7 @@ void	parse_line(char *line, t_scene *scene)
 	//Parsing objects
 	else
 	{
-		ft_putstr_fd("Error/nUndefined element/object type\n", 2);
+		error("Undefined element/object type\n");
 		scene->fail_to_parse = 1;
 	}
 	clean_array(array);
@@ -54,17 +56,18 @@ t_scene *parse_scene(int ac, char *av[])
 	t_scene *scene;
 
 	if (ac != 2 || check_extension(av[1], ".rt"))
-		return (ft_putstr_fd("Error\nUsage: ./minirt <scene.rt>\n", 2), NULL);
+		return (error("Usage: ./minirt <scene.rt>\n"), NULL);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
-		return (ft_putstr_fd("Error\nCannot open file\n", 2), NULL);
+		return (error("Cannot open file\n"), NULL);
 	scene = malloc(sizeof(t_scene));
 	if (!scene)
-		return (ft_putstr_fd("Error\nMemory allocation failed\n", 2), close(fd), NULL);
+		return (error("Memory allocation failed\n"), close(fd), NULL);
 	ft_memset(scene, 0, sizeof(t_scene));
 	line = get_next_line(fd);
 	while (line)
 	{
+//		printf("line: %s", line);
 		parse_line(line, scene);
 		free(line);
 		line = get_next_line(fd);

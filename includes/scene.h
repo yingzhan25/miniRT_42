@@ -1,50 +1,107 @@
+#ifndef SCENE_H
+# define SCENE_H
 
 #include "../libft/includes/libft.h"
 #include "../libft/includes/get_next_line.h"
 #include "vector.h"
+#include "stdio.h"
 
 #define	RATIO_MIN 0.0
 #define	RATIO_MAX 1.0
 #define	RGB_MAX 255
 
-/**
- *Struct of 3 elements
- */
-typedef struct s_ambient
-{
-	double	ratio;
-	t_vec3	color;
-}	t_ambient;
+// // Core vector type for 3D coordinates, directions, and colors
+// typedef struct s_vec3 {
+//     double x;
+//     double y;
+//     double z;
+// } t_vec3;
 
-typedef struct s_camera
-{
-	t_vec3	position;
-	t_vec3	orientation;
-	double	fov;
-}	t_camera;
+// RGB color (0-255 range)
+typedef struct s_color {
+    int r;
+    int g;
+    int b;
+} t_color;
 
-typedef struct s_light
-{
-	t_vec3	position;
-	double	brightness;
-	t_vec3	color;
-}	t_light;
+// Ambient light (singleton)
+typedef struct s_ambient {
+    double ratio;        // 0.0 to 1.0
+    t_color color;
+} t_ambient;
 
-/**
- *Struct of 3 objects
- */
+// Camera (singleton)
+typedef struct s_camera {
+    t_vec3 position;
+    t_vec3 orientation;  // Normalized direction vector
+    double fov;          // Field of view in degrees (0-180)
+    // Computed values for ray generation:
+    t_vec3 right;        // Camera right vector
+    t_vec3 up;           // Camera up vector
+    double viewport_width;
+    double viewport_height;
+} t_camera;
 
-typedef	struct s_scene
-{
-	int			fail_to_parse;
+// Light source (singleton in mandatory, multiple in bonus)
+typedef struct s_light {
+    t_vec3 position;
+    double brightness;   // 0.0 to 1.0
+    t_color color;       // Parsed but unused in mandatory
+} t_light;
+
+// Object type enumeration
+typedef enum e_obj_type {
+    OBJ_SPHERE,
+    OBJ_PLANE,
+    OBJ_CYLINDER
+} t_obj_type;
+
+// Sphere-specific data
+typedef struct s_sphere {
+    t_vec3 center;
+    double diameter;
+    double radius;       // Computed: diameter / 2
+} t_sphere;
+
+// Plane-specific data
+typedef struct s_plane {
+    t_vec3 point;
+    t_vec3 normal;       // Normalized
+} t_plane;
+
+// Cylinder-specific data
+typedef struct s_cylinder {
+    t_vec3 center;
+    t_vec3 axis;         // Normalized
+    double diameter;
+    double radius;       // Computed: diameter / 2
+    double height;
+} t_cylinder;
+
+// Generic object (linked list node)
+typedef struct s_object {
+    t_obj_type type;
+    t_color color;
+    union {
+        t_sphere sphere;
+        t_plane plane;
+        t_cylinder cylinder;
+    } data;
+    struct s_object *next;
+} t_object;
+
+// Complete scene
+typedef struct s_scene {
+    int			fail_to_parse;
 	t_ambient	ambient;
 	int			num_a;
 	t_camera	camera;
 	int			num_c;
 	t_light		light;
 	int			num_l;
-	//Objects
-}	t_scene;
+    t_object *objects;   // Linked list of all objects
+    int obj_count;
+} t_scene;
 
 t_scene	*parse_scene(int ac, char *av[]);
 int		parse_ambient(char **array, t_scene *scene);
@@ -58,3 +115,6 @@ int		check_dot(char *s);
 int 	check_extension(char *s1, char *s2);
 double	ft_atof(const char *str);
 int		check_int(char *s, char c);
+void	error(char *str);
+
+#endif

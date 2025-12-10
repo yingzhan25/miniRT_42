@@ -6,7 +6,7 @@
 /*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:30:01 by yingzhan          #+#    #+#             */
-/*   Updated: 2025/09/12 15:31:58 by yingzhan         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:11:40 by yingzhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ static char	**ft_assign_arr(char **array, const char *str, size_t count, char c)
 			i += ft_sub_len(str, i, c);
 			j++;
 		}
-		if (j < count)
+		if (j <= count)
 			i++;
 	}
 	return (array);
@@ -178,7 +178,7 @@ char	**ft_split(char const *s, char c)
 /*
 #include <stdio.h>
 #include <stdlib.h>
-#include "libft.h" // 确保包含了你的 ft_split 函数声明
+#include "libft.h"
 
 void	print_result(char **arr)
 {
