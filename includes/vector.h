@@ -6,6 +6,7 @@
 
 // Small value to prevent division by zero
 # define EPSILON 1.0e-6
+
 // Core vector type for 3D coordinates, directions, and colors
 typedef struct s_vec3
 {
