@@ -10,13 +10,6 @@
 #define	RATIO_MAX 1.0
 #define	RGB_MAX 255
 
-// // Core vector type for 3D coordinates, directions, and colors
-// typedef struct s_vec3 {
-//     double x;
-//     double y;
-//     double z;
-// } t_vec3;
-
 // RGB color (0-255 range)
 typedef struct s_color {
     int r;
@@ -104,9 +97,10 @@ typedef struct s_scene {
 } t_scene;
 
 t_scene	*parse_scene(int ac, char *av[]);
-int		parse_ambient(char **array, t_scene *scene);
-int		parse_doubles(char *s, t_scene *scene);
-int		parse_colors(char *s, t_scene *scene);
+int		parse_ambient(char **array, t_scene *scene, char *name);
+int		parse_ratio(char *s, t_scene *scene, char *name, char *sub_name);
+int		parse_colors(char *s, t_scene *scene, char *name, char *sub_name);
+int		parse_tuples(char *s, t_scene *scene, char *name, char *sub_name);
 
 //Utility functions
 int		count_array_element(char **array);
@@ -114,7 +108,8 @@ void	clean_array(char **arr);
 int		check_dot(char *s);
 int 	check_extension(char *s1, char *s2);
 double	ft_atof(const char *str);
-int		check_int(char *s, char c);
-void	error(char *str);
+int		check_int(char *s, char *name, char *sub_name);
+int		check_double(char *s, char *name, char *sub_name);
+void	error(char *name, char *sub_name, char *msg);
 
 #endif
