@@ -10,7 +10,7 @@ int	check_array_double(char	**array)
 	i = 0;
 	while (array[i])
 	{
-		if (check_double(array[i], "name", "sub_name"))
+		if (check_double(array[i]))
 			return (1);
 		i++;
 	}
