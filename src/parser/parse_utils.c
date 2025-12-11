@@ -78,7 +78,7 @@ int check_extension(char *s1, char *s2)
 }
 
 /**
- * Receive ONLY input with correct dot format and numeric(sign allowd);
+ * Receive input with or without dot and numeric(sign allowd);
  * convert string to double;
  * possible to have overflow
  */
@@ -104,15 +104,22 @@ double	ft_atof(const char *str)
 		i++;
 	while (str[i] && str[i] != '.')
 	{
+		if (str[i] < '0' || str[i] > '9')
+			break ;
 		integer = 10 * integer + (str[i] - '0');
 		i++;
 	}
-	i++;
-	while (str[i])
+	if (str[i] == '.')
 	{
-		fraction = 10 * fraction + (str[i] - '0');
-		divisor *= 10;
 		i++;
+		while (str[i])
+		{
+			if (str[i] < '0' || str[i] > '9')
+				break ;
+			fraction = 10 * fraction + (str[i] - '0');
+			divisor *= 10;
+			i++;
+		}
 	}
 	return (sign * (integer + fraction / divisor));
 }
@@ -121,21 +128,21 @@ double	ft_atof(const char *str)
  * Check whether dot format is correct;
  * check whether is numeric (sign allowed);
  */
-int	check_double(char *s, char *name, char *sub_name)
+int	check_double(char *s)
 {
 	int		dot_pos;
 	int		i;
 
 	dot_pos = check_dot(s);
 	if (!dot_pos || dot_pos == (int)ft_strlen(s) - 1)
-		return (error(name, sub_name, "Invalid double\n"), 1);
+		return (1);
 	i = 0;
 	if (s[i] == '-' || s[i] == '+')
 		i++;
 	while (s[i])
 	{
 		if (i != dot_pos && !ft_isdigit(s[i]))
-			return (error(name, sub_name, "Invalid double\n"), 1);
+			return (1);
 		i++;
 	}
 	return (0);
@@ -144,7 +151,7 @@ int	check_double(char *s, char *name, char *sub_name)
 /**
  * check whether is numeric (sign not allowed, negative not allowed)
  */
-int	check_int(char *s, char *element, char *type)
+int	check_int(char *s)
 {
 	int	i;
 
@@ -152,7 +159,7 @@ int	check_int(char *s, char *element, char *type)
 	while (s[i])
 	{
 		if (!ft_isdigit(s[i]))
-			return (error(element, type, "Invalid int input\n"), 1);
+			return (1);
 		i++;
 	}
 	return (0);
@@ -160,12 +167,9 @@ int	check_int(char *s, char *element, char *type)
 /**
  * Error\nAmbient: ratio: invalid double\n
  */
-void	error(char *name, char *sub_name, char *msg)
+void	error(char *msg)
 {
 	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(name, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(sub_name, 2);
-	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
 }
