@@ -37,7 +37,7 @@ UNAME_S 		= $(shell uname)
 RM 				= rm -rf
 MKDIR			= mkdir -p
 
-SRCS 			= src/main.c src/parser/parse_scene.c src/parser/parse_elements.c src/parser/parse_utils.c \
+SRCS 			= src/main.c src/parser/parse_scene.c src/parser/parse_camera.c src/parser/parse_utils.c \
 				src/parser/parse_ambient.c
 
 OBJ_DIR 		= ./obj

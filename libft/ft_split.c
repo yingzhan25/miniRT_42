@@ -6,11 +6,10 @@
 /*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:30:01 by yingzhan          #+#    #+#             */
-/*   Updated: 2025/12/10 17:11:40 by yingzhan         ###   ########.fr       */
+/*   Updated: 2025/12/11 17:53:34 by yingzhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
 #include "libft.h"
 
 static size_t	words_counter(char const *s, char c)
@@ -92,7 +91,7 @@ char	**ft_split(char const *s, char c)
 	*temp = NULL;
 	return (arr);
 }
-*/
+/*
 #include "libft.h"
 
 static size_t	ft_count_substr(char const *str, char c)
@@ -175,7 +174,7 @@ char	**ft_split(char const *s, char c)
 		return (arr);
 	return (ft_assign_arr(arr, s, num, c));
 }
-/*
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "libft.h"
