@@ -118,9 +118,33 @@ double	ft_atof(const char *str)
 }
 
 /**
+ * Check whether dot format is correct;
+ * check whether is numeric (sign allowed);
+ */
+int	check_double(char *s, char *name, char *sub_name)
+{
+	int		dot_pos;
+	int		i;
+
+	dot_pos = check_dot(s);
+	if (!dot_pos || dot_pos == (int)ft_strlen(s) - 1)
+		return (error(name, sub_name, "Invalid double\n"), 1);
+	i = 0;
+	if (s[i] == '-' || s[i] == '+')
+		i++;
+	while (s[i])
+	{
+		if (i != dot_pos && !ft_isdigit(s[i]))
+			return (error(name, sub_name, "Invalid double\n"), 1);
+		i++;
+	}
+	return (0);
+}
+
+/**
  * check whether is numeric (sign not allowed, negative not allowed)
  */
-int	check_int(char *s, char c)
+int	check_int(char *s, char *element, char *type)
 {
 	int	i;
 
@@ -128,14 +152,20 @@ int	check_int(char *s, char c)
 	while (s[i])
 	{
 		if (!ft_isdigit(s[i]))
-			return (error("Ambient: "), ft_putchar_fd(c, 2), error(": Invalid input\n"), 1);
+			return (error(element, type, "Invalid int input\n"), 1);
 		i++;
 	}
 	return (0);
 }
-
-void	error(char *str)
+/**
+ * Error\nAmbient: ratio: invalid double\n
+ */
+void	error(char *name, char *sub_name, char *msg)
 {
 	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(str, 2);
+	ft_putstr_fd(name, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(sub_name, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(msg, 2);
 }

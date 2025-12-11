@@ -6,15 +6,22 @@
  * check whether the ratio is valid;
  * check whether the RGB is valid
  */
-int	parse_ambient(char **array, t_scene *scene)
+int	parse_ambient(char **array, t_scene *scene, char *name)
 {
 	if (scene->num_a)
-		return (error("Ambient: more than 1 definition\n"), 1);
+		return (error(name, "duplicate", "more than 1 definition\n"), 1);
 	scene->num_a = 1;
 	if (!array || count_array_element(array) != 3 || !array[0] || !array[1] || !array[2])
-		return (error("Ambient: Usage: A Ratio [r,g,b]\n"), 1);
-	if (parse_doubles(array[1], scene) || parse_colors(array[2], scene))
-		return (1);
-	return (0);
+		return (error(name, "Usage", "A ratio [r,g,b]\n"), 1);
+	return (parse_ratio(array[1], scene, name, "ratio") || parse_colors(array[2], scene, name, "colors"));
 }
 
+// int	parse_camera(char **array, t_scene *scene, char *name)
+// {
+// 	if (scene->num_c)
+// 		return (error(name, "duplicate", "more than 1 definition\n"), 1);
+// 	scene->num_c = 1;
+// 	if (!array || count_array_element(array) != 4 || !array[0] || !array[1] || !array[2] || !array[3])
+// 		return (error("name", "Usage", "C [x,y,z] [nx,ny,nz] fov\n"), 1);
+// 	return (parse_tuples(array[1], scene, name, "position"));
+// }
