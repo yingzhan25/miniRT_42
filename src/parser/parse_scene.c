@@ -19,19 +19,20 @@ void	parse_line(char *line, t_scene *scene)
 		return ;
 	line_trim = ft_strtrim(line, "\n");
 	array = ft_split(line_trim, ' ');
+	free(line_trim);
 	if (!array || !array[0])
 		return ;
 	//if any parser fails, should clean up array, line and the whole struct before return
 	if (!ft_strcmp(array[0], "A"))
-		scene->fail_to_parse = parse_ambient(array, scene, "Ambient");
-	// else if (!ft_strcmp(array[0], "C"))
-	// 	scene->fail_to_parse = parse_camera(array, scene, "Camera");
+		scene->fail_to_parse = parse_ambient(array, scene);
+	else if (!ft_strcmp(array[0], "C"))
+		scene->fail_to_parse = parse_camera(array, scene);
 	// else if (!ft_strcmp(array[0], "L"))
-	// 	parse_light(array, scene);
+	// 	scene->fail_to_parse = parse_light(array, scene);
 	//Parsing objects
 	else
 	{
-		error("General", "type", "Undefined element/object type\n");
+		error(UNDEFINE_OBJS);
 		scene->fail_to_parse = 1;
 	}
 	clean_array(array);
@@ -53,13 +54,13 @@ t_scene *parse_scene(int ac, char *av[])
 	t_scene *scene;
 
 	if (ac != 2 || check_extension(av[1], ".rt"))
-		return (error("General", "usage", "./minirt <scene.rt>\n"), NULL);
+		return (error(INVALID_ARG_NUM), NULL);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
-		return (error("General", "usage", "Cannot open file\n"), NULL);
+		return (error(FAIL_OPEN_FILE), NULL);
 	scene = malloc(sizeof(t_scene));
 	if (!scene)
-		return (error("General", "memory", "Memory allocation failed\n"), close(fd), NULL);
+		return (error(FAIL_MEM_ALLOC), close(fd), NULL);
 	ft_memset(scene, 0, sizeof(t_scene));
 	line = get_next_line(fd);
 	while (line)
