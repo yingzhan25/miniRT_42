@@ -28,7 +28,8 @@ void	parse_line(char *line, t_scene *scene)
 	// 	scene->fail_to_parse = parse_camera(array, scene, "Camera");
 	// else if (!ft_strcmp(array[0], "L"))
 	// 	parse_light(array, scene);
-	//Parsing objects
+	else if (!is_object(array[0]))
+		scene->fail_to_parse = parse_objects(array, scene);
 	else
 	{
 		error("General", "type", "Undefined element/object type\n");

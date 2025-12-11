@@ -101,6 +101,7 @@ int		parse_ambient(char **array, t_scene *scene, char *name);
 int		parse_ratio(char *s, t_scene *scene, char *name, char *sub_name);
 int		parse_colors(char *s, t_scene *scene, char *name, char *sub_name);
 int		parse_tuples(char *s, t_scene *scene, char *name, char *sub_name);
+int		parse_objects(char	**array, t_scene *scene);
 
 //Utility functions
 int		count_array_element(char **array);
@@ -111,5 +112,13 @@ double	ft_atof(const char *str);
 int		check_int(char *s, char *name, char *sub_name);
 int		check_double(char *s, char *name, char *sub_name);
 void	error(char *name, char *sub_name, char *msg);
+
+// Utility functions for parsing the objects
+int		is_object(char *str);
+int		check_array_double(char	**array);
+int		parse_vector(char *str, t_vec3	*vec);
+int		is_zero_vec(t_vec3 *vec);
+int		parse_orientation(char	*str, t_vec3 *vec);
+
 
 #endif
