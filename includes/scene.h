@@ -10,8 +10,6 @@
 #define	RATIO_MIN 0.0
 #define	RATIO_MAX 1.0
 #define	RGB_MAX 255
-#define NORM_MIN -1.0
-#define NORM_MAX 1.0
 #define FOV_MIN 0
 #define FOV_MAX 180
 
@@ -104,9 +102,12 @@ typedef struct s_scene {
 t_scene	*parse_scene(int ac, char *av[]);
 int		parse_ambient(char **array, t_scene *scene);
 int		parse_camera(char **array, t_scene *scene);
+int		parse_light(char **array, t_scene *scene);
 int		parse_objects(char	**array, t_scene *scene);
 
 //Utility functions
+int		parse_ratio(char *s, double *ratio);
+int		parse_colors(char *s, t_color *color);
 int		count_array_element(char **array);
 void	clean_array(char **arr);
 int		check_dot(char *s);
