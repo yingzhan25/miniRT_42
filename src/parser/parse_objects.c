@@ -68,7 +68,7 @@ int	parse_color(char *str, t_color *color)
     (*color).g = ft_atof(split[1]);
     (*color).b = ft_atof(split[2]);
 	if ((*color).r > RGB_MAX || (*color).g > RGB_MAX || (*color).b > RGB_MAX)
-		return (error(A_EXCD_COLOR), clean_array(split), 1);
+		return (error(A_INVL_COLOR), clean_array(split), 1);
 	return (clean_array(split), 0);
 }
 

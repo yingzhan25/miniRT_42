@@ -27,8 +27,8 @@ void	parse_line(char *line, t_scene *scene)
 		scene->fail_to_parse = parse_ambient(array, scene);
 	else if (!ft_strcmp(array[0], "C"))
 		scene->fail_to_parse = parse_camera(array, scene);
-	// else if (!ft_strcmp(array[0], "L"))
-	// 	parse_light(array, scene);
+	else if (!ft_strcmp(array[0], "L"))
+	 	parse_light(array, scene);
 	else if (!is_object(array[0]))
 		scene->fail_to_parse = parse_objects(array, scene);
 	else
@@ -72,7 +72,7 @@ t_scene *parse_scene(int ac, char *av[])
 		line = get_next_line(fd);
 	}
 	close(fd);
-//	if (scene->fail_to_parse || scene->num_a != 1 || scene->num_c != 1 || scene->num_l != 1)
-//		return (free(scene), NULL);
+	if (scene->fail_to_parse || scene->num_a != 1 || scene->num_c != 1 || scene->num_l != 1)
+		return (free(scene), NULL);
 	return (scene);
 }
