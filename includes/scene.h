@@ -104,6 +104,7 @@ typedef struct s_scene {
 t_scene	*parse_scene(int ac, char *av[]);
 int		parse_ambient(char **array, t_scene *scene);
 int		parse_camera(char **array, t_scene *scene);
+int		parse_objects(char	**array, t_scene *scene);
 
 //Utility functions
 int		count_array_element(char **array);
@@ -114,5 +115,12 @@ double	ft_atof(const char *str);
 int		check_int(char *s);
 int		check_double(char *s);
 void	error(char *msg);
+
+// Parsing objects
+int		check_array_double(char	**array);
+int		parse_vector(char *str, t_vec3	*vec);
+int		is_zero_vec(t_vec3 *vec);
+int		parse_orientation(char	*str, t_vec3 *vec);
+int		is_object(char *str);
 
 #endif

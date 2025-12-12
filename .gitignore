@@ -1,0 +1,17 @@
+# Ignore editor/IDE settings
+.vscode/
+.idea/
+*.swp
+*~
+
+# Ignore build files
+*.o
+
+# Ignore pdf and imgs
+*.pdf
+*.png
+*.img
+*.md
+
+# Ignore mlx
+mlx/

@@ -49,7 +49,7 @@ INCLUDES += -I./includes/
 
 # Platform-specific MLX configuration
 ifeq ($(UNAME_S),Linux)
-    LIBS += -lmlx -lXext -lX11 -ldl
+    LIBS += -L./mlx -lmlx -lXext -lX11 -ldl
 endif
 
 ifeq ($(UNAME_S),Darwin)
@@ -59,9 +59,10 @@ endif
 
 all: $(NAME)
 
+#	Building LIBFT
 $(LIBFT):
 	@echo "$(GREEN)Building Libft...$(RESET)"
-	@make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR) --silent
 	@echo "$(GREEN)Libft built!$(RESET)"
 
 #  Build the executable
@@ -69,10 +70,6 @@ $(NAME): $(LIBFT) $(OBJ_DIR) $(OBJS)
 	@echo "$(CYAN)Building $(NAME)...$(RESET)"
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 	@echo "$(CYAN)Build complete!$(RESET)"
-
-#  Building LIBFT
-$(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR)
 
 #  Create object files directory
 $(OBJ_DIR):
@@ -91,14 +88,14 @@ $(OBJ_DIR)/%.o: %.c
 clean:
 	@echo "$(RED)Cleaning object files...$(RESET)"
 	@$(RM) $(OBJ_DIR)
-	@$(MAKE) -C $(LIBFT_DIR) clean
+	@$(MAKE) -C $(LIBFT_DIR) clean --silent
 	@echo "$(RED)Object files cleaned!$(RESET)"
 
 # Full clean up
 fclean: clean
 	@echo "$(RED)Cleaning executable...$(RESET)"
 	@$(RM) $(NAME)
-	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@$(MAKE) -C $(LIBFT_DIR) fclean --silent
 	@echo "$(RED)Executable cleaned!$(RESET)"
 
 # Rebuild the project
