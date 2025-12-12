@@ -117,7 +117,7 @@ int		check_double(char *s);
 void	error(char *msg);
 
 // Parsing objects
-int		check_array_double(char	**array);
+int     check_array_double(char	**array, int (*f)(char *));
 int		parse_vector(char *str, t_vec3	*vec);
 int		is_zero_vec(t_vec3 *vec);
 int		parse_orientation(char	*str, t_vec3 *vec);
