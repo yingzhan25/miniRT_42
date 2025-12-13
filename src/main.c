@@ -30,6 +30,26 @@ int	main(int argc, char *argv[])
 	printf("r: %d\n", scene->objects->color.r);
 	printf("g: %d\n", scene->objects->color.g);
 	printf("b: %d\n", scene->objects->color.b);
+	printf("========Test for Sphere========\n");
+	printf("x: %f\n", scene->objects->next->data.sphere.center.x);
+	printf("y: %f\n", scene->objects->next->data.sphere.center.y);
+	printf("z: %f\n", scene->objects->next->data.sphere.center.z);
+	printf("diametr: %f\n", scene->objects->next->data.sphere.diameter);
+	printf("r: %d\n", scene->objects->next->color.r);
+	printf("g: %d\n", scene->objects->next->color.g);
+	printf("b: %d\n", scene->objects->next->color.b);
+	printf("========Test for Cylinder========\n");
+	printf("x: %f\n", scene->objects->next->next->data.cylinder.center.x);
+	printf("y: %f\n", scene->objects->next->next->data.cylinder.center.y);
+	printf("z: %f\n", scene->objects->next->next->data.cylinder.center.z);
+	printf("nx: %f\n", scene->objects->next->next->data.cylinder.axis.x);
+	printf("ny: %f\n", scene->objects->next->next->data.cylinder.axis.y);
+	printf("nz: %f\n", scene->objects->next->next->data.cylinder.axis.z);
+	printf("diametr: %f\n", scene->objects->next->next->data.cylinder.diameter);
+	printf("height: %f\n", scene->objects->next->next->data.cylinder.height);
+	printf("r: %d\n", scene->objects->next->next->color.r);
+	printf("g: %d\n", scene->objects->next->next->color.g);
+	printf("b: %d\n", scene->objects->next->next->color.b);
 	free(scene);
 	return (0);
 }

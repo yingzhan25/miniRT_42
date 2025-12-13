@@ -28,7 +28,7 @@ void	parse_line(char *line, t_scene *scene)
 	else if (!ft_strcmp(array[0], "C"))
 		scene->fail_to_parse = parse_camera(array, scene);
 	else if (!ft_strcmp(array[0], "L"))
-	 	parse_light(array, scene);
+		parse_light(array, scene);
 	else if (!is_object(array[0]))
 		scene->fail_to_parse = parse_objects(array, scene);
 	else
