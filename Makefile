@@ -38,7 +38,8 @@ RM 				= rm -rf
 MKDIR			= mkdir -p
 
 SRCS 			= src/main.c src/parser/parse_scene.c src/parser/parse_camera.c src/parser/parse_utils.c \
-				src/parser/parse_ambient.c src/parser/parse_light.c src/utils/error.c
+				src/parser/parse_ambient.c src/parser/parse_objects.c src/parser/parse_obj_utils.c \
+				src/math/vector_ops.c src/math/vector_utils.c src/parser/parse_light.c src/utils/error.c \
 
 OBJ_DIR 		= ./obj
 OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))
