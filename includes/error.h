@@ -23,5 +23,11 @@
 # define L_INVL_BRIGHT "Light: Brightness: Invalid input"
 # define L_INVL_COLOR "Light: Color: Invalid input"
 
+# define O_INVL_CHAR "Object: Invalid character in input"
+# define O_INVL_ARG "Object: Invalid number of arguments"
+# define O_INVL_POS "Object: Position: Invalid input"
+# define O_INVL_ORT "Object: Orientation: Invalid input"
+# define O_INVL_DIAM "Object: Diameter: Invalid input"
+# define O_INVL_HEIGHT "Object: Height: Invalid input"
 
 #endif

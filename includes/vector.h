@@ -27,6 +27,7 @@ t_vec3	vec_negate(t_vec3 v);
 t_vec3	vec_new(double x, double y, double z);
 double	vec_length(t_vec3 v);
 double	dot_product(t_vec3 a, t_vec3 b);
+int		is_zero_vec(t_vec3 *vec);
 
 
 #endif
