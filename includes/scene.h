@@ -11,6 +11,8 @@
 # define P_VEC		parse_vector
 # define P_ORI		parse_orientation
 # define P_DIAM		parse_diametr
+# define P_RAT		parse_ratio
+# define P_FOV		parse_fov
 # define P_COL		parse_colors
 # define CH_A_D		check_array_double
 # define P_DM		parse_diametr
@@ -108,14 +110,18 @@ typedef struct s_scene {
     int obj_count;
 } t_scene;
 
+// Parsing elements
 t_scene		*parse_scene(int ac, char *av[]);
 int			parse_ambient(char **array, t_scene *scene);
 int			parse_camera(char **array, t_scene *scene);
 int			parse_light(char **array, t_scene *scene);
 int			parse_objects(char	**array, t_scene *scene);
-//Utility functions
+int			validate_scene(t_scene *scene);
+
+// Utility functions
 int			parse_ratio(char *s, double *ratio);
 int			parse_colors(char *s, t_color *color);
+int			parse_fov(char *s, double *fov);
 int			count_array_element(char **array);
 void		clean_array(char **arr);
 int			check_dot(char *s);
@@ -124,6 +130,7 @@ double		ft_atof(const char *str);
 int			check_int(char *s);
 int			check_double(char *s);
 void		error(char *msg);
+void		free_scene(t_scene *scene);
 
 // Parsing objects
 int			check_array_double(char	**array, int (*f)(char *));

@@ -4,7 +4,9 @@
 # define INVALID_ARG_NUM "Usage: ./minirt <scene.rt>"
 # define FAIL_OPEN_FILE "Cannot open file"
 # define FAIL_MEM_ALLOC "Memory allocation failed"
+# define EMPTY_FILE "File is empty"
 # define UNDEFINE_OBJS "Undefined element/object type"
+# define LACK_ELEMENT "Lack necessary elements: A C L"
 
 # define A_MULTIPLE_DEF "Ambient: More than 1 definition"
 # define A_INVL_ARG "Ambient: Usage: A ratio [r,g,b]"
