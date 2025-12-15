@@ -29,9 +29,8 @@ int	parse_colors(char *s, t_color *color)
 	arr = ft_split(s, ',');
 	if (!arr)
 		return (error(FAIL_MEM_ALLOC), 1);
-	if (count_array_element(arr) != 3 || !arr[0] || !arr[1] || !arr[2])
+	if (C_A_E(arr) != 3 || !arr[0] || !arr[1] || !arr[2])
 		return (clean_array(arr), 1);
-//	printf("arr[0]: %s/n", arr[0]);
 	if (check_int(arr[0]) || check_int(arr[1]) || check_int(arr[2]))
 		return (clean_array(arr), 1);
 	(*color).r = ft_atoi(arr[0]);
@@ -56,11 +55,11 @@ int	parse_ambient(char **array, t_scene *scene)
 	if (scene->num_a)
 		return (error(A_MULTIPLE_DEF), 1);
 	scene->num_a = 1;
-	if (!array || count_array_element(array) != 3 || !array[0] || !array[1] || !array[2])
+	if (!array || C_A_E(array) != 3 || !array[0] || !array[1] || !array[2])
 		return (error(A_INVL_ARG), 1);
-	if (parse_ratio(array[1], &ratio))
+	if (P_RAT(array[1], &ratio))
 		return (error(A_INVL_RATIO), 1);
-	if (parse_colors(array[2], &color))
+	if (P_COL(array[2], &color))
 		return (error(A_INVL_COLOR), 1);
 	scene->ambient.ratio = ratio;
 	scene->ambient.color = color;

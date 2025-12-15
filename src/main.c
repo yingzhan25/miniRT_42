@@ -58,12 +58,20 @@ int	main(int argc, char *argv[])
 	printf("ny: %f\n", scene->camera.orientation.y);
 	printf("nz: %f\n", scene->camera.orientation.z);
 	printf("fov: %f\n", scene->camera.fov);
+	printf("========Light========\n");
+	printf("x: %f\n", scene->light.position.x);
+	printf("y: %f\n", scene->light.position.y);
+	printf("z: %f\n", scene->light.position.z);
+	printf("r: %d\n", scene->light.color.r);
+	printf("g: %d\n", scene->light.color.g);
+	printf("b: %d\n", scene->light.color.b);
+	printf("brightness: %f\n", scene->light.brightness);
 	obj = scene->objects;
 	while (obj)
 	{
 		print_object(obj);
 		obj = obj->next;
 	}
-	free(scene);
+	free_scene(scene);
 	return (0);
 }
