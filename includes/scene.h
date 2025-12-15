@@ -1,11 +1,20 @@
 #ifndef SCENE_H
 # define SCENE_H
 
-#include "../libft/includes/libft.h"
-#include "../libft/includes/get_next_line.h"
-#include "vector.h"
-#include "error.h"
-#include "stdio.h"
+# include "../libft/includes/libft.h"
+# include "../libft/includes/get_next_line.h"
+# include "vector.h"
+# include "error.h"
+# include "stdio.h"
+
+// function macros
+# define P_VEC		parse_vector
+# define P_ORI		parse_orientation
+# define P_DIAM		parse_diametr
+# define P_COL		parse_colors
+# define CH_A_D		check_array_double
+# define P_DM		parse_diametr
+# define C_A_E		count_array_element
 
 #define	RATIO_MIN 0.0
 #define	RATIO_MAX 1.0
@@ -99,29 +108,37 @@ typedef struct s_scene {
     int obj_count;
 } t_scene;
 
-t_scene	*parse_scene(int ac, char *av[]);
-int		parse_ambient(char **array, t_scene *scene);
-int		parse_camera(char **array, t_scene *scene);
-int		parse_light(char **array, t_scene *scene);
-int		parse_objects(char	**array, t_scene *scene);
-
+t_scene		*parse_scene(int ac, char *av[]);
+int			parse_ambient(char **array, t_scene *scene);
+int			parse_camera(char **array, t_scene *scene);
+int			parse_light(char **array, t_scene *scene);
+int			parse_objects(char	**array, t_scene *scene);
 //Utility functions
-int		parse_ratio(char *s, double *ratio);
-int		parse_colors(char *s, t_color *color);
-int		count_array_element(char **array);
-void	clean_array(char **arr);
-int		check_dot(char *s);
-int 	check_extension(char *s1, char *s2);
-double	ft_atof(const char *str);
-int		check_int(char *s);
-int		check_double(char *s);
-void	error(char *msg);
+int			parse_ratio(char *s, double *ratio);
+int			parse_colors(char *s, t_color *color);
+int			count_array_element(char **array);
+void		clean_array(char **arr);
+int			check_dot(char *s);
+int			check_extension(char *s1, char *s2);
+double		ft_atof(const char *str);
+int			check_int(char *s);
+int			check_double(char *s);
+void		error(char *msg);
 
 // Parsing objects
-int     check_array_double(char	**array, int (*f)(char *));
-int		parse_vector(char *str, t_vec3	*vec);
-int		is_zero_vec(t_vec3 *vec);
-int		parse_orientation(char	*str, t_vec3 *vec);
-int		is_object(char *str);
+int			check_array_double(char	**array, int (*f)(char *));
+int			parse_vector(char *str, t_vec3	*vec);
+int			is_zero_vec(t_vec3 *vec);
+int			parse_orientation(char	*str, t_vec3 *vec);
+int			is_object(char *str);
+t_object*	create_cylinder(t_vec3 p, t_vec3 n, double dm, double ht, t_color cl);
+int			parse_cylinder(char **a, t_scene *scene);
+t_object*	create_plane(t_vec3 point, t_vec3 normal, t_color color);
+int			parse_plane(char **a, t_scene *scene);
+t_object*	create_sphere(t_vec3 point, double diametr, t_color color);
+int			parse_sphere(char **a, t_scene *scene);
+int			parse_diametr(char *s, double *diametr);
+void		parse_single_obj(t_scene *scene, t_object *obj);
+
 
 #endif

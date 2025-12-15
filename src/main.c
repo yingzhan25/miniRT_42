@@ -1,18 +1,56 @@
 #include "scene.h"
 
+static void	print_object(const t_object *obj)
+{
+	if (obj->type == OBJ_PLANE)
+	{
+		printf("========Plane========\n");
+		printf("x: %f\n", obj->data.plane.point.x);
+		printf("y: %f\n", obj->data.plane.point.y);
+		printf("z: %f\n", obj->data.plane.point.z);
+		printf("nx: %f\n", obj->data.plane.normal.x);
+		printf("ny: %f\n", obj->data.plane.normal.y);
+		printf("nz: %f\n", obj->data.plane.normal.z);
+	}
+	else if (obj->type == OBJ_SPHERE)
+	{
+		printf("========Sphere========\n");
+		printf("x: %f\n", obj->data.sphere.center.x);
+		printf("y: %f\n", obj->data.sphere.center.y);
+		printf("z: %f\n", obj->data.sphere.center.z);
+		printf("diameter: %f\n", obj->data.sphere.diameter);
+	}
+	else if (obj->type == OBJ_CYLINDER)
+	{
+		printf("========Cylinder========\n");
+		printf("x: %f\n", obj->data.cylinder.center.x);
+		printf("y: %f\n", obj->data.cylinder.center.y);
+		printf("z: %f\n", obj->data.cylinder.center.z);
+		printf("nx: %f\n", obj->data.cylinder.axis.x);
+		printf("ny: %f\n", obj->data.cylinder.axis.y);
+		printf("nz: %f\n", obj->data.cylinder.axis.z);
+		printf("diameter: %f\n", obj->data.cylinder.diameter);
+		printf("height: %f\n", obj->data.cylinder.height);
+	}
+	printf("r: %d\n", obj->color.r);
+	printf("g: %d\n", obj->color.g);
+	printf("b: %d\n", obj->color.b);
+}
+
 int	main(int argc, char *argv[])
 {
-	t_scene	*scene;
+	t_scene		*scene;
+	t_object	*obj;
 
 	scene = parse_scene(argc, argv);
 	if (!scene)
 		return (1);
-	printf("========Test for Ambient========\n");
+	printf("========Ambient========\n");
 	printf("ratio: %f\n", scene->ambient.ratio);
 	printf("r: %d\n", scene->ambient.color.r);
 	printf("g: %d\n", scene->ambient.color.g);
 	printf("b: %d\n", scene->ambient.color.b);
-	printf("========Test for Camera========\n");
+	printf("========Camera========\n");
 	printf("x: %f\n", scene->camera.position.x);
 	printf("y: %f\n", scene->camera.position.y);
 	printf("z: %f\n", scene->camera.position.z);
@@ -20,16 +58,12 @@ int	main(int argc, char *argv[])
 	printf("ny: %f\n", scene->camera.orientation.y);
 	printf("nz: %f\n", scene->camera.orientation.z);
 	printf("fov: %f\n", scene->camera.fov);
-	printf("========Test for Plane========\n");
-	printf("x: %f\n", scene->objects->data.plane.point.x);
-	printf("y: %f\n", scene->objects->data.plane.point.y);
-	printf("z: %f\n", scene->objects->data.plane.point.z);
-	printf("nx: %f\n", scene->objects->data.plane.normal.x);
-	printf("ny: %f\n", scene->objects->data.plane.normal.y);
-	printf("nz: %f\n", scene->objects->data.plane.normal.z);
-	printf("r: %d\n", scene->objects->color.r);
-	printf("g: %d\n", scene->objects->color.g);
-	printf("b: %d\n", scene->objects->color.b);
+	obj = scene->objects;
+	while (obj)
+	{
+		print_object(obj);
+		obj = obj->next;
+	}
 	free(scene);
 	return (0);
 }
