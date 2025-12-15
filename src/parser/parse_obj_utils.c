@@ -40,6 +40,8 @@ int	parse_diametr(char *s, double *diametr)
 	if (check_double(s))
 		return (error(O_INVL_DIAM), 1);
 	*diametr = ft_atof(s);
+	if (*diametr < EPSILON)
+		return (error(O_NEG_DM), 1);
 	return (0);
 }
 

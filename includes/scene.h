@@ -17,6 +17,7 @@
 # define CH_A_D		check_array_double
 # define P_DM		parse_diametr
 # define C_A_E		count_array_element
+# define P_SI		parse_single_obj
 
 #define	RATIO_MIN 0.0
 #define	RATIO_MAX 1.0
