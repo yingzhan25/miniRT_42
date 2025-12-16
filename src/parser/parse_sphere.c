@@ -29,11 +29,14 @@ int	parse_sphere(char **a, t_scene *scene)
 	double		dm;
 	t_object	*sp;
 
-	if (!a[0] || count_array_element(a) != 3)
+	if (!a[0] || C_A_E(a) != 3)
 		return (error(O_INVL_ARG), 1);
-	if (P_VEC(a[0], &co) || is_zero_vec(&co) || P_DIAM(a[1], &dm) 
-		|| P_COL(a[2], &cl))
-		return (1);
+	if (P_VEC(a[0], &co))
+		return (error(O_INVL_ORT), 1);
+	if (P_DIAM(a[1], &dm) || dm <= 0)
+		return (error(O_NEG_DM), 1);
+	if (P_COL(a[2], &cl))
+		return (error(O_INVL_COL), 1);
 	sp = create_sphere(co, dm, cl);
-	return (!sp || (parse_single_obj(scene, sp), 0));
+	return (!sp || (P_SI(scene, sp), scene->obj_count++, 0));
 }

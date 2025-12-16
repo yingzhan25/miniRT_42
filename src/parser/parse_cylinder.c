@@ -32,11 +32,18 @@ int	parse_cylinder(char **a, t_scene *scene)
 	double		dm[2];
 	t_object	*cy;
 
-	if (!a[0] || count_array_element(a) != 5)
+	if (!a[0] || C_A_E(a) != 5)
 		return (error(O_INVL_ARG), 1);
-	if (P_VEC(a[0], &co) || is_zero_vec(&co) || P_ORI(a[1], &no)
-		|| P_DIAM(a[2], &dm[0]) || P_DIAM(a[3], &dm[1]) || P_COL(a[4], &cl))
-		return (1);
+	if (P_VEC(a[0], &co))
+		return (error(O_INVL_POS), 1);
+	if (P_ORI(a[1], &no))
+		return (error(O_INVL_ORT), 1);
+	if (P_DIAM(a[2], &dm[0]) || dm[0] <= 0)
+		return (error(O_NEG_DM), 1);
+	if (P_DIAM(a[3], &dm[1]) || dm[1] <= 0)
+		return (error(O_NEG_HT), 1);
+	if (P_COL(a[4], &cl))
+		return (error(O_INVL_COL), 1);
 	cy = create_cylinder(co, no, dm[0], dm[1], cl);
-	return (!cy || (parse_single_obj(scene, cy), 0));
+	return (!cy || (P_SI(scene, cy), scene->obj_count++, 0));
 }

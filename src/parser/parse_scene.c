@@ -30,10 +30,7 @@ void parse_line(char *line, t_scene *scene)
 	else if (!is_object(array[0]))
 		scene->fail_to_parse += parse_objects(array, scene);
 	else
-	{
-		error(UNDEFINE_OBJS);
 		scene->fail_to_parse = 1;
-	}
 	clean_array(array);
 }
 
@@ -51,7 +48,6 @@ t_scene *parse_scene(int ac, char *av[])
 	int fd;
 	char *line;
 	t_scene *scene;
-
 	if (ac != 2 || check_extension(av[1], ".rt"))
 		return (error(INVALID_ARG_NUM), NULL);
 	fd = open(av[1], O_RDONLY);

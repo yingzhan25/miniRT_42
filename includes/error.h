@@ -31,5 +31,8 @@
 # define O_INVL_ORT "Object: Orientation: Invalid input"
 # define O_INVL_DIAM "Object: Diameter: Invalid input"
 # define O_INVL_HEIGHT "Object: Height: Invalid input"
+# define O_NEG_DM "Object: Diameter cannot be negative or zero"
+# define O_NEG_HT "Object: Height cannot be negative or zero"
+# define O_INVL_COL "Object: Color: Invalid input"
 
 #endif

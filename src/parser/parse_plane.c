@@ -28,11 +28,14 @@ int	parse_plane(char **a, t_scene *scene)
 	t_color		cl;
 	t_object	*pl;
 
-	if (! a[0] || count_array_element(a) != 3)
+	if (! a[0] || C_A_E(a) != 3)
 		return (error(O_INVL_ARG), 1);
-	if (P_VEC(a[0], &co) || is_zero_vec(&co) || P_ORI(a[1], &no)
-		 || P_COL(a[2], &cl))
-		return (1);
+	if (P_VEC(a[0], &co))
+		return (error(O_INVL_POS), 1);
+	if (P_ORI(a[1], &no))
+		return (error(O_INVL_ORT), 1);
+	if (P_COL(a[2], &cl))
+		return (error(O_INVL_COL), 1);
 	pl = create_plane(co, no, cl);
-	return (!pl || (parse_single_obj(scene, pl), 0));
+	return (!pl || (P_SI(scene, pl), scene->obj_count++, 0));
 }
