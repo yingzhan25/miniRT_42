@@ -10,7 +10,7 @@ int	parse_vector(char *str, t_vec3	*vec)
     split = ft_split(str, ',');
     if (!split || C_A_E(split) != 3
 		||	CH_A_D(split, check_double))
-        return (1);
+        return (clean_array(split), 1);
     (*vec).x = ft_atof(split[0]);
     (*vec).y = ft_atof(split[1]);
     (*vec).z = ft_atof(split[2]);
