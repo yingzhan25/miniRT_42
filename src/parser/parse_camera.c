@@ -35,7 +35,7 @@ int	parse_camera(char **array, t_scene *scene)
 		return (error(C_INVL_ARG), 1);
 	if (P_VEC(array[1], &pos))
 		return (error(C_INVL_POS), 1);
-	if (P_ORI(array[2], &orient) || is_zero_vec(&orient))
+	if (P_ORI(array[2], &orient))
 		return (error(C_INVL_ORT), 1);
 	if (P_FOV(array[3], &fov))
 		return (error(C_INVL_FOV), 1);
