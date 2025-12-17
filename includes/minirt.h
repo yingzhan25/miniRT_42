@@ -4,6 +4,7 @@
 # include <math.h>
 # include "scene.h"
 # include "vector.h"
+# include "render.h"
 
 # define ERROR_MESSAGE   "Error/n"
 
