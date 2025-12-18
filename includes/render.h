@@ -3,6 +3,7 @@
 
 # include "scene.h"
 # include <math.h>
+# include "/usr/local/include/mlx.h"
 
 // Number of pixels, can be changed to 1920*1080
 # define WIN_WIDTH 800
@@ -26,5 +27,10 @@ typedef struct s_mlx_data {
 	int		endian;
 	t_scene	*scene;
 } t_mlx_data;
+
+void	setup_camera(t_camera *cam);
+void	setup_viewport(t_camera *cam);
+void	render_scene(t_mlx_data *data);
+t_ray	generate_ray(t_camera *cam, int i, int j);
 
 #endif
