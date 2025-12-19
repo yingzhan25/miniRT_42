@@ -5,6 +5,7 @@
 # include "scene.h"
 # include "vector.h"
 # include "render.h"
+# include "intersection.h"
 
 # define ERROR_MESSAGE   "Error/n"
 
