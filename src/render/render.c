@@ -1,4 +1,5 @@
 # include "render.h"
+# include "intersection.h"
 
 /**
  * Generating ray to calculate intersection wth objects;
@@ -12,6 +13,7 @@ void	render_scene(t_mlx_data *data)
 	int		j;
 	t_color	color;
 	t_ray	ray;
+	t_hit	hit;
 
 	j = 0;
 	while (j < WIN_HEIGHT)
@@ -20,7 +22,7 @@ void	render_scene(t_mlx_data *data)
 		while (i < WIN_WIDTH)
 		{
 			ray = generate_ray(&data->scene->camera, i, j);
-			//Calculate intersection and find color;
+			hit = intersect_object(ray, data->scene->objects);
 			//following is for test:
 			color.r = 0;
 			color.g = 0;

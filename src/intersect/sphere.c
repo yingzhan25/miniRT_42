@@ -1,6 +1,6 @@
 #include "../../includes/minirt.h"
 
-t_intersection  ray_sphere_intersection(t_ray ray, t_sphere sphere)
+double  ray_sphere_intersection(t_ray ray, t_sphere sphere)
 {
 	t_intersection intersect;
 	double	discriminant;
@@ -18,11 +18,18 @@ t_intersection  ray_sphere_intersection(t_ray ray, t_sphere sphere)
 	{
 		intersect.t1 = NAN;
 		intersect.t2 = NAN;
+		return (NAN);
 	}
 	else
 	{
 		intersect.t1 = ((-1) * b - sqrt(discriminant)) / (2 * a);
 		intersect.t2 = ((-1) * b + sqrt(discriminant)) / (2 * a);
 	}
-	return (intersect);
+	if (intersect.t1 > 0 && intersect.t2 > 0)
+        return (fmin(intersect.t1, intersect.t2));
+    else if (intersect.t1 > 0)
+        return (intersect.t1);
+    else if (intersect.t2 > 0)
+        return (intersect.t2);
+	return (NAN);
 }
