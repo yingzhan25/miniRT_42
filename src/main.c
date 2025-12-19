@@ -74,22 +74,19 @@ void	print_scene(t_scene *scene)
 int	main(int argc, char *argv[])
 {
 	t_scene		*scene;
-	t_mlx_data	data;
+	t_mlx_data	*data;
 
 	scene = parse_scene(argc, argv);
 	if (!scene)
 		return (1);
 	print_scene(scene);
-	data.mlx = mlx_init();
-	data.window = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, "./miniRT");
-	data.image = mlx_new_image(data.mlx, WIN_WIDTH, WIN_HEIGHT);
-	data.addr = mlx_get_data_addr(data.image, &data.bits_per_pixel, &data.line_length, &data.endian);
-	data.scene = scene;
-	setup_camera(&data.scene->camera);
-	setup_viewport(&data.scene->camera);
-	render_scene(&data);
-	//Add mlx event hook
-	mlx_loop(data.mlx);
-	free_scene(scene);
+	data = malloc(sizeof(t_mlx_data));
+	if (!data)
+		return (error(FAIL_MEM_ALLOC), 1);
+	mlx_data_init(data, scene);
+	setup_camera(&data->scene->camera);
+	setup_viewport(&data->scene->camera);
+	render_scene(data);
+	handle_events(data);
 	return (0);
 }
