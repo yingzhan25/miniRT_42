@@ -1,16 +1,11 @@
 # include "render.h"
 
-static void	mlx_put_color_to_image(t_mlx_data *data, t_color color, int x, int y)
-{
-	char	*dst_pixel;
-	int		offset;
-
-	offset = (y * data->line_length) + (x * (data->bits_per_pixel / 8));
-	dst_pixel = data->addr + offset;
-	*(unsigned int *)dst_pixel = (color.b << 16) | (color.g << 8) | color.r;
-}
-
-// Render loop
+/**
+ * Generating ray to calculate intersection wth objects;
+ * find the color according to the intersection;
+ * render loop to render each pixel of image with correct color;
+ * put image to window at once to avoid flickering;
+ */
 void	render_scene(t_mlx_data *data)
 {
 	int		i;
