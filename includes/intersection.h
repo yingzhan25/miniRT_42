@@ -18,4 +18,6 @@ typedef struct s_hit {
 	t_color		color;       // Object color at hit point
 }	t_hit;
 
+t_intersection  ray_sphere_intersection(t_ray ray, t_sphere sphere);
+
 #endif
