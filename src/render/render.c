@@ -13,7 +13,7 @@ void	render_scene(t_mlx_data *data)
 	int		j;
 	t_color	color;
 	t_ray	ray;
-	t_hit	hit;
+	t_intersection	hit;
 
 	j = 0;
 	while (j < WIN_HEIGHT)
@@ -22,11 +22,13 @@ void	render_scene(t_mlx_data *data)
 		while (i < WIN_WIDTH)
 		{
 			ray = generate_ray(&data->scene->camera, i, j);
-			hit = intersect_object(ray, data->scene->objects);
-			//following is for test:
-			color.r = 0;
-			color.g = 0;
-			color.b = 255;
+			//Calculate intersection and find color;
+			//following is a silhouette of the sphere
+			hit = ray_sphere_intersection(ray, data->scene->objects->data.sphere);
+			if (!isnan(hit.t1) && !isnan(hit.t2) && (hit.t1 > 0 || hit.t2 > 0))
+				color = data->scene->objects->color;//Sphere color
+			else
+				color = (t_color) {0, 0, 0};//Background color: black
 			mlx_put_color_to_image(data, color, i, j);
 			i++;
 		}
