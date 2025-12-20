@@ -9,7 +9,7 @@ double  ray_sphere_intersection(t_ray ray, t_sphere sphere)
 	double	c;
 	t_vec3	sphere_to_ray;
 
-	sphere_to_ray = vec_sub(ray.origin, ZERO_VECTOR);
+	sphere_to_ray = vec_sub(ray.origin, sphere.center);
 	a = dot_product(ray.direction, ray.direction);
 	b = 2 * dot_product(ray.direction, sphere_to_ray);
 	c = dot_product(sphere_to_ray, sphere_to_ray) - sphere.radius * sphere.radius;
