@@ -27,16 +27,16 @@ void	object_loop(t_object *current, t_hit *hit_point, t_ray *ray)
 				}
 			}
 		}
-		// if (current->type == OBJ_PLANE)
-		// {
-		// 	(*hit_point).intersection_points = ray_plane_intersection(*ray);
-		// 	if ((*hit_point).intersection_points.valid)
-		// 	{
-		// 		(*hit_point).t = (*hit_point).intersection_points.t1;
-		// 		(*hit_point).hit = 1;
-		// 		(*hit_point).object = current;
-		// 	}
-		// }		
+		if (current->type == OBJ_PLANE)
+		{
+			(*hit_point).intersection_points = ray_plane_intersection(*ray, current->data.plane);
+			if ((*hit_point).intersection_points.valid)
+			{
+				(*hit_point).t = (*hit_point).intersection_points.t1;
+				(*hit_point).hit = 1;
+				(*hit_point).object = current;
+			}
+		}		
 		current = current->next;
 	}
 }

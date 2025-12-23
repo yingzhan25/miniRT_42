@@ -24,6 +24,7 @@ t_intersection	ray_sphere_intersection(t_ray ray, t_sphere sphere);
 double			define_valid_t_for_sphere(double t1, double t2);
 t_hit			intersect_object(t_ray ray, t_object *obj);
 void			object_loop(t_object *current, t_hit *hit_point, t_ray *ray);
+t_intersection	ray_plane_intersection(t_ray ray, t_plane plane);
 
 // Lighting and shade
 t_color			calculate_color(t_hit *hit, t_scene *scene);
