@@ -52,6 +52,11 @@ LIBS := -lm
 LIBS += -L$(LIBFT_DIR) -lft
 INCLUDES += -I./includes/
 
+# Count total files to compile
+TOTAL_FILES := $(words $(SRCS))
+# Variable to track current file number
+CURR_FILE := 0
+
 # Platform-specific MLX configuration
 ifeq ($(UNAME_S),Linux)
     LIBS += -L./mlx -lmlx -lXext -lX11 -ldl
@@ -72,9 +77,8 @@ $(LIBFT):
 
 #  Build the executable
 $(NAME): $(LIBFT) $(OBJ_DIR) $(OBJS)
-	@echo "$(CYAN)Building $(NAME)...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
-	@echo "$(CYAN)Build complete!$(RESET)"
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME) 
+	@echo "\n$(CYAN)Build complete!$(RESET)"
 
 #  Create object files directory
 $(OBJ_DIR):
@@ -85,9 +89,13 @@ $(OBJ_DIR):
 #  Compile source files to object files
 $(OBJ_DIR)/%.o: %.c
 	@$(MKDIR) $(dir $@)
-	@echo "$(BLUE)Compiling $<...$(RESET)"
+	@$(eval CURR_FILE=$(shell echo $$(($(CURR_FILE) + 1))))
+	@$(eval PERCENT=$(shell echo $$(($(CURR_FILE) * 100 / $(TOTAL_FILES)))))
+	@$(eval PROGRESS=$(shell echo $$(($(CURR_FILE) * 30 / $(TOTAL_FILES)))))
+	@printf "\r$(BLUE)Minirt Building: [%-30s] %3d%%$(RESET)" \
+		"$(shell printf '#%.0s' $$(seq 1 $(PROGRESS)))" \
+		"$(PERCENT)"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-	@echo "$(BLUE)Compiled $< to $@$(RESET)"
 
 # Clean up object files
 clean:
