@@ -6,21 +6,22 @@ t_vec3	position(t_ray ray, double t)
 }
 
 
-void	object_loop(t_object *current, t_hit *hit_point, t_ray *ray, t_intersection	*intersect, double *positive_t)
+void	object_loop(t_object *current, t_hit *hit_point, t_ray *ray)
 {
 	double	t;
 
+	(*hit_point).t = INFINITY;
 	while (current)
 	{
 		if (current->type == OBJ_SPHERE)
 		{
-			(*intersect) = ray_sphere_intersection(*ray, current->data.sphere);
-			if ((*intersect).valid)
+			(*hit_point).intersection_points = ray_sphere_intersection(*ray, current->data.sphere);
+			if ((*hit_point).intersection_points.valid)
 			{
-				t = define_valid_t_for_sphere((*intersect).t1, (*intersect).t2);
-				if (!isnan(t) && t < (*positive_t))
+				t = define_valid_t_for_sphere((*hit_point).intersection_points.t1, (*hit_point).intersection_points.t2);
+				if (!isnan(t) && t < (*hit_point).t)
 				{
-					*positive_t = t;
+					(*hit_point).t = t;
 					(*hit_point).hit = 1;
 					(*hit_point).object = current;
 				}
@@ -43,17 +44,12 @@ void	object_loop(t_object *current, t_hit *hit_point, t_ray *ray, t_intersection
 t_hit intersect_object(t_ray ray, t_object *obj)
 {
 	t_hit	hit_point = {0};
-	t_intersection	intersect;
 	t_object	*current;
-	double	positive_t;
 
-	positive_t = INFINITY;
 	current = obj;
-	object_loop(current, &hit_point, &ray, &intersect, &positive_t);
+	object_loop(current, &hit_point, &ray);
 	if (hit_point.hit)
 	{
-		hit_point.t = positive_t;
-		hit_point.intersection_points = intersect;
 		hit_point.color = hit_point.object->color;
 		hit_point.point = position(ray, hit_point.t);
 		hit_point.normal = vec_normalize(vec_sub(hit_point.point, hit_point.object->data.sphere.center));
