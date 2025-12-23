@@ -8,8 +8,8 @@
 # include <X11/X.h>
 
 // Number of pixels, can be changed to 1920*1080
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
 # define M_PI 3.14159265358979323846
 # define KEY_ESC 65307
 
