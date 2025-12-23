@@ -11,8 +11,8 @@ t_color	calculate_color(t_hit *hit, t_scene *scene)
 
 	calculate_ambient(&color, hit, scene);
 	hit_to_light = vec_normalize(vec_sub(scene->light.position, hit->point));
-	//Check whether is in shadow later
-	calculate_diffuse(&color, hit_to_light, hit, scene);
+	if (in_shadow(hit_to_light, scene, hit))
+		calculate_diffuse(&color, hit_to_light, hit, scene);
 	color.r = fmin(fmax(color.r, 0), 255);
 	color.g = fmin(fmax(color.g, 0), 255);
 	color.b = fmin(fmax(color.b, 0), 255);
