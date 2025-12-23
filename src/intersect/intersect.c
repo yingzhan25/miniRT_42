@@ -5,6 +5,31 @@ t_vec3	position(t_ray ray, double t)
 	return (vec_add(ray.origin, vec_scale(ray.direction, t)));
 }
 
+
+void	object_loop(t_object *current, t_hit *hit_point, t_ray *ray, t_intersection	*intersect, double *positive_t)
+{
+	double	t;
+
+	while (current)
+	{
+		if (current->type == OBJ_SPHERE)
+		{
+			(*intersect) = ray_sphere_intersection(*ray, current->data.sphere);
+			if ((*intersect).valid)
+			{
+				t = define_valid_t_for_sphere((*intersect).t1, (*intersect).t2);
+				if (!isnan(t) && t < (*positive_t))
+				{
+					*positive_t = t;
+					(*hit_point).hit = 1;
+					(*hit_point).object = current;
+				}
+			}
+		}
+		current = current->next;
+	}
+}
+
 /*
 ** Intersect Ray with Objects in the Scene
 ** This function iterates through all objects in the scene
@@ -20,29 +45,11 @@ t_hit intersect_object(t_ray ray, t_object *obj)
 	t_hit	hit_point = {0};
 	t_intersection	intersect;
 	t_object	*current;
-	double		t;
-	double		positive_t;
+	double	positive_t;
 
 	positive_t = INFINITY;
 	current = obj;
-	while (current)
-	{
-		if (current->type == OBJ_SPHERE)
-		{
-			intersect = ray_sphere_intersection(ray, current->data.sphere);
-			if (intersect.valid)
-			{
-				t = define_valid_t_for_sphere(intersect.t1, intersect.t2);
-				if (!isnan(t) && t < positive_t)
-				{
-					positive_t = t;
-					hit_point.hit = 1;
-					hit_point.object = current;
-				}
-			}
-		}
-		current = current->next;
-	}
+	object_loop(current, &hit_point, &ray, &intersect, &positive_t);
 	if (hit_point.hit)
 	{
 		hit_point.t = positive_t;
