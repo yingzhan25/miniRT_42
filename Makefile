@@ -43,7 +43,8 @@ SRCS 			= src/main.c src/parser/parse_scene.c src/parser/parse_camera.c src/pars
 				src/parser/parse_sphere.c src/parser/parse_plane.c src/parser/parse_cylinder.c \
 				src/math/math_helper.c src/utils/validation.c src/render/camera.c src/render/ray.c \
 				src/render/render.c src/window/init.c src/window/image.c src/window/event.c src/intersect/sphere.c \
-				src/intersect/intersect.c src/lighting/lighting.c src/lighting/ambient.c src/lighting/diffuse.c
+				src/intersect/intersect.c src/lighting/lighting.c src/lighting/ambient.c src/lighting/diffuse.c \
+				src/intersect/plane.c
 
 OBJ_DIR 		= ./obj
 OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))

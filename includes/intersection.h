@@ -23,6 +23,7 @@ typedef struct s_hit {
 t_intersection	ray_sphere_intersection(t_ray ray, t_sphere sphere);
 double			define_valid_t_for_sphere(double t1, double t2);
 t_hit			intersect_object(t_ray ray, t_object *obj);
+t_intersection	ray_plane_intersection(t_ray ray);
 
 // Lighting and shade
 t_color			calculate_color(t_hit *hit, t_scene *scene);
