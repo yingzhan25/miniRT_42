@@ -23,7 +23,10 @@ void	render_scene(t_mlx_data *data)
 		{
 			ray = generate_ray(&data->scene->camera, i, j);
 			hit = intersect_object(ray, data->scene->objects);
-			color = calculate_color(&hit, data->scene);
+			if (hit.hit == 1)
+				color = calculate_color(&hit, data->scene);
+			else
+				color = (t_color)BG_COLOR;
 			mlx_put_color_to_image(data, color, i, j);
 			i++;
 		}
