@@ -39,7 +39,7 @@ void	object_loop(t_object *current, t_hit *hit_point, t_ray *ray)
 					(*hit_point).object = current;
 				}
 			}
-		}		
+		}
 		current = current->next;
 	}
 }
@@ -58,7 +58,7 @@ t_hit intersect_object(t_ray ray, t_object *obj)
 		hit_point.point = position(ray, hit_point.t);
 		if (hit_point.object->type == OBJ_PLANE)
 		{
-			hit_point.normal = hit_point.object->data.plane.normal;	
+			hit_point.normal = hit_point.object->data.plane.normal;
 		}
 		else
 			hit_point.normal = vec_normalize(vec_sub(hit_point.point, hit_point.object->data.sphere.center));

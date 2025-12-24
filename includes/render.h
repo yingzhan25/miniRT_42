@@ -12,7 +12,7 @@
 # define WIN_HEIGHT 1080
 # define M_PI 3.14159265358979323846
 # define KEY_ESC 65307
-
+# define BG_COLOR {0,0,0}
 // Ray definition
 typedef struct s_ray {
 	t_vec3 origin;
