@@ -1,10 +1,19 @@
 #include "../../includes/minirt.h"
 
+
+/*
+** Function to compute the position along a ray at parameter t.
+** The position is calculated using the ray equation: P(t) = origin + t * direction
+*/
 t_vec3	position(t_ray ray, double t)
 {
 	return (vec_add(ray.origin, vec_scale(ray.direction, t)));
 }
 
+/*
+** Helper function to loop through all objects in the scene and find the closest intersection.
+** It updates the hit_point structure with the closest intersection details.
+*/
 void	object_loop(t_object *current, t_hit *hit_point, t_ray *ray)
 {
 	double	t;
@@ -58,7 +67,11 @@ void	object_loop(t_object *current, t_hit *hit_point, t_ray *ray)
 	}
 }
 
-
+/*
+** Main function to find the intersection of a ray with the scene objects.
+** It iterates through all objects, finds the closest intersection, and computes the hit point details.
+** If an intersection is found, it calculates the hit point position and normal vector based on the object type.
+*/
 t_hit intersect_object(t_ray ray, t_object *obj)
 {
 	t_hit	hit_point = {0};
