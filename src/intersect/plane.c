@@ -26,8 +26,11 @@ t_intersection	ray_plane_intersection(t_ray ray, t_plane plane)
 	}
 	else
 	{
-		intersect.valid = 1;
 		intersect.t1 = dot_product(plane_to_ray, plane.normal) / dot_product(ray.direction, plane.normal);
+		if (intersect.t1 > EPSILON)
+			intersect.valid = 1;
+		else
+			intersect. valid = 0;
 	}
 	return (intersect);
 }

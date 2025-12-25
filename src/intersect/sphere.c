@@ -47,11 +47,11 @@ t_intersection	ray_sphere_intersection(t_ray ray, t_sphere sphere)
 */
 double	define_valid_t_for_sphere(double t1, double t2)
 {
-	if (t1 > 0 && t2 > 0)
+	if (t1 > EPSILON && t2 > EPSILON)
         return (fmin(t1, t2));
-    else if (t1 > 0)
+    else if (t1 > EPSILON)
         return (t1);
-    else if (t2 > 0)
+    else if (t2 > EPSILON)
         return (t2);
 	else
 		return (NAN);
