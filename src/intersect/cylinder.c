@@ -37,16 +37,18 @@ t_intersection	ray_cylinder_intersect(t_ray ray, t_cylinder cylinder)
 		t2 = ((-1) * b + sqrt(discriminant)) / (2 * a);
 		y_max = cylinder.center.y + cylinder.height / 2;
 		y_min = cylinder.center.y - cylinder.height / 2;
-		double	t1_point = ray.origin.y + ray.direction.y * t1;
-		double	t2_point = ray.origin.y + ray.direction.y * t2;
-		if (t1_point <= y_max && t1_point >= y_min)
+		t_vec3	t1_point = position(ray, t1);
+		double	proj_1 = dot_product(vec_sub(t1_point, cylinder.center), cylinder.axis);
+		t_vec3	t2_point = position(ray, t2);
+		double	proj_2 = dot_product(vec_sub(t2_point, cylinder.center), cylinder.axis);
+		if (proj_1 <= y_max && proj_1 >= y_min)
 		{
 			intersect.valid = 1;
 			intersect.t1 = t1;
 		}
 		else
 			intersect.t1 = -1;
-		if (t2_point <= y_max && t2_point >= y_min)
+		if (proj_2 <= y_max && proj_2 >= y_min)
 		{
 			intersect.valid = 1;
 			intersect.t2 = t2;
