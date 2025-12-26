@@ -18,18 +18,16 @@ t_intersection	ray_cylinder_intersect(t_ray ray, t_cylinder cylinder)
 	double	a;
 	double	b;
 	double	c;
-	double	oc_x;
-	double	oc_z;
+	t_vec3	oc;
 	double	t1, t2;
 	double	y_max, y_min;
 
-	oc_x = ray.origin.x - cylinder.center.x;
-	oc_z = ray.origin.z - cylinder.center.z;
-	a = ray.direction.x * ray.direction.x + ray.direction.z * ray.direction.z;
+	oc = vec_sub(ray.origin, cylinder.center);
+	a = dot_product(ray.direction, ray.direction) - pow(dot_product(ray.direction, cylinder.axis), 2);
 	if (a < EPSILON)
 		return (intersect);
-	b = 2 * (oc_x * ray.direction.x + oc_z * ray.direction.z);
-	c = oc_x * oc_x + oc_z * oc_z - cylinder.radius * cylinder.radius;
+	b = 2.0 * (dot_product(oc, ray.direction) - dot_product(ray.direction, cylinder.axis) * dot_product(oc, cylinder.axis));
+	c = dot_product(oc, oc) - pow(dot_product(oc, cylinder.axis), 2) - cylinder.radius * cylinder.radius;
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < EPSILON)
 		return (intersect);
@@ -39,16 +37,18 @@ t_intersection	ray_cylinder_intersect(t_ray ray, t_cylinder cylinder)
 		t2 = ((-1) * b + sqrt(discriminant)) / (2 * a);
 		y_max = cylinder.center.y + cylinder.height / 2;
 		y_min = cylinder.center.y - cylinder.height / 2;
-		double	t1_point = ray.origin.y + ray.direction.y * t1;
-		double	t2_point = ray.origin.y + ray.direction.y * t2;
-		if (t1_point <= y_max && t1_point >= y_min)
+		t_vec3	t1_point = position(ray, t1);
+		double	proj_1 = dot_product(vec_sub(t1_point, cylinder.center), cylinder.axis);
+		t_vec3	t2_point = position(ray, t2);
+		double	proj_2 = dot_product(vec_sub(t2_point, cylinder.center), cylinder.axis);
+		if (proj_1 <= y_max && proj_1 >= y_min)
 		{
 			intersect.valid = 1;
 			intersect.t1 = t1;
 		}
 		else
 			intersect.t1 = -1;
-		if (t2_point <= y_max && t2_point >= y_min)
+		if (proj_2 <= y_max && proj_2 >= y_min)
 		{
 			intersect.valid = 1;
 			intersect.t2 = t2;
@@ -74,7 +74,7 @@ t_vec3 cylinder_normal(t_vec3 point, t_cylinder cylinder)
     t_vec3 normal;
     t_vec3 center_to_point;
     t_vec3 projection;
-	double proj_length; 
+	double proj_length;
 
 	center_to_point = vec_sub(point, cylinder.center);
 	proj_length = dot_product(center_to_point, cylinder.axis);
