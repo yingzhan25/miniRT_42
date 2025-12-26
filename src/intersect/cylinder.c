@@ -19,6 +19,8 @@ t_intersection	ray_cylinder_intersect(t_ray ray, t_cylinder cylinder)
 	double	b;
 	double	c;
 	t_vec3	oc;
+	double	t1, t2;
+	double	y_max, y_min;
 
 	oc = vec_sub(ray.origin, cylinder.center);
 	a = dot_product(ray.direction, ray.direction) - pow(dot_product(ray.direction, cylinder.axis), 2);
@@ -31,9 +33,26 @@ t_intersection	ray_cylinder_intersect(t_ray ray, t_cylinder cylinder)
 		return (intersect);
 	else
 	{
-		intersect.valid = 1;
-		intersect.t1 = ((-1) * b - sqrt(discriminant)) / (2 * a);
-		intersect.t2 = ((-1) * b + sqrt(discriminant)) / (2 * a);
+		t1 = ((-1) * b - sqrt(discriminant)) / (2 * a);
+		t2 = ((-1) * b + sqrt(discriminant)) / (2 * a);
+		y_max = cylinder.center.y + cylinder.height / 2;
+		y_min = cylinder.center.y - cylinder.height / 2;
+		double	t1_point = ray.origin.y + ray.direction.y * t1;
+		double	t2_point = ray.origin.y + ray.direction.y * t2;
+		if (t1_point <= y_max && t1_point >= y_min)
+		{
+			intersect.valid = 1;
+			intersect.t1 = t1;
+		}
+		else
+			intersect.t1 = -1;
+		if (t2_point <= y_max && t2_point >= y_min)
+		{
+			intersect.valid = 1;
+			intersect.t2 = t2;
+		}
+		else
+			intersect.t2 = -1;
 	}
 	return (intersect);
 }
@@ -60,5 +79,5 @@ t_vec3 cylinder_normal(t_vec3 point, t_cylinder cylinder)
 	projection = vec_scale(cylinder.axis, proj_length);
 	normal = vec_sub(center_to_point, projection);
 	normal = vec_normalize(normal);
-    return normal;
+    return (normal);
 }
