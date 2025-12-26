@@ -84,11 +84,17 @@ t_hit intersect_object(t_ray ray, t_object *obj)
 		hit_point.color = hit_point.object->color;
 		hit_point.point = position(ray, hit_point.t);
 		if (hit_point.object->type == OBJ_PLANE)
+		{
 			hit_point.normal = hit_point.object->data.plane.normal;	
+		}
 		else if (hit_point.object->type == OBJ_SPHERE)
+		{
 			hit_point.normal = vec_normalize(vec_sub(hit_point.point, hit_point.object->data.sphere.center));
+		}
 		else
+		{
 			hit_point.normal = cylinder_normal(hit_point.point, hit_point.object->data.cylinder);
+		}
 	}
 	return (hit_point);
 }
