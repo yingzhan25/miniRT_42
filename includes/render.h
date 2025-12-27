@@ -4,13 +4,15 @@
 # include "scene.h"
 # include <math.h>
 //# include "/usr/local/include/mlx.h"
-# include "../mlx/mlx.h"
-# include <X11/X.h>
+# include "../mlx_macos/mlx.h"
+//# include <X11/X.h>
 
 // Number of pixels, can be changed to 1920*1080
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
+#ifndef M_PI
 # define M_PI 3.14159265358979323846
+#endif
 # define KEY_ESC 65307
 # define BG_COLOR {0,0,0}
 // Ray definition
