@@ -13,7 +13,6 @@ double	dot_product(t_vec3 a, t_vec3 b)
 	return (product);
 }
 
-
 /*
 ** Computes the cross product of two 3D vectors a and b.
 ** The cross product is a vector that is perpendicular to both a and b.

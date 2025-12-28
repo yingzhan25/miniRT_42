@@ -11,18 +11,16 @@
 */
 t_intersection	ray_sphere_intersection(t_ray ray, t_sphere sphere)
 {
-	t_intersection intersect;
-	double	discriminant;
-	double	a;
-	double	b;
-	double	c;
-	t_vec3	sphere_to_ray;
+	t_intersection	intersect;
+	double			discriminant;
+	double			a;
+	double			b;
+	double			c;
 
-	sphere_to_ray = vec_sub(ray.origin, sphere.center);
 	a = dot_product(ray.direction, ray.direction);
-	b = 2 * dot_product(ray.direction, sphere_to_ray);
-	c = dot_product(sphere_to_ray, sphere_to_ray) - 
-		sphere.radius * sphere.radius;
+	b = 2 * dot_product(ray.direction, vec_sub(ray.origin, sphere.center));
+	c = dot_product(vec_sub(ray.origin, sphere.center), 
+			vec_sub(ray.origin, sphere.center)) - sphere.radius * sphere.radius;
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
 	{
@@ -48,11 +46,11 @@ t_intersection	ray_sphere_intersection(t_ray ray, t_sphere sphere)
 double	define_valid_t_for_sphere(double t1, double t2)
 {
 	if (t1 > EPSILON && t2 > EPSILON)
-        return (fmin(t1, t2));
-    else if (t1 > EPSILON)
-        return (t1);
-    else if (t2 > EPSILON)
-        return (t2);
+		return (fmin(t1, t2));
+	else if (t1 > EPSILON)
+		return (t1);
+	else if (t2 > EPSILON)
+		return (t2);
 	else
 		return (NAN);
 }

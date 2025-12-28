@@ -9,19 +9,19 @@
 
 static int	cyl_init(t_cyl_work *w, t_ray ray, t_cylinder cy)
 {
-    w->ray = ray;
-    w->cy = cy;
-    w->half_h = cy.height * 0.5;
-    w->oc = vec_sub(ray.origin, cy.center);
+	w->ray = ray;
+	w->cy = cy;
+	w->half_h = cy.height * 0.5;
+	w->oc = vec_sub(ray.origin, cy.center);
 	w->a = dot_product(ray.direction, ray.direction)
 		- pow(dot_product(ray.direction, cy.axis), 2);
 	if (w->a < EPSILON)
-        return (0);
-	w->b = 2.0 * (dot_product(w->oc, ray.direction)
-		- dot_product(ray.direction, cy.axis) * dot_product(w->oc, cy.axis));
-	w->c = dot_product(w->oc, w->oc)
-    	- pow(dot_product(w->oc, cy.axis), 2)
-		- cy.radius * cy.radius;
+		return (0);
+	w->b = 2.0 * (dot_product(w->oc, ray.direction) - \
+			dot_product(ray.direction, cy.axis) * dot_product(w->oc, cy.axis));
+	w->c = dot_product(w->oc, w->oc) - \
+		pow(dot_product(w->oc, cy.axis), 2) - \
+		cy.radius * cy.radius;
 	return (1);
 }
 
@@ -31,17 +31,16 @@ static int	cyl_init(t_cyl_work *w, t_ray ray, t_cylinder cy)
 ** points t1 and t2.
 ** Returns 1 if there are real solutions (intersections), 0 otherwise.
 */
-
 static int	cyl_solve(t_cyl_work *w)
 {
-    double	d;
+	double	d;
 
-    d = w->b * w->b - 4.0 * w->a * w->c;
-    if (d < EPSILON)
-        return (0);
-    w->t1 = ((-1)*(w->b) - sqrt(d)) / (2.0 * w->a);
-    w->t2 = ((-1)*(w->b) + sqrt(d)) / (2.0 * w->a);
-    return (1);
+	d = w->b * w->b - 4.0 * w->a * w->c;
+	if (d < EPSILON)
+		return (0);
+	w->t1 = ((-1) * (w->b) - sqrt(d)) / (2.0 * w->a);
+	w->t2 = ((-1) * (w->b) + sqrt(d)) / (2.0 * w->a);
+	return (1);
 }
 
 /*
@@ -51,17 +50,16 @@ static int	cyl_solve(t_cyl_work *w)
 ** and verifies if it falls within the half-height limits.
 ** Returns 1 if the point is within height bounds, 0 otherwise.
 */
-
 static int	cyl_in_height(t_cyl_work *w, double t)
 {
-    t_vec3	p;
-    double	proj;
+	t_vec3	p;
+	double	proj;
 
-    if (t <= EPSILON)
-        return (0);
-    p = position(w->ray, t);
-    proj = dot_product(vec_sub(p, w->cy.center), w->cy.axis);
-    return (proj >= ((-1) * (w->half_h)) && proj <= w->half_h);
+	if (t <= EPSILON)
+		return (0);
+	p = position(w->ray, t);
+	proj = dot_product(vec_sub(p, w->cy.center), w->cy.axis);
+	return (proj >= ((-1) * (w->half_h)) && proj <= w->half_h);
 }
 
 /*
@@ -74,14 +72,16 @@ static int	cyl_in_height(t_cyl_work *w, double t)
 ** to 1 and t1, t2 are the intersection distances.
 ** If there are no valid intersections, valid is set to 0.
 */
-
 t_intersection	ray_cylinder_intersect(t_ray ray, t_cylinder cylinder)
 {
-	t_intersection intersect = {0};
-	t_cyl_work	cyl;
+	t_intersection	intersect;
+	t_cyl_work		cyl;
 
+	intersect.valid = 0;
+	intersect.t1 = NAN;
+	intersect.t2 = NAN;
 	if (!cyl_init(&cyl, ray, cylinder))
-		return (intersect);	
+		return (intersect);
 	if (!cyl_solve(&cyl))
 		return (intersect);
 	if (cyl_in_height(&cyl, cyl.t1))
@@ -112,12 +112,12 @@ t_intersection	ray_cylinder_intersect(t_ray ray, t_cylinder cylinder)
 ** surface at the intersection point.
 */
 
-t_vec3 cylinder_normal(t_vec3 point, t_cylinder cylinder)
+t_vec3	cylinder_normal(t_vec3 point, t_cylinder cylinder)
 {
-	t_vec3 normal;
-	t_vec3 center_to_point;
-	t_vec3 projection;
-	double proj_length;
+	t_vec3	normal;
+	t_vec3	center_to_point;
+	t_vec3	projection;
+	double	proj_length;
 
 	center_to_point = vec_sub(point, cylinder.center);
 	proj_length = dot_product(center_to_point, cylinder.axis);
