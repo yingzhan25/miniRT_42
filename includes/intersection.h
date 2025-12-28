@@ -20,6 +20,19 @@ typedef struct s_hit {
 	t_color		color;       // Object color at hit point
 }	t_hit;
 
+typedef struct s_cyl_work
+{
+	t_ray		ray;
+	t_cylinder	cy;
+	t_vec3		oc;
+	double		a;
+	double		b;
+	double		c;
+	double		t1;
+	double		t2;
+	double		half_h;
+}				t_cyl_work;
+
 t_intersection	ray_sphere_intersection(t_ray ray, t_sphere sphere);
 double			define_valid_t_for_sphere(double t1, double t2);
 t_hit			intersect_object(t_ray ray, t_object *obj);
