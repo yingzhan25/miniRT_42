@@ -1,4 +1,4 @@
-#include "scene.h"
+#include "minirt.h"
 
 /**
  * Check whether all the parsing is valid or not

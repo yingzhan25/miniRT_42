@@ -37,9 +37,10 @@ UNAME_S 		= $(shell uname)
 RM 				= rm -rf
 MKDIR			= mkdir -p
 
-SRCS 			= src/main.c src/parser/parse_scene.c src/parser/parse_camera.c src/parser/parse_utils.c \
-				src/parser/parse_ambient.c src/parser/parse_objects.c src/parser/parse_obj_utils.c \
-				src/math/vector_ops.c src/math/vector_utils.c src/parser/parse_light.c src/utils/error.c \
+SRCS 			= src/main.c src/parser/parse_scene.c src/parser/parse_camera.c src/utils/parse_utils_1.c \
+				src/utils/parse_utils_2.c src/utils/parse_utils_atof.c src/parser/parse_ambient.c \
+				src/parser/parse_objects.c src/parser/parse_obj_utils.c \
+				src/math/vector_ops.c src/math/vector_utils.c src/parser/parse_light.c \
 				src/parser/parse_sphere.c src/parser/parse_plane.c src/parser/parse_cylinder.c \
 				src/math/math_helper.c src/utils/validation.c src/render/camera.c src/render/ray.c \
 				src/render/render.c src/window/init.c src/window/image.c src/window/event.c src/intersect/sphere.c \
