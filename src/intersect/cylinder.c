@@ -1,4 +1,4 @@
- #include "../../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 /*
 ** cyl_init: Initializes the cylinder intersection work structure.
@@ -6,7 +6,6 @@
 ** based on the ray and cylinder parameters.
 ** Returns 1 if initialization is successful, 0 otherwise.
 */
-
 static int	cyl_init(t_cyl_work *w, t_ray ray, t_cylinder cy)
 {
 	w->ray = ray;

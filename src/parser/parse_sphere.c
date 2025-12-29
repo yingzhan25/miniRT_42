@@ -3,9 +3,9 @@
 /*
 ** create_sphere: create a new sphere object
 */
-t_object* create_sphere(t_vec3 point, double diametr, t_color color)
+t_object	*create_sphere(t_vec3 point, double diametr, t_color color)
 {
-	t_object *obj;
+	t_object	*obj;
 
 	obj = (t_object *)malloc(sizeof(t_object));
 	if (!obj)
