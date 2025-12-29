@@ -1,4 +1,4 @@
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 /*
 ** is_object: check whether the string 
@@ -44,4 +44,3 @@ int	parse_diametr(char *s, double *diametr)
 		return (error(O_NEG_DM), 1);
 	return (0);
 }
-

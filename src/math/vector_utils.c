@@ -46,7 +46,7 @@ t_vec3	vec_normalize(t_vec3 v)
 
 	m = vec_length(v);
 	if (m < EPSILON)
-		tmp = ZERO_VECTOR;
+		tmp = vec_zero();
 	else
 	{
 		tmp.x = v.x / m;

@@ -1,11 +1,11 @@
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 /*
 ** create_plane: create a new plane object
 */
-t_object* create_plane(t_vec3 point, t_vec3 normal, t_color color)
+t_object	*create_plane(t_vec3 point, t_vec3 normal, t_color color)
 {
-	t_object *obj;
+	t_object	*obj;
 
 	obj = (t_object *)malloc(sizeof(t_object));
 	if (!obj)

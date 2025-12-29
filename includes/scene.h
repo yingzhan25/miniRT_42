@@ -139,7 +139,7 @@ int			parse_vector(char *str, t_vec3	*vec);
 int			is_zero_vec(t_vec3 *vec);
 int			parse_orientation(char	*str, t_vec3 *vec);
 int			is_object(char *str);
-t_object*	create_cylinder(t_vec3 p, t_vec3 n, double dm, double ht, t_color cl);
+t_object	*create_cylinder(t_vec3 p, t_vec3 n, double *dm, t_color cl);
 int			parse_cylinder(char **a, t_scene *scene);
 t_object*	create_plane(t_vec3 point, t_vec3 normal, t_color color);
 int			parse_plane(char **a, t_scene *scene);
