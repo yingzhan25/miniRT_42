@@ -7,6 +7,4 @@
 # include "render.h"
 # include "intersection.h"
 
-# define ERROR_MESSAGE   "Error/n"
-
 #endif

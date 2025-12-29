@@ -1,4 +1,4 @@
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 /*
 ** Function to compute the position along a ray at parameter t.

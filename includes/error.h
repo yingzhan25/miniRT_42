@@ -1,6 +1,8 @@
 #ifndef ERROR_H
 # define ERROR_H
 
+# define ERROR_MESSAGE   "Error/n"
+
 # define INVALID_ARG_NUM "Usage: ./minirt <scene.rt>"
 # define FAIL_OPEN_FILE "Cannot open file"
 # define FAIL_MEM_ALLOC "Memory allocation failed"

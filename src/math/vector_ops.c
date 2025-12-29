@@ -40,7 +40,7 @@ t_vec3	vec_divide(t_vec3 v, double scalar)
 	t_vec3	tmp;
 
 	if (scalar < EPSILON)
-		return (ZERO_VECTOR);
+		return (vec_zero());
 	tmp.x = v.x / scalar;
 	tmp.y = v.y / scalar;
 	tmp.z = v.z / scalar;
