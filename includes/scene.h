@@ -15,103 +15,123 @@
 # define P_FOV		parse_fov
 # define P_COL		parse_colors
 # define CH_A_D		check_array_double
-# define P_DM		parse_diametr
 # define C_A_E		count_array_element
 # define P_SI		parse_single_obj
 
-#define	RATIO_MIN 0.0
-#define	RATIO_MAX 1.0
-#define	RGB_MAX 255
-#define FOV_MIN 0
-#define FOV_MAX 180
+# define RATIO_MIN 0.0
+# define RATIO_MAX 1.0
+# define RGB_MAX 255
+# define FOV_MIN 0
+# define FOV_MAX 180
 
-// RGB color (0-255 range)
+/**
+ * RGB color (0-255 range)
+ */
 typedef struct s_color {
-    int r;
-    int g;
-    int b;
-} t_color;
+	int	r;
+	int	g;
+	int	b;
+}	t_color;
 
-// Ambient light (singleton)
+/**
+ * Ambient light (singleton)
+ */
 typedef struct s_ambient {
-    double ratio;        // 0.0 to 1.0
-    t_color color;
-} t_ambient;
+	double	ratio;
+	t_color	color;
+}	t_ambient;
 
-// Camera (singleton)
+/**
+ * Camera (singleton)
+ */
 typedef struct s_camera {
-    t_vec3 position;
-    t_vec3 orientation;  // Normalized direction vector
-    double fov;          // Field of view in degrees (0-180)
-    // Computed values for ray generation:
-    t_vec3 right;        // Camera right vector
-    t_vec3 up;           // Camera up vector
-    double viewport_width;
-    double viewport_height;
-} t_camera;
+	t_vec3	position;
+	t_vec3	orientation;
+	double	fov;
+	t_vec3	right;
+	t_vec3	up;
+	double	viewport_width;
+	double	viewport_height;
+}	t_camera;
 
-// Light source (singleton in mandatory, multiple in bonus)
+/**
+ * Light source (singleton in mandatory, multiple in bonus)
+ */
 typedef struct s_light {
-    t_vec3 position;
-    double brightness;   // 0.0 to 1.0
-    t_color color;       // Parsed but unused in mandatory
-} t_light;
+	t_vec3	position;
+	double	brightness;
+	t_color	color;
+}	t_light;
 
-// Object type enumeration
+/**
+ * Object type enumeration
+ */
 typedef enum e_obj_type {
-    OBJ_SPHERE,
-    OBJ_PLANE,
-    OBJ_CYLINDER
-} t_obj_type;
+	OBJ_SPHERE,
+	OBJ_PLANE,
+	OBJ_CYLINDER
+}	t_obj_type;
 
-// Sphere-specific data
+/**
+ * Sphere-specific data
+ */
 typedef struct s_sphere {
-    t_vec3 center;
-    double diameter;
-    double radius;       // Computed: diameter / 2
-} t_sphere;
+	t_vec3	center;
+	double	diameter;
+	double	radius;
+}	t_sphere;
 
-// Plane-specific data
+/**
+ * Plane-specific data
+ */
 typedef struct s_plane {
-    t_vec3 point;
-    t_vec3 normal;       // Normalized
-} t_plane;
+	t_vec3	point;
+	t_vec3	normal;
+}	t_plane;
 
-// Cylinder-specific data
+/**
+ * Cylinder-specific data
+ */
 typedef struct s_cylinder {
-    t_vec3 center;
-    t_vec3 axis;         // Normalized
-    double diameter;
-    double radius;       // Computed: diameter / 2
-    double height;
-} t_cylinder;
+	t_vec3	center;
+	t_vec3	axis;
+	double	diameter;
+	double	radius;
+	double	height;
+}	t_cylinder;
 
-// Generic object (linked list node)
+/**
+ * Generic object (linked list node)
+ */
 typedef struct s_object {
-    t_obj_type type;
-    t_color color;
-    union {
-        t_sphere sphere;
-        t_plane plane;
-        t_cylinder cylinder;
-    } data;
-    struct s_object *next;
-} t_object;
+	t_obj_type		type;
+	t_color			color;
+	union {
+		t_sphere	sphere;
+		t_plane		plane;
+		t_cylinder	cylinder;
+	} u_data;
+	struct s_object	*next;
+}	t_object;
 
-// Complete scene
+/**
+ * Complete scene
+ */
 typedef struct s_scene {
-    int			fail_to_parse;
+	int			fail_to_parse;
 	t_ambient	ambient;
 	int			num_a;
 	t_camera	camera;
 	int			num_c;
 	t_light		light;
 	int			num_l;
-    t_object *objects;   // Linked list of all objects
-    int obj_count;
-} t_scene;
+	t_object	*objects;
+	int			obj_count;
+}	t_scene;
 
-// Parsing elements
+/**
+ * Parsing elements
+ */
 t_scene		*parse_scene(int ac, char *av[]);
 int			parse_ambient(char **array, t_scene *scene);
 int			parse_camera(char **array, t_scene *scene);
@@ -119,7 +139,9 @@ int			parse_light(char **array, t_scene *scene);
 int			parse_objects(char	**array, t_scene *scene);
 int			validate_scene(t_scene *scene);
 
-// Utility functions
+/**
+ * Utility functions
+ */
 int			parse_ratio(char *s, double *ratio);
 int			parse_colors(char *s, t_color *color);
 int			parse_fov(char *s, double *fov);
@@ -133,7 +155,9 @@ int			check_double(char *s);
 void		error(char *msg);
 void		free_scene(t_scene *scene);
 
-// Parsing objects
+/**
+ * Parsing objects
+ */
 int			check_array_double(char	**array, int (*f)(char *));
 int			parse_vector(char *str, t_vec3	*vec);
 int			is_zero_vec(t_vec3 *vec);
@@ -141,12 +165,12 @@ int			parse_orientation(char	*str, t_vec3 *vec);
 int			is_object(char *str);
 t_object	*create_cylinder(t_vec3 p, t_vec3 n, double *dm, t_color cl);
 int			parse_cylinder(char **a, t_scene *scene);
-t_object*	create_plane(t_vec3 point, t_vec3 normal, t_color color);
+t_object	*create_plane(t_vec3 point, t_vec3 normal, t_color color);
 int			parse_plane(char **a, t_scene *scene);
-t_object*	create_sphere(t_vec3 point, double diametr, t_color color);
+t_object	*create_sphere(t_vec3 point, double diametr, t_color color);
 int			parse_sphere(char **a, t_scene *scene);
 int			parse_diametr(char *s, double *diametr);
 void		parse_single_obj(t_scene *scene, t_object *obj);
-
+void		print_scene(t_scene *scene);
 
 #endif

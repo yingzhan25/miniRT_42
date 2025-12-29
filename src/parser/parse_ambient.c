@@ -1,4 +1,4 @@
-#include "scene.h"
+#include "minirt.h"
 
 /**
  * Check whether is valid double;
@@ -43,7 +43,8 @@ int	parse_colors(char *s, t_color *color)
 
 /**
  * Check whether the number of entry is correct and elements are not empty;
- * check whether the information is redefined (once defined, no matter succeed or not, cannot be redefined);
+ * check whether the information is redefined
+ * (once defined, no matter succeed or not, cannot be redefined);
  * check whether the ratio is valid;
  * check whether the RGB is valid
  */

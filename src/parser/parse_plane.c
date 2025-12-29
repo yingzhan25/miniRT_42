@@ -12,8 +12,8 @@ t_object	*create_plane(t_vec3 point, t_vec3 normal, t_color color)
 		return (error(FAIL_MEM_ALLOC), NULL);
 	obj->type = OBJ_PLANE;
 	obj->color = color;
-	obj->data.plane.point = point;
-	obj->data.plane.normal = normal;
+	obj->u_data.plane.point = point;
+	obj->u_data.plane.normal = normal;
 	obj->next = NULL;
 	return (obj);
 }

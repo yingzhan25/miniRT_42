@@ -1,6 +1,8 @@
-# include "render.h"
+#include "minirt.h"
 
-// Click cross to close the window
+/**
+ * Click cross to close the window
+ */
 static int	handle_close(t_mlx_data *data)
 {
 	if (data->image)
@@ -23,8 +25,10 @@ static int	handle_close(t_mlx_data *data)
 	return (0);
 }
 
-// Press ESC to close the window
-// Use keys to transform camera
+/**
+ * Press ESC to close the window;
+ * Use keys to transform camera
+ */
 static int	handle_keypress(int keycode, t_mlx_data *data)
 {
 	if (keycode == KEY_ESC)

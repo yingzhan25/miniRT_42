@@ -12,11 +12,11 @@ t_object	*create_cylinder(t_vec3 p, t_vec3 n, double *dm, t_color cl)
 		return (error(FAIL_MEM_ALLOC), NULL);
 	obj->type = OBJ_CYLINDER;
 	obj->color = cl;
-	obj->data.cylinder.center = p;
-	obj->data.cylinder.axis = n;
-	obj->data.cylinder.diameter = dm[0];
-	obj->data.cylinder.height = dm[1];
-	obj->data.cylinder.radius = dm[0] / 2;
+	obj->u_data.cylinder.center = p;
+	obj->u_data.cylinder.axis = n;
+	obj->u_data.cylinder.diameter = dm[0];
+	obj->u_data.cylinder.height = dm[1];
+	obj->u_data.cylinder.radius = dm[0] / 2;
 	obj->next = NULL;
 	return (obj);
 }
@@ -39,9 +39,9 @@ int	parse_cylinder(char **a, t_scene *scene)
 	if (P_ORI(a[1], &no))
 		return (error(O_INVL_ORT), 1);
 	if (P_DIAM(a[2], &dm[0]) || dm[0] <= 0)
-		return (error(O_NEG_DM), 1);
+		return (error(O_INVL_DIAM), 1);
 	if (P_DIAM(a[3], &dm[1]) || dm[1] <= 0)
-		return (error(O_NEG_HT), 1);
+		return (error(O_INVL_HEIGHT), 1);
 	if (P_COL(a[4], &cl))
 		return (error(O_INVL_COL), 1);
 	cy = create_cylinder(co, no, dm, cl);

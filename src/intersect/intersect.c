@@ -2,7 +2,7 @@
 
 /*
 ** Function to compute the position along a ray at parameter t.
-** The position is calculated using 
+** The position is calculated using
 ** the ray equation: P(t) = origin + t * direction
 */
 t_vec3	position(t_ray ray, double t)
@@ -21,26 +21,26 @@ static void	define_valid_t(t_ray *ray, t_object *current, \
 {
 	if (current->type == OBJ_SPHERE)
 	{
-		(*temp_pts) = ray_sphere_intersection(*ray, current->data.sphere);
+		(*temp_pts) = ray_sphere_intersection(*ray, current->u_data.sphere);
 		if ((*temp_pts).valid)
 			*t = define_valid_t_for_sphere((*temp_pts).t1, (*temp_pts).t2);
 	}
 	if (current->type == OBJ_PLANE)
 	{
-		(*temp_pts) = ray_plane_intersection(*ray, current->data.plane);
+		(*temp_pts) = ray_plane_intersection(*ray, current->u_data.plane);
 		if ((*temp_pts).valid)
 			*t = (*temp_pts).t1;
 	}
 	if (current->type == OBJ_CYLINDER)
 	{
-		(*temp_pts) = ray_cylinder_intersect(*ray, current->data.cylinder);
+		(*temp_pts) = ray_cylinder_intersect(*ray, current->u_data.cylinder);
 		if ((*temp_pts).valid)
 			*t = define_valid_t_for_sphere((*temp_pts).t1, (*temp_pts).t2);
 	}
 }
 
 /*
-** Helper function to loop through all objects 
+** Helper function to loop through all objects
 ** in the scene and find the closest intersection.
 ** It updates the hit_point structure with the closest intersection details.
 */
@@ -67,9 +67,9 @@ void	object_loop(t_object *current, t_hit *hit_point, t_ray *ray)
 
 /*
 ** Main function to find the intersection of a ray with the scene objects.
-** It iterates through all objects, finds the closest 
+** It iterates through all objects, finds the closest
 ** intersection, and computes the hit point details.
-** If an intersection is found, it calculates 
+** If an intersection is found, it calculates
 ** the hit point position and normal vector based on the object type.
 */
 t_hit	intersect_object(t_ray ray, t_object *obj)
@@ -85,13 +85,13 @@ t_hit	intersect_object(t_ray ray, t_object *obj)
 		hit_point.color = hit_point.object->color;
 		hit_point.point = position(ray, hit_point.t);
 		if (hit_point.object->type == OBJ_PLANE)
-			hit_point.normal = hit_point.object->data.plane.normal;
+			hit_point.normal = hit_point.object->u_data.plane.normal;
 		else if (hit_point.object->type == OBJ_SPHERE)
-			hit_point.normal = vec_normalize(vec_sub(hit_point.point, 
-						hit_point.object->data.sphere.center));
+			hit_point.normal = vec_normalize(vec_sub(hit_point.point,
+						hit_point.object->u_data.sphere.center));
 		else
-			hit_point.normal = cylinder_normal(hit_point.point, 
-					hit_point.object->data.cylinder);
+			hit_point.normal = cylinder_normal(hit_point.point,
+					hit_point.object->u_data.cylinder);
 	}
 	return (hit_point);
 }

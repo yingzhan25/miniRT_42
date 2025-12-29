@@ -1,4 +1,4 @@
-# include "render.h"
+#include "minirt.h"
 
 /**
  * Check whether forward is close to y-axis;
