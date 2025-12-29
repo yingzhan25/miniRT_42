@@ -15,7 +15,6 @@
 # define P_FOV		parse_fov
 # define P_COL		parse_colors
 # define CH_A_D		check_array_double
-# define P_DM		parse_diametr
 # define C_A_E		count_array_element
 # define P_SI		parse_single_obj
 

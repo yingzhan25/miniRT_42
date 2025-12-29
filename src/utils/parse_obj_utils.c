@@ -1,7 +1,7 @@
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 /*
-** is_object: check whether the string 
+** is_object: check whether the string
 ** corresponds to a known object type
 */
 int	is_object(char *str)
@@ -26,7 +26,7 @@ int	check_array_double(char	**array, int (*f)(char *))
 	while (array[i])
 	{
 		if (f(array[i]))
-			return (error(O_INVL_CHAR), 1);
+			return (1);
 		i++;
 	}
 	return (0);
@@ -38,10 +38,9 @@ int	check_array_double(char	**array, int (*f)(char *))
 int	parse_diametr(char *s, double *diametr)
 {
 	if (check_double(s))
-		return (error(O_INVL_DIAM), 1);
+		return (1);
 	*diametr = ft_atof(s);
 	if (*diametr < EPSILON)
-		return (error(O_NEG_DM), 1);
+		return (1);
 	return (0);
 }
-
