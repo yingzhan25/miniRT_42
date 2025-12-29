@@ -49,7 +49,7 @@ t_vec3	vec_divide(t_vec3 v, double scalar)
 
 t_vec3	vec_new(double x, double y, double z)
 {
-	t_vec3 tmp;
+	t_vec3	tmp;
 
 	tmp.x = x;
 	tmp.y = y;

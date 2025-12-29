@@ -11,12 +11,12 @@ int	is_zero_vec(t_vec3 *vec)
 	return (0);
 }
 
-t_vec3  vec_zero(void)
+t_vec3	vec_zero(void)
 {
-    t_vec3  v;
+	t_vec3	v;
 
-    v.x = 0;
-    v.y = 0;
-    v.z = 0;
-    return (v);
+	v.x = 0;
+	v.y = 0;
+	v.z = 0;
+	return (v);
 }
