@@ -37,4 +37,5 @@
 # define O_NEG_HT "Object: Height cannot be negative or zero"
 # define O_INVL_COL "Object: Color: Invalid input"
 
+# define MAT_INVL_VAL "Material: Invalid material values"
 #endif

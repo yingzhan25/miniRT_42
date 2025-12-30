@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 /*
 ** is_object: check whether the string
