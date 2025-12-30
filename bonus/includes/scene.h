@@ -87,7 +87,8 @@ typedef struct s_material {
 typedef enum e_obj_type {
 	OBJ_SPHERE,
 	OBJ_PLANE,
-	OBJ_CYLINDER
+	OBJ_CYLINDER,
+	OBJ_CONE
 }	t_obj_type;
 
 /**
@@ -119,6 +120,17 @@ typedef struct s_cylinder {
 }	t_cylinder;
 
 /**
+ * Cone-specific data
+ */
+typedef struct s_cone {
+	t_vec3		apex;
+	t_vec3		axis;
+	double		diameter;
+	double		radius;
+	double		height;
+}	t_cone;
+
+/**
  * Generic object (linked list node)
  */
 typedef struct s_object {
@@ -128,6 +140,7 @@ typedef struct s_object {
 		t_sphere	sphere;
 		t_plane		plane;
 		t_cylinder	cylinder;
+		t_cone		cone;
 	} u_data;
 	struct s_object	*next;
 }	t_object;
@@ -190,6 +203,8 @@ int			parse_sphere(char **a, t_scene *scene);
 int			parse_diametr(char *s, double *diametr);
 void		parse_single_obj(t_scene *scene, t_object *obj);
 void		print_scene(t_scene *scene);
+int			parse_cone(char **a, t_scene *scene);
+t_object	*create_cone(t_vec3 p, t_vec3 n, double *dm, t_material ml);
 
 /*
 ** Bonus functions

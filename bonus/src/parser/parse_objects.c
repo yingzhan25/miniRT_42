@@ -58,5 +58,7 @@ int	parse_objects(char	**array, t_scene *scene)
 		return (parse_sphere(++array, scene));
 	if (!ft_strcmp(array[0], "cy"))
 		return (parse_cylinder(++array, scene));
+	if (!ft_strcmp(array[0], "co"))
+		return (parse_cylinder(++array, scene));
 	return (0);
 }
