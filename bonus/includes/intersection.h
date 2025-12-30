@@ -1,7 +1,7 @@
 #ifndef INTERSECTION_H
 # define INTERSECTION_H
 
-# include "minirt.h"
+# include "minirt_bonus.h"
 
 typedef struct s_intersection
 {

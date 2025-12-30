@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 /*
 ** Function to compute the intersection of a ray with a plane.

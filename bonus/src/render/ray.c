@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 t_ray	ray_create(t_vec3 origin, t_vec3 direction)
 {

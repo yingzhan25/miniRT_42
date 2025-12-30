@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 /**
  * Calculate color of object with Phong reflection model:
