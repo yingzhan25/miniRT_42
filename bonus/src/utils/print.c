@@ -1,41 +1,40 @@
-/**
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static void	print_object(const t_object *obj)
 {
 	if (obj->type == OBJ_PLANE)
 	{
 		printf("========Plane========\n");
-		printf("x: %f\n", obj->data.plane.point.x);
-		printf("y: %f\n", obj->data.plane.point.y);
-		printf("z: %f\n", obj->data.plane.point.z);
-		printf("nx: %f\n", obj->data.plane.normal.x);
-		printf("ny: %f\n", obj->data.plane.normal.y);
-		printf("nz: %f\n", obj->data.plane.normal.z);
+		printf("x: %f\n", obj->u_data.plane.point.x);
+		printf("y: %f\n", obj->u_data.plane.point.y);
+		printf("z: %f\n", obj->u_data.plane.point.z);
+		printf("nx: %f\n", obj->u_data.plane.normal.x);
+		printf("ny: %f\n", obj->u_data.plane.normal.y);
+		printf("nz: %f\n", obj->u_data.plane.normal.z);
 	}
 	else if (obj->type == OBJ_SPHERE)
 	{
 		printf("========Sphere========\n");
-		printf("x: %f\n", obj->data.sphere.center.x);
-		printf("y: %f\n", obj->data.sphere.center.y);
-		printf("z: %f\n", obj->data.sphere.center.z);
-		printf("diameter: %f\n", obj->data.sphere.diameter);
+		printf("x: %f\n", obj->u_data.sphere.center.x);
+		printf("y: %f\n", obj->u_data.sphere.center.y);
+		printf("z: %f\n", obj->u_data.sphere.center.z);
+		printf("diameter: %f\n", obj->u_data.sphere.diameter);
 	}
 	else if (obj->type == OBJ_CYLINDER)
 	{
 		printf("========Cylinder========\n");
-		printf("x: %f\n", obj->data.cylinder.center.x);
-		printf("y: %f\n", obj->data.cylinder.center.y);
-		printf("z: %f\n", obj->data.cylinder.center.z);
-		printf("nx: %f\n", obj->data.cylinder.axis.x);
-		printf("ny: %f\n", obj->data.cylinder.axis.y);
-		printf("nz: %f\n", obj->data.cylinder.axis.z);
-		printf("diameter: %f\n", obj->data.cylinder.diameter);
-		printf("height: %f\n", obj->data.cylinder.height);
+		printf("x: %f\n", obj->u_data.cylinder.center.x);
+		printf("y: %f\n", obj->u_data.cylinder.center.y);
+		printf("z: %f\n", obj->u_data.cylinder.center.z);
+		printf("nx: %f\n", obj->u_data.cylinder.axis.x);
+		printf("ny: %f\n", obj->u_data.cylinder.axis.y);
+		printf("nz: %f\n", obj->u_data.cylinder.axis.z);
+		printf("diameter: %f\n", obj->u_data.cylinder.diameter);
+		printf("height: %f\n", obj->u_data.cylinder.height);
 	}
-	printf("r: %d\n", obj->color.r);
-	printf("g: %d\n", obj->color.g);
-	printf("b: %d\n", obj->color.b);
+	printf("r: %d\n", obj->material.color.r);
+	printf("g: %d\n", obj->material.color.g);
+	printf("b: %d\n", obj->material.color.b);
 }
 
 void	print_scene(t_scene *scene)
@@ -70,4 +69,3 @@ void	print_scene(t_scene *scene)
 		obj = obj->next;
 	}
 }
-*/

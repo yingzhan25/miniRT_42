@@ -24,6 +24,8 @@
 # define RGB_MAX 255
 # define FOV_MIN 0
 # define FOV_MAX 180
+# define SHINENESS_MIN 10.0
+# define SHINENESS_MAX 200.0
 
 /**
  * RGB color (0-255 range)
@@ -72,10 +74,10 @@ typedef enum	e_texture_type {
 }	t_texture_type;
 
 typedef struct s_material {
+	t_color			color;
 	double			specular;
 	double			shineness;
 	t_texture_type	texture;
-	double			checker_scale;
 	char			*xpm_path;
 }		t_material;
 
@@ -95,7 +97,6 @@ typedef struct s_sphere {
 	t_vec3		center;
 	double		diameter;
 	double		radius;
-	t_material	material;
 }	t_sphere;
 
 /**
@@ -104,7 +105,6 @@ typedef struct s_sphere {
 typedef struct s_plane {
 	t_vec3		point;
 	t_vec3		normal;
-	t_material	material;
 }	t_plane;
 
 /**
@@ -116,7 +116,6 @@ typedef struct s_cylinder {
 	double		diameter;
 	double		radius;
 	double		height;
-	t_material	material;
 }	t_cylinder;
 
 /**
@@ -124,7 +123,7 @@ typedef struct s_cylinder {
  */
 typedef struct s_object {
 	t_obj_type		type;
-	t_color			color;
+	t_material		material;
 	union {
 		t_sphere	sphere;
 		t_plane		plane;
@@ -191,6 +190,12 @@ int			parse_sphere(char **a, t_scene *scene);
 int			parse_diametr(char *s, double *diametr);
 void		parse_single_obj(t_scene *scene, t_object *obj);
 void		print_scene(t_scene *scene);
-int			parse_material(char	*str, t_material *ml);
+
+/*
+** Bonus functions
+*/
+int			parse_shineness(char *s, double *shineness);
+int			parse_texture_type(char *s, t_texture_type *type);
+int			parse_texture_path(char *s, t_material *ml);
 
 #endif
