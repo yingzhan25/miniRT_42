@@ -43,7 +43,7 @@ int	parse_sphere(char **a, t_scene *scene)
 		return (error(MAT_INVL_VAL), 1);
 	if (parse_texture_type(a[5], &(ml.texture)))
 		return (error(MAT_INVL_VAL), 1);
-	if (parse_texture_path(a[6], &(ml.xpm_path)))
+	if (parse_texture_path(a[6], &(ml)))
 		return (error(MAT_INVL_VAL), 1);
 	sp = create_sphere(co, dm, ml);
 	return (!sp || (P_SI(scene, sp), scene->obj_count++, 0));

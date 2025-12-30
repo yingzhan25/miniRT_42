@@ -50,7 +50,7 @@ int	parse_cylinder(char **a, t_scene *scene)
 		return (error(MAT_INVL_VAL), 1);
 	if (parse_texture_type(a[7], &(ml.texture)))
 		return (error(MAT_INVL_VAL), 1);
-	if (parse_texture_path(a[8], &(ml.xpm_path)))
+	if (parse_texture_path(a[8], &(ml)))
 		return (error(MAT_INVL_VAL), 1);
 	cy = create_cylinder(co, no, dm, ml);
 	return (!cy || (P_SI(scene, cy), scene->obj_count++, 0));

@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 /*
 ** parse_vector: parse a string into a t_vec3 structure

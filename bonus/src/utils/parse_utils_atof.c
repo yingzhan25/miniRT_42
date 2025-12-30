@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static double	skip_sign(const char *str, int *i)
 {

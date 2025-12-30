@@ -1,5 +1,31 @@
 #include "minirt_bonus.h"
 
+static void	print_texture_type(t_texture_type texture)
+{
+	if (texture == TEXTURE_NONE)
+		printf("texture: NONE\n");
+	else if (texture == TEXTURE_CHECKER)
+		printf("texture: CHECKER\n");
+	else if (texture == TEXTURE_XPM)
+		printf("texture: XPM\n");
+}
+
+static void	print_material(const t_material *mat)
+{
+	printf("--Material--\n");
+	printf("specular: %f\n", mat->specular);
+	printf("shineness: %f\n", mat->shineness);
+	print_texture_type(mat->texture);
+	if (mat->xpm_path)
+		printf("xpm_path: %s\n", mat->xpm_path);
+	else
+		printf("xpm_path: (null)\n");
+	printf("--Color--\n");
+	printf("r: %d\n", mat->color.r);
+	printf("g: %d\n", mat->color.g);
+	printf("b: %d\n", mat->color.b);
+}
+
 static void	print_object(const t_object *obj)
 {
 	if (obj->type == OBJ_PLANE)
@@ -32,9 +58,7 @@ static void	print_object(const t_object *obj)
 		printf("diameter: %f\n", obj->u_data.cylinder.diameter);
 		printf("height: %f\n", obj->u_data.cylinder.height);
 	}
-	printf("r: %d\n", obj->material.color.r);
-	printf("g: %d\n", obj->material.color.g);
-	printf("b: %d\n", obj->material.color.b);
+	print_material(&obj->material);
 }
 
 void	print_scene(t_scene *scene)

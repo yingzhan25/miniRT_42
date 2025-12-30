@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 /**
  * Check whether all the parsing is valid or not

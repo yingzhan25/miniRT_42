@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 /*
 ** Function to compute the position along a ray at parameter t.
@@ -82,7 +82,7 @@ t_hit	intersect_object(t_ray ray, t_object *obj)
 	object_loop(current, &hit_point, &ray);
 	if (hit_point.hit)
 	{
-		hit_point.color = hit_point.object->color;
+		hit_point.color = hit_point.object->material.color;
 		hit_point.point = position(ray, hit_point.t);
 		if (hit_point.object->type == OBJ_PLANE)
 			hit_point.normal = hit_point.object->u_data.plane.normal;

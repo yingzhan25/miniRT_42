@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 /**
  * Generate a shadow ray from hit point to light position;

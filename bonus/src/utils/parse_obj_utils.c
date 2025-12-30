@@ -62,7 +62,7 @@ int	parse_texture_type(char *s, t_texture_type *type)
 	if (check_int(s))
 		return (1);
 	i = ft_atoi(s);
-	if (i < 0 && i > 2)
+	if ((0 > i) || (i > 2))
 		return (1);
 	if (i == 0)
 		*type = TEXTURE_NONE;

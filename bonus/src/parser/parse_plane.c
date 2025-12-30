@@ -42,7 +42,7 @@ int	parse_plane(char **a, t_scene *scene)
 		return (error(MAT_INVL_VAL), 1);
 	if (parse_texture_type(a[5], &(ml.texture)))
 		return (error(MAT_INVL_VAL), 1);
-	if (parse_texture_path(a[6], &(ml.xpm_path)))
+	if (parse_texture_path(a[6], &(ml)))
 		return (error(MAT_INVL_VAL), 1);
 	pl = create_plane(co, no, ml);
 	return (!pl || (P_SI(scene, pl), scene->obj_count++, 0));

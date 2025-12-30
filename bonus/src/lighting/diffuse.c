@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 /**
  * Calculate color of object with both ambient and diffuse;
