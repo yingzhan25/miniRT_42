@@ -1,8 +1,8 @@
 #ifndef SCENE_H
 # define SCENE_H
 
-# include "../libft/includes/libft.h"
-# include "../libft/includes/get_next_line.h"
+# include "../../libft/includes/libft.h"
+# include "../../libft/includes/get_next_line.h"
 # include "vector.h"
 # include "error.h"
 # include "stdio.h"
