@@ -1,4 +1,4 @@
-#include "minirt_bonus.h"
+#include "../../includes/minirt_bonus.h"
 
 /**
  * dot_product: cosine between 2 vectors;
@@ -23,14 +23,16 @@ t_color	calculate_color(t_hit *hit, t_scene *scene)
 	t_color	color;
 	t_vec3	hit_to_light;
 	double	light_dot_normal;
+	double	specular_intense;
 
 	calculate_ambient(&color, hit, scene);
 	hit_to_light = vec_normalize(vec_sub(scene->light.position, hit->point));
 	light_dot_normal = check_light_visible(hit_to_light, hit);
-	if (!in_shadow(hit_to_light, scene, hit) || light_dot_normal >= 0)
+	if (!in_shadow(hit_to_light, scene, hit) && light_dot_normal >= 0)
 	{
 		add_diffuse(&color, light_dot_normal, hit, scene);
-		add_specular(&color, light_dot_normal, hit, scene);
+		specular_intense= calc_intensity(light_dot_normal, hit, hit_to_light, scene);
+		add_specular(&color, scene, hit, specular_intense);
 	}
 	color.r = fmin(fmax(color.r, 0), 255);
 	color.g = fmin(fmax(color.g, 0), 255);
