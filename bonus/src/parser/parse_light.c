@@ -14,8 +14,8 @@ int	parse_light(char **array, t_scene *scene)
 	double	bright;
 	t_color	color;
 
-	if (scene->num_l)
-		return (error(L_MULTIPLE_DEF), 1);
+	// if (scene->num_l)
+	// 	return (error(L_MULTIPLE_DEF), 1);
 	scene->num_l = 1;
 	if (!array || C_A_E(array) != 4 || \
 		!array[0] || !array[1] || !array[2] || !array[3])

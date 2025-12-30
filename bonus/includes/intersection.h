@@ -45,8 +45,9 @@ t_vec3			position(t_ray ray, double t);
 // Lighting and shade
 t_color			calculate_color(t_hit *hit, t_scene *scene);
 void			calculate_ambient(t_color *color, t_hit *hit, t_scene *scene);
-void			calculate_diffuse(t_color *color, t_vec3 hit_to_light, 
-					t_hit *hit, t_scene *scene);
+void			add_diffuse(t_color *c, double cosine, t_hit *h, t_scene *s);
 int				in_shadow(t_vec3 hit_to_light, t_scene *scene, t_hit *hit);
+double			calc_intensity(double cosine, t_hit *h, t_vec3 hit_to_light, t_scene *s);
+void			add_specular(t_color *c, t_scene *s, t_hit *h, double intensity);
 
 #endif
