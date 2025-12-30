@@ -10,7 +10,8 @@ int	is_object(char *str)
 		return (1);
 	if (!ft_strcmp(str, "pl")
 		|| !ft_strcmp(str, "sp")
-		|| !ft_strcmp(str, "cy"))
+		|| !ft_strcmp(str, "cy")
+		|| !ft_strcmp(str, "co"))
 		return (0);
 	return (1);
 }
