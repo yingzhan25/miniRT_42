@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 /*
 ** cyl_init: Initializes the cylinder intersection work structure.
