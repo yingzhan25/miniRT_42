@@ -17,6 +17,7 @@
 # define CH_A_D		check_array_double
 # define C_A_E		count_array_element
 # define P_SI		parse_single_obj
+# define P_MLH		parse_material_light
 
 # define RATIO_MIN 0.0
 # define RATIO_MAX 1.0
@@ -63,6 +64,21 @@ typedef struct s_light {
 	t_color	color;
 }	t_light;
 
+typedef enum	e_texture_type {
+	TEXTURE_NONE,
+	TEXTURE_CHECKER,
+	TEXTURE_XPM
+}	t_texture_type;
+
+typedef struct s_material {
+	double			ambient;
+	double			diffuse;
+	double			specular;
+	t_texture_type	texture;
+	double			checker_scale;
+	char			*xpm_path;
+}		t_material;
+
 /**
  * Object type enumeration
  */
@@ -76,28 +92,31 @@ typedef enum e_obj_type {
  * Sphere-specific data
  */
 typedef struct s_sphere {
-	t_vec3	center;
-	double	diameter;
-	double	radius;
+	t_vec3		center;
+	double		diameter;
+	double		radius;
+	t_material	material;
 }	t_sphere;
 
 /**
  * Plane-specific data
  */
 typedef struct s_plane {
-	t_vec3	point;
-	t_vec3	normal;
+	t_vec3		point;
+	t_vec3		normal;
+	t_material	material;
 }	t_plane;
 
 /**
  * Cylinder-specific data
  */
 typedef struct s_cylinder {
-	t_vec3	center;
-	t_vec3	axis;
-	double	diameter;
-	double	radius;
-	double	height;
+	t_vec3		center;
+	t_vec3		axis;
+	double		diameter;
+	double		radius;
+	double		height;
+	t_material	material;
 }	t_cylinder;
 
 /**
@@ -172,5 +191,6 @@ int			parse_sphere(char **a, t_scene *scene);
 int			parse_diametr(char *s, double *diametr);
 void		parse_single_obj(t_scene *scene, t_object *obj);
 void		print_scene(t_scene *scene);
+int			parse_material(char	*str, t_material *ml);
 
 #endif

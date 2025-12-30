@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 /*
 ** is_object: check whether the string
@@ -43,4 +43,31 @@ int	parse_diametr(char *s, double *diametr)
 	if (*diametr < EPSILON)
 		return (1);
 	return (0);
+}
+
+int	parse_material_light(char *str, t_material *ml)
+{
+	char	**split;
+
+	split = ft_split(str, ',');
+	if (!split || (C_A_E(split) != 3) || CH_A_D(split, check_double))
+		return (clean_array(split), 1);
+	ml->ambient = ft_atof(split[0]);
+	ml->diffuse = ft_atof(split[1]);
+	ml->specular = ft_atof(split[2]);
+	return (0);
+}
+
+int	parse_checkboard(char *str, t_material *ml)
+{
+	char	*split;
+
+	split = ft_split(str, ',');
+	if (!split || (C_A_E(split) != 2) || CH_A_D(split, check_double))
+		return (clean_array(split), 1);
+	ml->checker_scale = ft_atof(split[0]);
+	ml->xpm_path = ft_strdup(split[1]);
+	if (!ml->xpm_path)
+		return (clean_array(split), 1);
+	return (clean_array(split), 0);
 }
