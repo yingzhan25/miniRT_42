@@ -58,6 +58,18 @@ static void	print_object(const t_object *obj)
 		printf("diameter: %f\n", obj->u_data.cylinder.diameter);
 		printf("height: %f\n", obj->u_data.cylinder.height);
 	}
+	else if (obj->type == OBJ_CONE)
+	{
+		printf("========Cylinder========\n");
+		printf("x: %f\n", obj->u_data.cone.apex.x);
+		printf("y: %f\n", obj->u_data.cone.apex.y);
+		printf("z: %f\n", obj->u_data.cone.apex.z);
+		printf("nx: %f\n", obj->u_data.cone.axis.x);
+		printf("ny: %f\n", obj->u_data.cone.axis.y);
+		printf("nz: %f\n", obj->u_data.cone.axis.z);
+		printf("diameter: %f\n", obj->u_data.cone.diameter);
+		printf("height: %f\n", obj->u_data.cone.height);
+	}
 	print_material(&obj->material);
 }
 
