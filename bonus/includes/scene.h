@@ -59,9 +59,10 @@ typedef struct s_camera {
  * Light source (singleton in mandatory, multiple in bonus)
  */
 typedef struct s_light {
-	t_vec3	position;
-	double	brightness;
-	t_color	color;
+	t_vec3			position;
+	double			brightness;
+	t_color			color;
+	struct s_light	*next;
 }	t_light;
 
 typedef enum	e_texture_type {
@@ -71,9 +72,8 @@ typedef enum	e_texture_type {
 }	t_texture_type;
 
 typedef struct s_material {
-	double			ambient;
-	double			diffuse;
 	double			specular;
+	double			shineness;
 	t_texture_type	texture;
 	double			checker_scale;
 	char			*xpm_path;

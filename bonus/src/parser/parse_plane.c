@@ -37,8 +37,6 @@ int	parse_plane(char **a, t_scene *scene)
 		return (error(O_INVL_ORT), 1);
 	if (P_COL(a[2], &cl))
 		return (error(O_INVL_COL), 1);
-	if (P_MLH(a[4], &ml))
-		return (error(MAT_INVL_VAL), 1);
 	pl = create_plane(co, no, cl);
 	return (!pl || (P_SI(scene, pl), scene->obj_count++, 0));
 }
