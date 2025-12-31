@@ -60,7 +60,7 @@ static void	print_object(const t_object *obj)
 	}
 	else if (obj->type == OBJ_CONE)
 	{
-		printf("========Cylinder========\n");
+		printf("========Cone========\n");
 		printf("x: %f\n", obj->u_data.cone.apex.x);
 		printf("y: %f\n", obj->u_data.cone.apex.y);
 		printf("z: %f\n", obj->u_data.cone.apex.z);

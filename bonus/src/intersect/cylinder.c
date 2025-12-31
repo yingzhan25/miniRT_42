@@ -48,6 +48,11 @@ static int	cyl_solve(t_cyl_work *w)
 ** It computes the projection of the intersection point onto the cylinder axis
 ** and verifies if it falls within the half-height limits.
 ** Returns 1 if the point is within height bounds, 0 otherwise.
+**      +half_h  ←── top point
+**         |
+**         |  ← projection of point onto axis must be between these
+**         |
+**      -half_h  ←── bottom point
 */
 static int	cyl_in_height(t_cyl_work *w, double t)
 {
@@ -93,35 +98,34 @@ t_intersection	ray_cylinder_intersect(t_ray ray, t_cylinder cylinder)
 		intersect.valid = 1;
 		intersect.t2 = cyl.t2;
 	}
+	check_caps(&cyl, &intersect);
 	return (intersect);
 }
 
 /*
-** Function to compute the normal vector
-** at a point on the surface of a cylinder.
-** The normal is calculated by projecting the vector
-** from the cylinder center to the point onto the cylinder axis,
-** and then subtracting this projection from
-** the original vector to get the perpendicular component.
-** The resulting normal vector is then normalized.
-** center_to_point is the vector from the cylinder center
-** to the intersection point.
-** projection is the projection of center_to_point onto the cylinder axis.
-** normal is the vector perpendicular to the cylinder
-** surface at the intersection point.
+** cylinder_normal: Computes the normal vector at a point on the cylinder surface.
+** It calculates the vector from the cylinder center to the point,
+** projects it onto the cylinder axis, and derives the normal.
+** Returns the normalized normal vector.
+** If the point is on the caps, returns the cap normal.
+** (Normal vektor - yuzaga perpendikulyar vektor.) 
+** (Yorug'lik qanday aks etishini hisoblash uchun kerak.)
 */
 
 t_vec3	cylinder_normal(t_vec3 point, t_cylinder cylinder)
 {
-	t_vec3	normal;
 	t_vec3	center_to_point;
 	t_vec3	projection;
 	double	proj_length;
+	double	half_h;
 
+    half_h = cylinder. height * 0.5;
 	center_to_point = vec_sub(point, cylinder.center);
 	proj_length = dot_product(center_to_point, cylinder.axis);
 	projection = vec_scale(cylinder.axis, proj_length);
-	normal = vec_sub(center_to_point, projection);
-	normal = vec_normalize(normal);
-	return (normal);
+    if (fabs(proj_length - half_h) < EPSILON)
+		return (cylinder.axis);
+	if (fabs(proj_length + half_h) < EPSILON)
+		return (vec_scale(cylinder.axis, -1.0));
+	return (vec_normalize(vec_sub(center_to_point, projection)));
 }
