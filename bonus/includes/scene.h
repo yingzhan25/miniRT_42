@@ -26,6 +26,8 @@
 # define FOV_MAX 180
 # define SHINENESS_MIN 10.0
 # define SHINENESS_MAX 200.0
+# define CHECKER_COLOR1 {0,0,0}
+# define CHECKER_COLOR2 {255,255,255}
 
 /**
  * RGB color (0-255 range)
