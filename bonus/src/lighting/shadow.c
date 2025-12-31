@@ -8,7 +8,7 @@
  * then it is in the shadow;
  * offset origin of shadow ray with epsilon to avoid self-intersection
  */
-int	in_shadow(t_vec3 hit_to_light, t_scene *scene, t_hit *hit)
+int	in_shadow(t_vec3 hit_to_light, t_scene *scene, t_hit *hit, t_light *l)
 {
 	t_ray		shadow_ray;
 	double		shadow_ray_length;
@@ -18,7 +18,7 @@ int	in_shadow(t_vec3 hit_to_light, t_scene *scene, t_hit *hit)
 	ft_memset(&shadow_hit, 0, sizeof(t_hit));
 	shadow_ray.origin = vec_add(hit->point, vec_scale(hit->normal, EPSILON));
 	shadow_ray.direction = hit_to_light;
-	shadow_ray_length = vec_length(vec_sub(scene->light.position, hit->point));
+	shadow_ray_length = vec_length(vec_sub(l->position, hit->point));
 	current = scene->objects;
 	object_loop(current, &shadow_hit, &shadow_ray);
 	return (shadow_hit.hit == 1 && shadow_hit.t < shadow_ray_length - EPSILON \

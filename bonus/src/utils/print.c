@@ -73,9 +73,22 @@ static void	print_object(const t_object *obj)
 	print_material(&obj->material);
 }
 
+static void	print_light(const t_light *light)
+{
+	printf("========Light========\n");
+	printf("x: %f\n", light->position.x);
+	printf("y: %f\n", light->position.y);
+	printf("z: %f\n", light->position.z);
+	printf("r: %d\n", light->color.r);
+	printf("g: %d\n", light->color.g);
+	printf("b: %d\n", light->color.b);
+	printf("brightness: %f\n", light->brightness);
+}
+
 void	print_scene(t_scene *scene)
 {
 	t_object	*obj;
+	t_light		*light;
 
 	printf("========Ambient========\n");
 	printf("ratio: %f\n", scene->ambient.ratio);
@@ -90,14 +103,12 @@ void	print_scene(t_scene *scene)
 	printf("ny: %f\n", scene->camera.orientation.y);
 	printf("nz: %f\n", scene->camera.orientation.z);
 	printf("fov: %f\n", scene->camera.fov);
-	printf("========Light========\n");
-	printf("x: %f\n", scene->light.position.x);
-	printf("y: %f\n", scene->light.position.y);
-	printf("z: %f\n", scene->light.position.z);
-	printf("r: %d\n", scene->light.color.r);
-	printf("g: %d\n", scene->light.color.g);
-	printf("b: %d\n", scene->light.color.b);
-	printf("brightness: %f\n", scene->light.brightness);
+	light = scene->lights;
+	while (light)
+	{
+		print_light(light);
+		light = light->next;
+	}
 	obj = scene->objects;
 	while (obj)
 	{
