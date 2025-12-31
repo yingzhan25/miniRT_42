@@ -2,12 +2,12 @@
 /**
  * Calculate color of object with ambient
  */
-void	calculate_ambient(t_color *color, t_hit *hit, t_scene *scene)
+void	calculate_ambient(t_color *color, t_color base, t_scene *scene)
 {
-	color->r = hit->color.r * scene->ambient.color.r * \
+	color->r = base.r * scene->ambient.color.r * \
 	scene->ambient.ratio / 255;
-	color->g = hit->color.g * scene->ambient.color.g * \
+	color->g = base.g * scene->ambient.color.g * \
 	scene->ambient.ratio / 255;
-	color->b = hit->color.b * scene->ambient.color.b * \
+	color->b = base.b * scene->ambient.color.b * \
 	scene->ambient.ratio / 255;
 }
