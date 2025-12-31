@@ -59,7 +59,7 @@ BONUS_SRCS		= $(BONUS_DIR)/src/main.c $(BONUS_DIR)/src/parser/parse_scene.c $(BO
 				$(BONUS_DIR)/src/render/render.c $(BONUS_DIR)/src/window/init.c $(BONUS_DIR)/src/window/image.c $(BONUS_DIR)/src/window/event.c $(BONUS_DIR)/src/intersect/sphere.c \
 				$(BONUS_DIR)/src/intersect/intersect.c $(BONUS_DIR)/src/lighting/lighting.c $(BONUS_DIR)/src/lighting/ambient.c $(BONUS_DIR)/src/lighting/diffuse.c \
 				$(BONUS_DIR)/src/intersect/plane.c $(BONUS_DIR)/src/lighting/shadow.c $(BONUS_DIR)/src/intersect/cylinder.c $(BONUS_DIR)/src/utils/print.c \
-				$(BONUS_DIR)/src/lighting/specular.c $(BONUS_DIR)/src/parser/parse_cone.c $(BONUS_DIR)/src/utils/intersection_utils.c
+				$(BONUS_DIR)/src/lighting/specular.c $(BONUS_DIR)/src/parser/parse_cone.c $(BONUS_DIR)/src/utils/intersection_utils.c $(BONUS_DIR)/src/intersect/cone.c 
 
 OBJ_DIR 		= ./obj
 BONUS_OBJ_DIR 		= $(BONUS_DIR)/bonus_obj
