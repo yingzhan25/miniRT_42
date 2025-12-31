@@ -28,6 +28,7 @@
 # define SHINENESS_MAX 200.0
 # define CHECKER_COLOR1 {0,0,0}
 # define CHECKER_COLOR2 {255,255,255}
+# define CHECKER_SCALE 1
 
 /**
  * RGB color (0-255 range)

@@ -17,12 +17,14 @@ static double	check_light_visible(t_vec3 hit_to_light, t_hit *hit)
  * checkerborad: base color is one of the checker colors;
  * bump texture:/
  */
-static t_color	check_base_color(t_hit *hit, t_scene *scene)
+static t_color	check_base_color(t_hit *hit)
 {
 	if (hit->object->material.texture == 0)
 		return (hit->color);
 	else if (hit->object->material.texture == 1)
 		return (get_texture_color(hit));
+	//For bump texture
+	return (hit->color);
 }
 /**
  * Restrict the range of color to: 0-255
@@ -54,7 +56,7 @@ t_color	calculate_color(t_hit *hit, t_scene *scene)
 	double	light_dot_normal;
 	double	specular_intense;
 
-	base_color = check_base_color(hit, scene);
+	base_color = check_base_color(hit);
 	calculate_ambient(&color, base_color, scene);
 	current = scene->lights;
 	while (current)
