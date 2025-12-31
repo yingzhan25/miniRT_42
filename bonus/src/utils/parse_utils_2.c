@@ -5,15 +5,22 @@
  */
 void	free_scene(t_scene *scene)
 {
-	t_object	*next;
+	t_object	*next_obj;
+	t_light		*next_light;
 
 	if (!scene)
 		return ;
 	while (scene->objects)
 	{
-		next = scene->objects->next;
+		next_obj = scene->objects->next;
 		free (scene->objects);
-		scene->objects = next;
+		scene->objects = next_obj;
+	}
+	while (scene->lights)
+	{
+		next_light = scene->lights->next;
+		free (scene->lights);
+		scene->lights = next_light;
 	}
 	free (scene);
 }

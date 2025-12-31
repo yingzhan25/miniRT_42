@@ -154,7 +154,7 @@ typedef struct s_scene {
 	int			num_a;
 	t_camera	camera;
 	int			num_c;
-	t_light		light;
+	t_light		*lights;
 	int			num_l;
 	t_object	*objects;
 	int			obj_count;

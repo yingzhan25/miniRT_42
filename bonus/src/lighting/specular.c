@@ -25,9 +25,9 @@ double	calc_intensity(double cosine, t_hit *h, t_vec3 hit_to_light, t_scene *s)
 /**
  * Specular reflects the color of light instead of object
  */
-void	add_specular(t_color *c, t_scene *s, t_hit *h, double intensity)
+void	add_specular(t_color *c, t_light *l, t_hit *h, double intensity)
 {
-	c->r += s->light.color.r * h->object->material.specular * intensity;
-	c->g += s->light.color.g * h->object->material.specular * intensity;
-	c->b += s->light.color.b * h->object->material.specular * intensity;
+	c->r += l->color.r * h->object->material.specular * intensity;
+	c->g += l->color.g * h->object->material.specular * intensity;
+	c->b += l->color.b * h->object->material.specular * intensity;
 }

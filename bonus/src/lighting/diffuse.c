@@ -3,12 +3,12 @@
 /**
  * Calculate color of object with both ambient and diffuse;
  */
-void	add_diffuse(t_color *c, double cosine, t_hit *h, t_scene *s)
+void	add_diffuse(t_color *c, double cosine, t_hit *h, t_light *l)
 {
-	c->r += h->color.r * s->light.color.r * s->light.brightness * \
+	c->r += h->color.r * l->color.r * l->brightness * \
 			cosine / 255;
-	c->g += h->color.g * s->light.color.g * s->light.brightness * \
+	c->g += h->color.g * l->color.g * l->brightness * \
 			cosine / 255;
-	c->b += h->color.b * s->light.color.b * s->light.brightness * \
+	c->b += h->color.b * l->color.b * l->brightness * \
 			cosine / 255;
 }
