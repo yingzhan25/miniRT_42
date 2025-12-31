@@ -37,6 +37,12 @@ static void	define_valid_t(t_ray *ray, t_object *current, \
 		if ((*temp_pts).valid)
 			*t = define_valid_t_for_sphere((*temp_pts).t1, (*temp_pts).t2);
 	}
+	if (current->type == OBJ_CONE)
+	{
+		(*temp_pts) = ray_cone_intersect(*ray, current->u_data.cone);
+		if ((*temp_pts).valid)
+			*t = define_valid_t_for_sphere((*temp_pts).t1, (*temp_pts).t2);
+	}
 }
 
 /*
@@ -89,9 +95,12 @@ t_hit	intersect_object(t_ray ray, t_object *obj)
 		else if (hit_point.object->type == OBJ_SPHERE)
 			hit_point.normal = vec_normalize(vec_sub(hit_point.point,
 						hit_point.object->u_data.sphere.center));
-		else
+		else if (hit_point.object->type == OBJ_CYLINDER)
 			hit_point.normal = cylinder_normal(hit_point.point,
 					hit_point.object->u_data.cylinder);
+		else if (hit_point.object->type == OBJ_CONE)
+			hit_point.normal = cone_normal(hit_point.point,
+					hit_point.object->u_data.cone);
 	}
 	return (hit_point);
 }

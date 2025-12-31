@@ -24,7 +24,7 @@
 # define RGB_MAX 255
 # define FOV_MIN 0
 # define FOV_MAX 180
-# define SHINENESS_MIN 10.0
+# define SHINENESS_MIN 2.0
 # define SHINENESS_MAX 200.0
 
 /**
