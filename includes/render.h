@@ -14,24 +14,23 @@
 # define M_PI 3.14159265358979323846
 #endif
 # define KEY_ESC 65307
-# define BG_COLOR {0,0,0}
 // Ray definition
 typedef struct s_ray {
-	t_vec3 origin;
-	t_vec3 direction;    // Must be normalized
-} t_ray;
+	t_vec3	origin;
+	t_vec3	direction;
+}			t_ray;
 
 // Window and image data
 typedef struct s_mlx_data {
-	void	*mlx;      // MLX instance
-	void	*window;	// Window pointer
-	void	*image;	// Image buffer
-	char	*addr;	    // Image pixel data address
+	void	*mlx;
+	void	*window;
+	void	*image;
+	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
 	t_scene	*scene;
-} t_mlx_data;
+}	t_mlx_data;
 
 void	setup_camera(t_camera *cam);
 void	setup_viewport(t_camera *cam);

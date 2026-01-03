@@ -1,20 +1,20 @@
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 /*
 ** create_sphere: create a new sphere object
 */
-t_object* create_sphere(t_vec3 point, double diametr, t_color color)
+t_object	*create_sphere(t_vec3 point, double diametr, t_color color)
 {
-	t_object *obj;
+	t_object	*obj;
 
 	obj = (t_object *)malloc(sizeof(t_object));
 	if (!obj)
 		return (error(FAIL_MEM_ALLOC), NULL);
 	obj->type = OBJ_SPHERE;
 	obj->color = color;
-	obj->data.sphere.center = point;
-	obj->data.sphere.diameter = diametr;
-	obj->data.sphere.radius = diametr / 2;
+	obj->u_data.sphere.center = point;
+	obj->u_data.sphere.diameter = diametr;
+	obj->u_data.sphere.radius = diametr / 2;
 	obj->next = NULL;
 	return (obj);
 }
@@ -34,7 +34,7 @@ int	parse_sphere(char **a, t_scene *scene)
 	if (P_VEC(a[0], &co))
 		return (error(O_INVL_ORT), 1);
 	if (P_DIAM(a[1], &dm) || dm <= 0)
-		return (error(O_NEG_DM), 1);
+		return (error(O_INVL_DIAM), 1);
 	if (P_COL(a[2], &cl))
 		return (error(O_INVL_COL), 1);
 	sp = create_sphere(co, dm, cl);

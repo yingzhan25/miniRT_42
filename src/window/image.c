@@ -1,6 +1,8 @@
-# include "render.h"
+#include "minirt.h"
 
-// Render each pixel of the image with corresponding color
+/**
+ * Render each pixel of the image with corresponding color
+ */
 void	mlx_put_color_to_image(t_mlx_data *data, t_color color, int x, int y)
 {
 	char	*dst_pixel;

@@ -1,5 +1,17 @@
-# include "render.h"
-# include "intersection.h"
+#include "minirt.h"
+
+/**
+ * Set background color as black;
+ */
+static t_color	set_bg_color(void)
+{
+	t_color	color;
+
+	color.r = 0;
+	color.g = 0;
+	color.b = 0;
+	return (color);
+}
 
 /**
  * Generating ray to calculate intersection wth objects;
@@ -26,7 +38,7 @@ void	render_scene(t_mlx_data *data)
 			if (hit.hit == 1)
 				color = calculate_color(&hit, data->scene);
 			else
-				color = (t_color)BG_COLOR;
+				color = set_bg_color();
 			mlx_put_color_to_image(data, color, i, j);
 			i++;
 		}
