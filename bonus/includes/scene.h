@@ -76,12 +76,25 @@ typedef enum	e_texture_type {
 	TEXTURE_XPM
 }	t_texture_type;
 
+
+typedef	struct s_texture
+{
+	void	*xpm_img;
+	char	*img_data;
+	int		width;
+	int		height;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_texture;
+
 typedef struct s_material {
 	t_color			color;
 	double			specular;
 	double			shineness;
 	t_texture_type	texture;
 	char			*xpm_path;
+	t_texture		img;
 }		t_material;
 
 /**
