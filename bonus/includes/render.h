@@ -4,7 +4,7 @@
 # include "scene.h"
 # include <math.h>
 # include "/usr/local/include/mlx.h"
-// # include "../mlx/mlx.h"
+// # include "../../mlx/mlx.h"
 # include <X11/X.h>
 
 // Number of pixels, can be changed to 1920*1080
