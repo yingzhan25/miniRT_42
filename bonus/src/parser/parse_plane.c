@@ -12,10 +12,6 @@ t_object	*create_plane(t_vec3 point, t_vec3 normal, t_material ml)
 		return (error(FAIL_MEM_ALLOC), NULL);
 	obj->type = OBJ_PLANE;
 	obj->material = ml;
-	if (ml.texture == TEXTURE_XPM)
-	{
-		
-	}	
 	obj->u_data.plane.point = point;
 	obj->u_data.plane.normal = normal;
 	obj->next = NULL;
