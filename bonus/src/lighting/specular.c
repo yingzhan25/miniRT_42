@@ -14,7 +14,8 @@ double	calc_intensity(double cosine, t_hit *h, t_vec3 hit_to_light, t_scene *s)
 	t_vec3	hit_to_eye;
 	double	reflect_dot_eye;
 
-	reflect_light = vec_normalize(vec_sub(vec_scale(h->normal, 2 * cosine), hit_to_light));
+	reflect_light = vec_normalize(vec_sub(vec_scale(h->normal, 2 * cosine), \
+					hit_to_light));
 	hit_to_eye = vec_normalize(vec_sub(s->camera.position, h->point));
 	reflect_dot_eye = dot_product(reflect_light, hit_to_eye);
 	if (reflect_dot_eye < 0)

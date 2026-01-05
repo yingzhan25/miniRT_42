@@ -16,6 +16,7 @@ t_light	*create_light(t_vec3 pos, double bright, t_color color)
 	light->next = NULL;
 	return (light);
 }
+
 /**
  * Add a single light to light lists
  */

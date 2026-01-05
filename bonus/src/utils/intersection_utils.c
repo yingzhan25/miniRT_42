@@ -6,7 +6,7 @@
 ** and checks if it lies within the cap's radius.
 ** Returns the t value of the intersection if valid, -1.0 otherwise.
 */
-static double	cap_intersect(t_ray ray, t_vec3 cap_center, 
+static double	cap_intersect(t_ray ray, t_vec3 cap_center,
 		t_vec3 axis, double radius)
 {
 	double	denom;
@@ -38,34 +38,34 @@ static double	cap_intersect(t_ray ray, t_vec3 cap_center,
 */
 void	check_caps(t_cyl_work *w, t_intersection *intersect)
 {
-    t_vec3	bottom_center;
-    t_vec3	top_center;
-    double	t;
+	t_vec3	bottom_center;
+	t_vec3	top_center;
+	double	t;
 
-    bottom_center = vec_sub(w->cy.center, vec_scale(w->cy.axis, w->half_h));
-    top_center = vec_add(w->cy.center, vec_scale(w->cy.axis, w->half_h));    
-    t = cap_intersect(w->ray, bottom_center, w->cy.axis, w->cy.radius);
-    if (t > EPSILON)
-    {
-        if (!intersect->valid || t < intersect->t1)
-        {
+	bottom_center = vec_sub(w->cy.center, vec_scale(w->cy.axis, w->half_h));
+	top_center = vec_add(w->cy.center, vec_scale(w->cy.axis, w->half_h));
+	t = cap_intersect(w->ray, bottom_center, w->cy.axis, w->cy.radius);
+	if (t > EPSILON)
+	{
+		if (!intersect->valid || t < intersect->t1)
+		{
 			intersect->t2 = intersect->t1;
 			intersect->t1 = t;
 			intersect->valid = 1;
-        }
-        else if (isnan(intersect->t2) || t < intersect->t2)
-            intersect->t2 = t;
-    }
-    t = cap_intersect(w->ray, top_center, w->cy.axis, w->cy.radius);
-    if (t > EPSILON)
-    {
-        if (!intersect->valid || t < intersect->t1)
-        {
-            intersect->t2 = intersect->t1;
-            intersect->t1 = t;
-            intersect->valid = 1;
-        }
-        else if (isnan(intersect->t2) || t < intersect->t2)
-            intersect->t2 = t;
-    }
+		}
+		else if (isnan(intersect->t2) || t < intersect->t2)
+			intersect->t2 = t;
+	}
+	t = cap_intersect(w->ray, top_center, w->cy.axis, w->cy.radius);
+	if (t > EPSILON)
+	{
+		if (!intersect->valid || t < intersect->t1)
+		{
+			intersect->t2 = intersect->t1;
+			intersect->t1 = t;
+			intersect->valid = 1;
+		}
+		else if (isnan(intersect->t2) || t < intersect->t2)
+			intersect->t2 = t;
+	}
 }
