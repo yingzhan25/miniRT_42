@@ -1,21 +1,22 @@
 #include "minirt_bonus.h"
 
-void load_texture_for_material(t_material *material, void *mlx)
+void	load_texture_for_material(t_material *material, void *mlx)
 {
-    int bpp;
-	int line_len;
-	int endian;
+	int	bpp;
+	int	line_len;
+	int	endian;
 
-    material->img.xpm_img = mlx_xpm_file_to_image(mlx, material->xpm_path,
-                                &material->img.width, &material->img.height);
-    material->img.img_data = mlx_get_data_addr(material->img.xpm_img,
-		&bpp, &line_len, &endian);
-    material->img.bits_per_pixel = bpp;
-    material->img.line_length = line_len;
-    material->img.endian = endian;
+	material->img.xpm_img = mlx_xpm_file_to_image(mlx, material->xpm_path, \
+		&material->img.width, &material->img.height);
+	material->img.img_data = mlx_get_data_addr(material->img.xpm_img, &bpp, \
+		&line_len, &endian);
+	material->img.bits_per_pixel = bpp;
+	material->img.line_length = line_len;
+	material->img.endian = endian;
 }
 
-void load_all_textures(t_scene *scene, void *mlx) {
+void	load_all_textures(t_scene *scene, void *mlx)
+{
 	t_object	*obj;
 
 	obj = scene->objects;

@@ -77,4 +77,3 @@ int	check_extension(char *s1, char *s2)
 		return (1);
 	return (0);
 }
-

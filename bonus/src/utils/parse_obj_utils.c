@@ -70,19 +70,19 @@ int	parse_texture_type(char *s, t_texture_type *type)
 	else if (i == 1)
 		*type = TEXTURE_CHECKER;
 	else
-		*type = TEXTURE_XPM; 
+		*type = TEXTURE_XPM;
 	return (0);
 }
 
-int check_texture_path(char *path)
+int	check_texture_path(char *path)
 {
-    int fd;
+	int	fd;
 
 	if (! path || !ft_strcmp(path, "-"))
 		return (0);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (1);   
+		return (1);
 	close(fd);
 	return (0);
 }
@@ -95,11 +95,11 @@ int	parse_texture_path(char *s, t_material *ml)
 	{
 		if (check_texture_path(s))
 			return (1);
-    	ml->xpm_path = ft_strdup(s);
+		ml->xpm_path = ft_strdup(s);
 		if (!ml->xpm_path)
 			return (1);
 	}
 	else
-    	ml->xpm_path = NULL;
+		ml->xpm_path = NULL;
 	return (0);
 }
