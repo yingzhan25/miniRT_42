@@ -10,6 +10,12 @@ typedef struct s_intersection
 	double	t2;
 }	t_intersection;
 
+typedef struct	s_uv
+{
+	double	u;
+	double	v;
+}			t_uv;
+
 typedef struct s_hit {
 	int				hit;
 	t_intersection	intersection_points;
@@ -18,6 +24,7 @@ typedef struct s_hit {
 	t_vec3			normal;
 	t_object		*object;
 	t_color			color;
+	t_uv			uv;
 }	t_hit;
 
 typedef struct s_cyl_work
@@ -69,5 +76,7 @@ void			add_specular(t_color *c, t_light *l, t_hit *h, double intensity);
 
 // Checkerboard texture
 t_color			get_texture_color(t_hit *hit);
+t_uv			calculate_uv(t_hit *hit);
+t_color			sample_xpm_texture(t_hit *hit);
 
 #endif
