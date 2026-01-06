@@ -90,7 +90,6 @@ t_hit	intersect_object(t_ray ray, t_object *obj)
 	{
 		hit_point.color = hit_point.object->material.color;
 		hit_point.point = position(ray, hit_point.t);
-		hit_point.uv = calculate_uv(&hit_point);
 		if (hit_point.object->type == OBJ_PLANE)
 			hit_point.normal = hit_point.object->u_data.plane.normal;
 		else if (hit_point.object->type == OBJ_SPHERE)
@@ -102,6 +101,7 @@ t_hit	intersect_object(t_ray ray, t_object *obj)
 		else if (hit_point.object->type == OBJ_CONE)
 			hit_point.normal = cone_normal(hit_point.point,
 					hit_point.object->u_data.cone);
+		hit_point.uv = calculate_uv(&hit_point);
 	}
 	return (hit_point);
 }
