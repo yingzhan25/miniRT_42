@@ -23,7 +23,7 @@ static t_color	check_base_color(t_hit *hit)
 	if (hit->object->material.texture == 0)
 		return (hit->color);
 	else if (hit->object->material.texture == 1)
-		return (get_texture_color(hit));
+		return (get_cb_color(hit));
 	else
 		return (sample_xpm_texture(hit));
 	return (hit->color);
