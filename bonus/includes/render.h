@@ -13,13 +13,15 @@
 # define M_PI 3.14159265358979323846
 # define KEY_ESC 65307
 // Ray definition
-typedef struct s_ray {
+typedef struct s_ray
+{
 	t_vec3	origin;
 	t_vec3	direction;
 }			t_ray;
 
 // Window and image data
-typedef struct s_mlx_data {
+typedef struct s_mlx_data
+{
 	void	*mlx;
 	void	*window;
 	void	*image;

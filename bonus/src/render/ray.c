@@ -30,7 +30,7 @@ t_ray	generate_ray(t_camera *cam, int i, int j)
 	v *= -cam->viewport_height;
 	ray.origin = cam->position;
 	viewport_point = vec_add(
-			vec_add(cam->orientation, vec_scale(cam->right, u)), 
+			vec_add(cam->orientation, vec_scale(cam->right, u)),
 			vec_scale(cam->up, v));
 	ray.direction = vec_normalize(viewport_point);
 	return (ray);

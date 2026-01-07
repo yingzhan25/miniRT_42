@@ -103,7 +103,8 @@ t_intersection	ray_cylinder_intersect(t_ray ray, t_cylinder cylinder)
 }
 
 /*
-** cylinder_normal: Computes the normal vector at a point on the cylinder surface.
+** cylinder_normal: Computes the normal vector at a point 
+** on the cylinder surface.
 ** It calculates the vector from the cylinder center to the point,
 ** projects it onto the cylinder axis, and derives the normal.
 ** Returns the normalized normal vector.
@@ -119,11 +120,11 @@ t_vec3	cylinder_normal(t_vec3 point, t_cylinder cylinder)
 	double	proj_length;
 	double	half_h;
 
-    half_h = cylinder. height * 0.5;
+	half_h = cylinder.height * 0.5;
 	center_to_point = vec_sub(point, cylinder.center);
 	proj_length = dot_product(center_to_point, cylinder.axis);
 	projection = vec_scale(cylinder.axis, proj_length);
-    if (fabs(proj_length - half_h) < EPSILON)
+	if (fabs(proj_length - half_h) < EPSILON)
 		return (cylinder.axis);
 	if (fabs(proj_length + half_h) < EPSILON)
 		return (vec_scale(cylinder.axis, -1.0));
