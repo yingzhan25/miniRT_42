@@ -29,10 +29,11 @@
 # define BLACK {0,0,0}
 # define WHITE {255,255,255}
 # define RED {255,0,0}
-# define GREEN {0,255,0}
-# define SCALE_S 0.1
-# define SCALE_M 0.5
-# define SCALE_L 1
+# define BLUE {0,0,255}
+# define SCALE_S 1
+# define SCALE_M 0.3
+# define SCALE_L 0.1
+# define SCALE_XL 0.08
 
 /**
  * RGB color (0-255 range)

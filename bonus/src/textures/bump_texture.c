@@ -35,6 +35,10 @@ static t_color get_pixel_color(char *img_data, int x, int y, t_material *mat)
 ** samples texture color at hit point's UV coordinates.
 ** converts UV (0.0-1.0) to pixel coordinates, clamps to valid range,
 ** and returns the color from the XPM texture image.
+** For plane:
+** 1. use scale to change size (the smaller, the more times repeat)
+** 2. use floor to convert UV to (0.0-1.0);
+** 3. revert direction of u,v
 */
 t_color	sample_xpm_texture(t_hit *hit)
 {
@@ -45,12 +49,16 @@ t_color	sample_xpm_texture(t_hit *hit)
 	mat = hit->object->material;
 	if (hit->object->type == OBJ_PLANE)
 	{
-		hit->uv.u *= SCALE_S;
-		hit->uv.v *= SCALE_S;
+		hit->uv.u *= SCALE_XL;
+		hit->uv.v *= SCALE_XL;
+		hit->uv.u -= floor(hit->uv.u);
+		hit->uv.v -= floor(hit->uv.v);
+		hit->uv.u = 1.0 - hit->uv.u;
+		hit->uv.v = 1.0 - hit->uv.v;
 	}
 	x = (int)(hit->uv.u * (mat.img.width - 1));
 	y = (int)(hit->uv.v * (mat.img.height - 1));
 	x = clamp_int(x, 0, mat.img.width - 1);
-    y = clamp_int(y, 0, mat.img.height - 1);
+	y = clamp_int(y, 0, mat.img.height - 1);
 	return (get_pixel_color(mat.img.img_data, x, y, &mat));
 }
