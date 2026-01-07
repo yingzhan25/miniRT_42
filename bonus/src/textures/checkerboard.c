@@ -15,16 +15,16 @@ t_color	get_cb_color(t_hit *hit)
 
 	if (hit->object->type == OBJ_PLANE)
 	{
-		i = (int)floor(hit->uv.u / SCALE_L);
-		j = (int)floor(hit->uv.v / SCALE_L);
+		i = (int)floor(hit->uv.u / SCALE_S);
+		j = (int)floor(hit->uv.v / SCALE_S);
 		if ((i + j) % 2)
 			return ((t_color)RED);
-		return ((t_color)GREEN);
+		return ((t_color)BLUE);
 	}
 	else
 	{
-		i = (int)floor(hit->uv.u / SCALE_S);
-		j = (int)floor(hit->uv.v / SCALE_S);
+		i = (int)floor(hit->uv.u / SCALE_L);
+		j = (int)floor(hit->uv.v / SCALE_L);
 		if ((i + j) % 2)
 			return ((t_color)BLACK);
 		return ((t_color)WHITE);
