@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/08 12:29:41 by yingzhan          #+#    #+#             */
+/*   Updated: 2026/01/08 12:29:42 by yingzhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 /*
@@ -26,7 +38,7 @@ static int	cyl_init(t_cyl_work *w, t_ray ray, t_cylinder cy)
 
 /*
 ** cyl_solve: Solves the quadratic equation for cylinder intersection.
-** It calculates the discriminant and determines the intersection 
+** It calculates the discriminant and determines the intersection
 ** points t1 and t2.
 ** Returns 1 if there are real solutions (intersections), 0 otherwise.
 */
@@ -65,9 +77,9 @@ static int	cyl_in_height(t_cyl_work *w, double t)
 ** ray_cylinder_intersect: Computes the intersection of a ray with a cylinder.
 ** It initializes the cylinder work structure, solves the quadratic equation,
 ** and checks if the intersection points are within the cylinder's height.
-** Returns a t_intersection struct containing 
+** Returns a t_intersection struct containing
 ** the intersection validity and t values.
-** If there are valid intersections, the valid field is set 
+** If there are valid intersections, the valid field is set
 ** to 1 and t1, t2 are the intersection distances.
 ** If there are no valid intersections, valid is set to 0.
 */
@@ -97,17 +109,17 @@ t_intersection	ray_cylinder_intersect(t_ray ray, t_cylinder cylinder)
 }
 
 /*
-** Function to compute the normal vector 
+** Function to compute the normal vector
 ** at a point on the surface of a cylinder.
-** The normal is calculated by projecting the vector 
+** The normal is calculated by projecting the vector
 ** from the cylinder center to the point onto the cylinder axis,
-** and then subtracting this projection from 
+** and then subtracting this projection from
 ** the original vector to get the perpendicular component.
 ** The resulting normal vector is then normalized.
-** center_to_point is the vector from the cylinder center 
+** center_to_point is the vector from the cylinder center
 ** to the intersection point.
 ** projection is the projection of center_to_point onto the cylinder axis.
-** normal is the vector perpendicular to the cylinder 
+** normal is the vector perpendicular to the cylinder
 ** surface at the intersection point.
 */
 
