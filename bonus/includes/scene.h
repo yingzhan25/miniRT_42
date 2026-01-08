@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scene.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/08 12:02:02 by yingzhan          #+#    #+#             */
+/*   Updated: 2026/01/08 12:02:03 by yingzhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SCENE_H
 # define SCENE_H
 
@@ -29,10 +41,6 @@
 # define FOV_MAX 180
 # define SHINENESS_MIN 2.0
 # define SHINENESS_MAX 200.0
-# define BLACK {0,0,0}
-# define WHITE {255,255,255}
-# define RED {255,0,0}
-# define BLUE {0,0,255}
 # define SCALE_S 1
 # define SCALE_M 0.3
 # define SCALE_L 0.1

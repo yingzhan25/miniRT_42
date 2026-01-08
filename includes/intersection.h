@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intersection.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/08 12:28:48 by yingzhan          #+#    #+#             */
+/*   Updated: 2026/01/08 12:28:49 by yingzhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef INTERSECTION_H
 # define INTERSECTION_H
 
@@ -45,7 +57,7 @@ t_vec3			position(t_ray ray, double t);
 // Lighting and shade
 t_color			calculate_color(t_hit *hit, t_scene *scene);
 void			calculate_ambient(t_color *color, t_hit *hit, t_scene *scene);
-void			calculate_diffuse(t_color *color, t_vec3 hit_to_light, 
+void			calculate_diffuse(t_color *color, t_vec3 hit_to_light,
 					t_hit *hit, t_scene *scene);
 int				in_shadow(t_vec3 hit_to_light, t_scene *scene, t_hit *hit);
 

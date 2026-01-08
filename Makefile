@@ -52,7 +52,7 @@ SRCS 			= src/main.c src/parser/parse_scene.c src/parser/parse_camera.c src/util
 
 BONUS_SRCS		= $(BONUS_DIR)/src/main.c $(BONUS_DIR)/src/parser/parse_scene.c $(BONUS_DIR)/src/parser/parse_camera.c $(BONUS_DIR)/src/utils/parse_utils_1.c \
 				$(BONUS_DIR)/src/utils/parse_utils_2.c $(BONUS_DIR)/src/utils/parse_utils_atof.c $(BONUS_DIR)/src/parser/parse_ambient.c \
-				$(BONUS_DIR)/src/parser/parse_objects.c $(BONUS_DIR)/src/utils/parse_obj_utils.c \
+				$(BONUS_DIR)/src/parser/parse_objects.c $(BONUS_DIR)/src/utils/parse_obj_utils.c $(BONUS_DIR)/src/utils/parse_obj_utils_1.c \
 				$(BONUS_DIR)/src/math/vector_ops.c $(BONUS_DIR)/src/math/vector_utils.c $(BONUS_DIR)/src/parser/parse_light.c \
 				$(BONUS_DIR)/src/parser/parse_sphere.c $(BONUS_DIR)/src/parser/parse_plane.c $(BONUS_DIR)/src/parser/parse_cylinder.c \
 				$(BONUS_DIR)/src/math/math_helper.c $(BONUS_DIR)/src/utils/validation.c $(BONUS_DIR)/src/render/camera.c $(BONUS_DIR)/src/render/ray.c \
