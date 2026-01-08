@@ -24,7 +24,7 @@ t_vec3	vec_cross(t_vec3 a, t_vec3 b)
 	tmp.x = a.y * b.z - a.z * b.y;
 	tmp.y = a.z * b.x - a.x * b.z;
 	tmp.z = a.x * b.y - a.y * b.x;
-	return (tmp); 
+	return (tmp);
 }
 
 /*

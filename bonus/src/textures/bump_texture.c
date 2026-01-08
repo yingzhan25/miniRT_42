@@ -17,7 +17,7 @@ static int	clamp_int(int val, int min, int max)
 ** calculates memory offset and decodes the 32-bit ARGB pixel value.
 ** returns color with R, G, B components (0-255).
 */
-static t_color get_pixel_color(char *img_data, int x, int y, t_material *mat)
+static t_color	get_pixel_color(char *img_data, int x, int y, t_material *mat)
 {
 	int		offset;
 	int		pixel;

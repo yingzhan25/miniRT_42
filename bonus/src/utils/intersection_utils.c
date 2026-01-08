@@ -28,6 +28,19 @@ static double	cap_intersect(t_ray ray, t_vec3 cap_center,
 	return (t);
 }
 
+// Helper function to avoid code duplication
+static void	update_intersection(t_intersection *intersect, double t)
+{
+	if (!intersect->valid || t < intersect->t1)
+	{
+		intersect->t2 = intersect->t1;
+		intersect->t1 = t;
+		intersect->valid = 1;
+	}
+	else if (isnan(intersect->t2) || t < intersect->t2)
+		intersect->t2 = t;
+}
+
 /*
 ** check_caps: Checks for intersections with the cylinder's caps.
 ** Updates the intersection structure with valid t values if intersections occur.
@@ -38,34 +51,19 @@ static double	cap_intersect(t_ray ray, t_vec3 cap_center,
 */
 void	check_caps(t_cyl_work *w, t_intersection *intersect)
 {
+	t_vec3	axis_scaled;
 	t_vec3	bottom_center;
 	t_vec3	top_center;
-	double	t;
+	double	t_bottom;
+	double	t_top;
 
-	bottom_center = vec_sub(w->cy.center, vec_scale(w->cy.axis, w->half_h));
-	top_center = vec_add(w->cy.center, vec_scale(w->cy.axis, w->half_h));
-	t = cap_intersect(w->ray, bottom_center, w->cy.axis, w->cy.radius);
-	if (t > EPSILON)
-	{
-		if (!intersect->valid || t < intersect->t1)
-		{
-			intersect->t2 = intersect->t1;
-			intersect->t1 = t;
-			intersect->valid = 1;
-		}
-		else if (isnan(intersect->t2) || t < intersect->t2)
-			intersect->t2 = t;
-	}
-	t = cap_intersect(w->ray, top_center, w->cy.axis, w->cy.radius);
-	if (t > EPSILON)
-	{
-		if (!intersect->valid || t < intersect->t1)
-		{
-			intersect->t2 = intersect->t1;
-			intersect->t1 = t;
-			intersect->valid = 1;
-		}
-		else if (isnan(intersect->t2) || t < intersect->t2)
-			intersect->t2 = t;
-	}
+	axis_scaled = vec_scale(w->cy.axis, w->half_h);
+	bottom_center = vec_sub(w->cy.center, axis_scaled);
+	top_center = vec_add(w->cy.center, axis_scaled);
+	t_bottom = cap_intersect(w->ray, bottom_center, w->cy.axis, w->cy.radius);
+	if (t_bottom > EPSILON)
+		update_intersection(intersect, t_bottom);
+	t_top = cap_intersect(w->ray, top_center, w->cy.axis, w->cy.radius);
+	if (t_top > EPSILON)
+		update_intersection(intersect, t_top);
 }

@@ -59,8 +59,8 @@ t_uv	calculate_uv(t_hit *hit)
 	if (hit->object->material.texture == TEXTURE_NONE)
 		return (uv);
 	if (hit->object->type == OBJ_SPHERE)
-		return	(sphere_uv(hit->point, hit->object->u_data.sphere));
+		return (sphere_uv(hit->point, hit->object->u_data.sphere));
 	else if (hit->object->type == OBJ_PLANE)
-		return	(plane_uv(hit->point, hit->object->u_data.plane, hit));
+		return (plane_uv(hit->point, hit->object->u_data.plane, hit));
 	return (uv);
 }
