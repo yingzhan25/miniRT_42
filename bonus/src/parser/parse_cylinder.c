@@ -44,13 +44,9 @@ int	parse_cylinder(char **a, t_scene *scene)
 		return (error(O_INVL_HEIGHT), 1);
 	if (P_COL(a[4], &(ml.color)))
 		return (error(O_INVL_COL), 1);
-	if (parse_ratio(a[5], &(ml.specular)))
+	if (P_RAT(a[5], &(ml.specular)) || P_SHN(a[6], &(ml.shineness)))
 		return (error(MAT_INVL_VAL), 1);
-	if (parse_shineness(a[6], &(ml.shineness)))
-		return (error(MAT_INVL_VAL), 1);
-	if (parse_texture_type(a[7], &(ml.texture)))
-		return (error(MAT_INVL_VAL), 1);
-	if (parse_texture_path(a[8], &(ml)))
+	if (P_TEX(a[7], &(ml.texture)) || P_TEXP(a[8], &(ml)))
 		return (error(MAT_INVL_VAL), 1);
 	cy = create_cylinder(co, no, dm, ml);
 	return (!cy || (P_SI(scene, cy), scene->obj_count++, 0));
