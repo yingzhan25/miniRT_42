@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector_ops.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/08 12:03:43 by yingzhan          #+#    #+#             */
+/*   Updated: 2026/01/08 12:03:44 by yingzhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/vector.h"
 
 t_vec3	vec_add(t_vec3 a, t_vec3 b)
@@ -31,9 +43,9 @@ t_vec3	vec_scale(t_vec3 v, double scalar)
 }
 
 /*
-** here is the thing that if scalar value is eqaual to 0, we should 
+** here is the thing that if scalar value is eqaual to 0, we should
 ** return the error. its good to check before calling the function, i think so
-** it would be more safer than returning zero vector 
+** it would be more safer than returning zero vector
 */
 t_vec3	vec_divide(t_vec3 v, double scalar)
 {

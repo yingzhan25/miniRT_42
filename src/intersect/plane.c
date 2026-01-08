@@ -1,20 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   plane.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/08 12:29:59 by yingzhan          #+#    #+#             */
+/*   Updated: 2026/01/08 12:30:00 by yingzhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 /*
 ** Function to compute the intersection of a ray with a plane.
 ** The plane is defined by a point on the plane and a normal vector.
-** The function returns a t_intersection struct containing the intersection 
+** The function returns a t_intersection struct containing the intersection
 ** validity and t value.
-** If the ray is parallel to the plane (denominator close to zero), 
+** If the ray is parallel to the plane (denominator close to zero),
 ** no intersection occurs.
 ** Otherwise, the intersection t value is calculated using the plane equation.
 ** plane_to_ray is the vector from the ray origin to the plane point.
-** denominator is the dot product of the ray direction and the plane normal, 
+** denominator is the dot product of the ray direction and the plane normal,
 ** used to determine parallelism.
-** If the absolute value of the denominator is less than EPSILON, the ray is 
+** If the absolute value of the denominator is less than EPSILON, the ray is
 ** considered parallel to the plane.
 ** If not parallel, the intersection t value is computed and marked as valid.
-** The intersection t value represents the distance along the ray to 
+** The intersection t value represents the distance along the ray to
 ** the intersection point.
 */
 t_intersection	ray_plane_intersection(t_ray ray, t_plane plane)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/08 12:02:23 by yingzhan          #+#    #+#             */
+/*   Updated: 2026/01/08 12:02:24 by yingzhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt_bonus.h"
 
 /*
@@ -103,13 +115,13 @@ t_intersection	ray_cylinder_intersect(t_ray ray, t_cylinder cylinder)
 }
 
 /*
-** cylinder_normal: Computes the normal vector at a point 
+** cylinder_normal: Computes the normal vector at a point
 ** on the cylinder surface.
 ** It calculates the vector from the cylinder center to the point,
 ** projects it onto the cylinder axis, and derives the normal.
 ** Returns the normalized normal vector.
 ** If the point is on the caps, returns the cap normal.
-** (Normal vektor - yuzaga perpendikulyar vektor.) 
+** (Normal vektor - yuzaga perpendikulyar vektor.)
 ** (Yorug'lik qanday aks etishini hisoblash uchun kerak.)
 */
 
