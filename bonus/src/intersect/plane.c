@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   plane.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/08 12:02:37 by yingzhan          #+#    #+#             */
+/*   Updated: 2026/01/08 12:02:38 by yingzhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt_bonus.h"
 
 /*
@@ -6,7 +18,7 @@
 ** It returns a t_intersection struct containing
 ** the intersection point t1.
 ** If there is no intersection, the valid field is set to 0.
-** If there is an intersection, valid is set to 1 and t1 is 
+** If there is an intersection, valid is set to 1 and t1 is
 ** the intersection distance.
 */
 t_intersection	ray_plane_intersection(t_ray ray, t_plane plane)

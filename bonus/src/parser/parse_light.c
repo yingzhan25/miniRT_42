@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_light.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/08 12:04:21 by yingzhan          #+#    #+#             */
+/*   Updated: 2026/01/08 12:04:22 by yingzhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt_bonus.h"
 
 /**
@@ -16,6 +28,7 @@ t_light	*create_light(t_vec3 pos, double bright, t_color color)
 	light->next = NULL;
 	return (light);
 }
+
 /**
  * Add a single light to light lists
  */

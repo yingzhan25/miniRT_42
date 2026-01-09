@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   specular.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/08 12:03:15 by yingzhan          #+#    #+#             */
+/*   Updated: 2026/01/08 12:03:16 by yingzhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt_bonus.h"
 
 /**
@@ -14,7 +26,8 @@ double	calc_intensity(double cosine, t_hit *h, t_vec3 hit_to_light, t_scene *s)
 	t_vec3	hit_to_eye;
 	double	reflect_dot_eye;
 
-	reflect_light = vec_normalize(vec_sub(vec_scale(h->normal, 2 * cosine), hit_to_light));
+	reflect_light = vec_normalize(vec_sub(vec_scale(h->normal, 2 * cosine), \
+					hit_to_light));
 	hit_to_eye = vec_normalize(vec_sub(s->camera.position, h->point));
 	reflect_dot_eye = dot_product(reflect_light, hit_to_eye);
 	if (reflect_dot_eye < 0)

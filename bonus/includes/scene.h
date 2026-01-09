@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scene.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/08 12:02:02 by yingzhan          #+#    #+#             */
+/*   Updated: 2026/01/08 12:02:03 by yingzhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SCENE_H
 # define SCENE_H
 
@@ -18,6 +30,9 @@
 # define C_A_E		count_array_element
 # define P_SI		parse_single_obj
 # define P_MLH		parse_material_light
+# define P_TEX		parse_texture_type
+# define P_TEXP		parse_texture_path
+# define P_SHN		parse_shineness
 
 # define RATIO_MIN 0.0
 # define RATIO_MAX 1.0
@@ -26,14 +41,16 @@
 # define FOV_MAX 180
 # define SHINENESS_MIN 2.0
 # define SHINENESS_MAX 200.0
-# define CHECKER_COLOR1 {0,0,0}
-# define CHECKER_COLOR2 {255,255,255}
-# define CHECKER_SCALE 1
+# define SCALE_S 1
+# define SCALE_M 0.3
+# define SCALE_L 0.1
+# define SCALE_XL 0.08
 
 /**
  * RGB color (0-255 range)
  */
-typedef struct s_color {
+typedef struct s_color
+{
 	int	r;
 	int	g;
 	int	b;
@@ -42,7 +59,8 @@ typedef struct s_color {
 /**
  * Ambient light (singleton)
  */
-typedef struct s_ambient {
+typedef struct s_ambient
+{
 	double	ratio;
 	t_color	color;
 }	t_ambient;
@@ -50,7 +68,8 @@ typedef struct s_ambient {
 /**
  * Camera (singleton)
  */
-typedef struct s_camera {
+typedef struct s_camera
+{
 	t_vec3	position;
 	t_vec3	orientation;
 	double	fov;
@@ -63,21 +82,22 @@ typedef struct s_camera {
 /**
  * Light source (singleton in mandatory, multiple in bonus)
  */
-typedef struct s_light {
+typedef struct s_light
+{
 	t_vec3			position;
 	double			brightness;
 	t_color			color;
 	struct s_light	*next;
 }	t_light;
 
-typedef enum	e_texture_type {
+typedef enum e_texture_type
+{
 	TEXTURE_NONE,
 	TEXTURE_CHECKER,
 	TEXTURE_XPM
 }	t_texture_type;
 
-
-typedef	struct s_texture
+typedef struct s_texture
 {
 	void	*xpm_img;
 	char	*img_data;
@@ -88,7 +108,8 @@ typedef	struct s_texture
 	int		endian;
 }	t_texture;
 
-typedef struct s_material {
+typedef struct s_material
+{
 	t_color			color;
 	double			specular;
 	double			shineness;
@@ -100,7 +121,8 @@ typedef struct s_material {
 /**
  * Object type enumeration
  */
-typedef enum e_obj_type {
+typedef enum e_obj_type
+{
 	OBJ_SPHERE,
 	OBJ_PLANE,
 	OBJ_CYLINDER,
@@ -110,7 +132,8 @@ typedef enum e_obj_type {
 /**
  * Sphere-specific data
  */
-typedef struct s_sphere {
+typedef struct s_sphere
+{
 	t_vec3		center;
 	double		diameter;
 	double		radius;
@@ -119,7 +142,8 @@ typedef struct s_sphere {
 /**
  * Plane-specific data
  */
-typedef struct s_plane {
+typedef struct s_plane
+{
 	t_vec3		point;
 	t_vec3		normal;
 }	t_plane;
@@ -127,7 +151,8 @@ typedef struct s_plane {
 /**
  * Cylinder-specific data
  */
-typedef struct s_cylinder {
+typedef struct s_cylinder
+{
 	t_vec3		center;
 	t_vec3		axis;
 	double		diameter;
@@ -138,7 +163,8 @@ typedef struct s_cylinder {
 /**
  * Cone-specific data
  */
-typedef struct s_cone {
+typedef struct s_cone
+{
 	t_vec3		apex;
 	t_vec3		axis;
 	double		diameter;
@@ -149,10 +175,12 @@ typedef struct s_cone {
 /**
  * Generic object (linked list node)
  */
-typedef struct s_object {
+typedef struct s_object
+{
 	t_obj_type		type;
 	t_material		material;
-	union {
+	union
+	{
 		t_sphere	sphere;
 		t_plane		plane;
 		t_cylinder	cylinder;
@@ -164,7 +192,8 @@ typedef struct s_object {
 /**
  * Complete scene
  */
-typedef struct s_scene {
+typedef struct s_scene
+{
 	int			fail_to_parse;
 	t_ambient	ambient;
 	int			num_a;

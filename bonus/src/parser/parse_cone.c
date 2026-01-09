@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_cone.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/08 12:04:09 by yingzhan          #+#    #+#             */
+/*   Updated: 2026/01/08 12:04:10 by yingzhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt_bonus.h"
 
 /*
@@ -44,13 +56,9 @@ int	parse_cone(char **a, t_scene *scene)
 		return (error(O_INVL_HEIGHT), 1);
 	if (P_COL(a[4], &(ml.color)))
 		return (error(O_INVL_COL), 1);
-	if (parse_ratio(a[5], &(ml.specular)))
+	if (P_RAT(a[5], &(ml.specular)) || P_SHN(a[6], &(ml.shineness)))
 		return (error(MAT_INVL_VAL), 1);
-	if (parse_shineness(a[6], &(ml.shineness)))
-		return (error(MAT_INVL_VAL), 1);
-	if (parse_texture_type(a[7], &(ml.texture)))
-		return (error(MAT_INVL_VAL), 1);
-	if (parse_texture_path(a[8], &(ml)))
+	if (P_TEX(a[7], &(ml.texture)) || P_TEXP(a[8], &(ml)))
 		return (error(MAT_INVL_VAL), 1);
 	cone = create_cone(ap, no, dm, ml);
 	return (!cone || (P_SI(scene, cone), scene->obj_count++, 0));

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/08 12:03:51 by yingzhan          #+#    #+#             */
+/*   Updated: 2026/01/08 12:03:52 by yingzhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/vector.h"
 
-/** 
+/**
 ** Computes the dot product of two 3D vectors a and b.
 ** The dot product is a scalar value that represents the cosine of the angle
 ** between the two vectors multiplied by their magnitudes.
@@ -24,7 +36,7 @@ t_vec3	vec_cross(t_vec3 a, t_vec3 b)
 	tmp.x = a.y * b.z - a.z * b.y;
 	tmp.y = a.z * b.x - a.x * b.z;
 	tmp.z = a.x * b.y - a.y * b.x;
-	return (tmp); 
+	return (tmp);
 }
 
 /*

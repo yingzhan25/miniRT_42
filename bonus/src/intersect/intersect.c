@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intersect.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/08 12:02:32 by yingzhan          #+#    #+#             */
+/*   Updated: 2026/01/08 12:02:33 by yingzhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt_bonus.h"
 
 /*
@@ -101,6 +113,7 @@ t_hit	intersect_object(t_ray ray, t_object *obj)
 		else if (hit_point.object->type == OBJ_CONE)
 			hit_point.normal = cone_normal(hit_point.point,
 					hit_point.object->u_data.cone);
+		hit_point.uv = calculate_uv(&hit_point);
 	}
 	return (hit_point);
 }

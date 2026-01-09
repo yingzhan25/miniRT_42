@@ -1,41 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checkerboard.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/08 12:05:26 by yingzhan          #+#    #+#             */
+/*   Updated: 2026/01/08 12:23:22 by yingzhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt_bonus.h"
 
-t_color	calculate_checker(t_vec3 hit_to_point, t_vec3 u_axis, t_vec3 v_axis)
+/**
+ * Calculate checkered texture for objects;
+ * i, j: index of checkerboard;
+ * using floor() to find the small roundup index after divide scale;
+ * decide the color of checker with (i + j) % 2
+ * the scale of plane should be larger than sphere,
+ * because plane uv is not normalized
+ */
+t_color	get_cb_color(t_hit *hit)
 {
-	double	u;
-	double	v;
 	int		i;
 	int		j;
 
-	u = dot_product(hit_to_point, u_axis);
-	v = dot_product(hit_to_point, v_axis);
-	i = (int)floor(u / CHECKER_SCALE);
-	j = (int)floor(v / CHECKER_SCALE);
-	if ((i + j) % 2)
-		return ((t_color)CHECKER_COLOR1);
-	return ((t_color)CHECKER_COLOR2);
-}
-
-/**
- * Calculate checkered texture for plane;
- * set up a world coordinate based on plane normal;
- * find out projection of vecter in u and v axis;
- * using floor() to find the small roundup number after divide scale;
- * decide in which color of checker
- */
-t_color	get_texture_color(t_hit *hit)
-{
-	t_vec3	u_axis;
-	t_vec3	v_axis;
-	t_vec3	tmp_up;
-	t_vec3	hit_to_point;
-
-	if (fabs(hit->normal.y) > 1.0 - EPSILON)
-		tmp_up = (t_vec3){0, 0, 1};
+	if (hit->object->type == OBJ_PLANE)
+	{
+		i = (int)floor(hit->uv.u / SCALE_S);
+		j = (int)floor(hit->uv.v / SCALE_S);
+		if ((i + j) % 2)
+			return ((t_color){255, 0, 0});
+		return ((t_color){0, 0, 255});
+	}
 	else
-		tmp_up = (t_vec3){0, 1, 0};
-	u_axis = vec_normalize(vec_cross(tmp_up, hit->normal));
-	v_axis = vec_normalize(vec_cross(hit->normal, u_axis));
-	hit_to_point = vec_sub(hit->point, hit->object->u_data.plane.point);
-	return (calculate_checker(hit_to_point, u_axis, v_axis));
+	{
+		i = (int)floor(hit->uv.u / SCALE_L);
+		j = (int)floor(hit->uv.v / SCALE_L);
+		if ((i + j) % 2)
+			return ((t_color){0, 0, 0});
+		return ((t_color){255, 255, 255});
+	}
 }

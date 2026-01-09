@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/08 12:10:18 by yingzhan          #+#    #+#             */
+/*   Updated: 2026/01/08 12:10:19 by yingzhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt_bonus.h"
 
 int	main(int argc, char *argv[])
@@ -8,7 +20,6 @@ int	main(int argc, char *argv[])
 	scene = parse_scene(argc, argv);
 	if (!scene)
 		return (1);
-	print_scene(scene);
 	data = malloc(sizeof(t_mlx_data));
 	if (!data)
 		return (error(FAIL_MEM_ALLOC), 1);
