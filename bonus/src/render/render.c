@@ -6,7 +6,7 @@
 /*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:05:13 by yingzhan          #+#    #+#             */
-/*   Updated: 2026/01/08 12:05:14 by yingzhan         ###   ########.fr       */
+/*   Updated: 2026/01/09 12:46:08 by yingzhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,35 @@ static t_color	set_bg_color(void)
 	color.g = 0;
 	color.b = 0;
 	return (color);
+}
+
+/**
+ * Display the progress of render;
+ * display percentage after rendering every 10 lines of pixels;
+ * \r: move to the start of line to rewrite
+ * fflush(): output immediately without delay
+ */
+static void	display_progress(int j)
+{
+	int	progress;
+
+	if (!j)
+	{
+		printf("Start rendering");
+	}
+	else if (j % 10 == 0 && j < WIN_HEIGHT - 1)
+	{
+		progress = j * 100 / WIN_HEIGHT;
+		printf("\rRender progress: %d%%", progress);
+		fflush(stdout);
+	}
+	else if (j == WIN_HEIGHT - 1)
+	{
+		printf("\rRender progress: 100%%");
+		fflush(stdout);
+		printf("\n");
+	}
+	return ;
 }
 
 /**
@@ -54,6 +83,7 @@ void	render_scene(t_mlx_data *data)
 			mlx_put_color_to_image(data, color, i, j);
 			i++;
 		}
+		display_progress(j);
 		j++;
 	}
 	mlx_put_image_to_window(data->mlx, data->window, data->image, 0, 0);
