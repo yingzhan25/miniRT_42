@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: javokhir <javokhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:10:02 by yingzhan          #+#    #+#             */
-/*   Updated: 2026/01/08 12:10:03 by yingzhan         ###   ########.fr       */
+/*   Updated: 2026/01/09 13:25:12 by javokhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ static int	handle_close(t_mlx_data *data)
 		free_scene(data->scene);
 	if (data->mlx)
 	{
+# ifndef __APPLE__
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
+# endif
 		data->mlx = NULL;
 	}
 	free(data);
@@ -50,7 +52,12 @@ static int	handle_keypress(int keycode, t_mlx_data *data)
 
 void	handle_events(t_mlx_data *data)
 {
+# ifdef __APPLE__
+	mlx_key_hook(data->window, handle_keypress, data);
+	mlx_hook(data->window, 17, 0, handle_close, data);
+# else
 	mlx_hook(data->window, KeyPress, KeyPressMask, handle_keypress, data);
 	mlx_hook(data->window, DestroyNotify, 0, handle_close, data);
+# endif
 	mlx_loop(data->mlx);
 }

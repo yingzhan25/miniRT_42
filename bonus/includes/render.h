@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: javokhir <javokhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:01:53 by yingzhan          #+#    #+#             */
-/*   Updated: 2026/01/08 12:11:48 by yingzhan         ###   ########.fr       */
+/*   Updated: 2026/01/09 13:25:02 by javokhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,23 @@
 
 # include "scene.h"
 # include <math.h>
-# include "/usr/local/include/mlx.h"
-// # include "../../mlx/mlx.h"
-# include <X11/X.h>
+
+# ifdef __APPLE__
+#  include "../../mlx_macos/mlx.h"
+# else
+#  include "/usr/local/include/mlx.h"
+#  include <X11/X.h>
+# endif
 
 // Number of pixels, can be changed to 1920*1080
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
-# define M_PI 3.14159265358979323846
-# define KEY_ESC 65307
+
+# ifdef __APPLE__
+#  define KEY_ESC 53
+# else
+#  define KEY_ESC 65307
+# endif
 // Ray definition
 typedef struct s_ray
 {
