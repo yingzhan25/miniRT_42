@@ -15,8 +15,8 @@ CLEAN			= 🧹
 BONUS_ICON		= 💎
 
 # Program name
-NAME 			= minirt
-BONUS_NAME      = bonus_minirt
+NAME 			= miniRT
+BONUS_NAME      = bonus_miniRT
 
 # Compiler and flags
 CC 				= cc

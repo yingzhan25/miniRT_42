@@ -1,0 +1,8 @@
+# Change of light spot on spheres at (0,0,0) before and after translation
+
+A 0.2 255,255,255
+C 0,0,-10 0,0,1 70
+L 0,10,0 0.7 255,0,255
+sp 0,0,0 1 0,0,255
+sp -5,0,0 1 0,0,255
+sp 5,0,0 1 0,0,255
