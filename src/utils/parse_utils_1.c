@@ -6,7 +6,7 @@
 /*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:36:30 by yingzhan          #+#    #+#             */
-/*   Updated: 2026/01/08 12:36:31 by yingzhan         ###   ########.fr       */
+/*   Updated: 2026/01/09 14:11:33 by yingzhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,21 +71,18 @@ int	check_dot(char *s)
 
 /**
  * Check whether the scene file has a valid filename and ends with ".rt";
- * multiple entension(more than 1 dots) is forbidden
+ * edge cases:
+ * .rt is unvalid filename;
+ * filename with multiple .(path) is valid
  */
 int	check_extension(char *s1, char *s2)
 {
-	int	pos;
-	int	len;
+	char	*last_dot_pos;
 
 	if (!s1 || !s1[0])
 		return (1);
-	pos = check_dot(s1);
-	len = ft_strlen(s1);
-	if (!pos || pos == -1 || pos == len - 1)
-		return (1);
-	if (len <= (int)ft_strlen(s2) || \
-		ft_strcmp(s1 + len - (int)ft_strlen(s2), s2))
+	last_dot_pos = ft_strrchr(s1, '.');
+	if (!last_dot_pos || last_dot_pos == s1 || ft_strcmp(last_dot_pos, s2))
 		return (1);
 	return (0);
 }

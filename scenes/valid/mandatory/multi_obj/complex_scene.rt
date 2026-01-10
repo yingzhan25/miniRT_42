@@ -1,4 +1,5 @@
 # Complex scene description file for ray tracer
+# 4 spheres, 2 planes, 2 cylinders
 
 # Ambient lighting
 A 0.1 255,255,255

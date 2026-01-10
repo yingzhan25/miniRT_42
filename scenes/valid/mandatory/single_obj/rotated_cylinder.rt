@@ -1,0 +1,10 @@
+# 1 cylinder extending along y-axis
+# rotated 90 degree along z-zxis
+
+A 0.2 255,255,255
+C 0,0,-5 0,0,1 70
+L -10,10,0 0.7 255,0,255
+# Before rotation
+# cy 0,0,0 0,1,0 2 2 255,0,0
+# After rotation
+# cy 0,0,0 0,0,1 2 2 255,0,0
