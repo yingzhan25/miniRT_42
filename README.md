@@ -63,20 +63,6 @@ Scene highlighting the cylinder intersection algorithm and lighting.
 
 ## 🚀 Installation
 
-### Prerequisites
-
-#### For Linux: 
-- GCC compiler
-- Make
-- X11 development libraries
-- miniLibX library
-
-#### For macOS:
-- Clang or GCC
-- Make
-- Xcode Command Line Tools
-- miniLibX (included with the project or installed separately)
-
 ### Clone the Repository
 
 ```bash
@@ -213,48 +199,30 @@ co -20,0,10 0,1,0 15 30 100,200,100 0.7 80 0 -
 
 #### Mandatory Elements
 
-| Identifier | Format | Description |
-|------------|--------|-------------|
-| **A** | `A ratio R,G,B` | Ambient lighting |
-| **C** | `C x,y,z nx,ny,nz fov` | Camera position, orientation, field of view |
-| **L** | `L x,y,z brightness R,G,B` | Light source |
-| **sp** | `sp x,y,z diameter R,G,B` | Sphere |
-| **pl** | `pl x,y,z nx,ny,nz R,G,B` | Plane |
-| **cy** | `cy x,y,z nx,ny,nz diameter height R,G,B` | Cylinder |
+| Identifier | Format | Parameters | Description |
+|------------|--------|------------|-------------|
+| **A** | `A ratio R,G,B` | **ratio**: `[0.0 - 1.0]` Ambient light ratio<br>**R,G,B**:  `[0 - 255]` Color values | Ambient lighting |
+| **C** | `C x,y,z nx,ny,nz fov` | **x,y,z**:  3D position coordinates<br>**nx,ny,nz**:  `[-1.0 - 1.0]` Normalized orientation vector<br>**fov**:  `[0 - 180]` Field of view in degrees | Camera position, orientation, field of view |
+| **L** | `L x,y,z brightness R,G,B` | **x,y,z**: 3D position coordinates<br>**brightness**: `[0.0 - 1.0]` Light brightness<br>**R,G,B**:  `[0 - 255]` Color values | Light source |
+| **sp** | `sp x,y,z diameter R,G,B` | **x,y,z**: 3D center position<br>**diameter**:  Positive value<br>**R,G,B**: `[0 - 255]` Color values | Sphere |
+| **pl** | `pl x,y,z nx,ny,nz R,G,B` | **x,y,z**: Point on the plane<br>**nx,ny,nz**: `[-1.0 - 1.0]` Normalized normal vector<br>**R,G,B**: `[0 - 255]` Color values | Plane |
+| **cy** | `cy x,y,z nx,ny,nz diameter height R,G,B` | **x,y,z**:  3D center position<br>**nx,ny,nz**:  `[-1.0 - 1.0]` Normalized axis vector<br>**diameter**:  Positive value<br>**height**:  Positive value<br>**R,G,B**: `[0 - 255]` Color values | Cylinder |
 
 #### Bonus Elements
 
-| Identifier | Format | Description |
-|------------|--------|-------------|
-| **L** | `L x,y,z brightness R,G,B` | **(Bonus)** Multiple lights allowed |
-| **sp** | `sp x,y,z diameter R,G,B specular shininess [texture]` | **(Bonus)** Sphere with materials |
-| **pl** | `pl x,y,z nx,ny,nz R,G,B specular shininess [texture]` | **(Bonus)** Plane with materials |
-| **cy** | `cy x,y,z nx,ny,nz diameter height R,G,B specular shininess [texture]` | **(Bonus)** Cylinder with materials |
-| **co** | `co x,y,z nx,ny,nz diameter height R,G,B [specular shininess] [texture]` | **(Bonus)** Cone |
+| Identifier | Format | Parameters | Description |
+|------------|--------|------------|-------------|
+| **co** | `co x,y,z nx,ny,nz diameter height R,G,B [specular shininess] [texture]` | **x,y,z**:  3D apex position<br>**nx,ny,nz**:  `[-1.0 - 1.0]` Normalized axis vector<br>**diameter**:  Positive value (base diameter)<br>**height**: Positive value<br>**R,G,B**:  `[0 - 255]` Color values<br>**specular**: `[0.0 - 1.0]` (optional)<br>**shininess**: `[2.0 - 200.0]` (optional)<br>**texture**: `checker` or `xpm path` (optional) | **(Bonus)** Cone |
 
-#### Texture Options (Bonus)
+#### Bonus Material Properties
 
-| Texture | Format | Description |
-|---------|--------|-------------|
-| **checker** | `checker` | Procedural checkerboard pattern |
-| **xpm** | `xpm path/to/texture.xpm` | XPM image texture mapping |
+**(Bonus)** All objects (sp, pl, cy, co) can be extended with optional material properties:
 
-### Parameter Details
-
-**Mandatory Parameters:**
-- **ratio**:  Ambient light ratio `[0.0 - 1.0]`
-- **brightness**: Light brightness `[0.0 - 1.0]`
-- **x,y,z**: 3D coordinates (position)
-- **nx,ny,nz**: 3D normalized orientation vector `[-1.0 - 1.0]`
-- **fov**: Field of view in degrees `[0 - 180]`
-- **R,G,B**:  Color values `[0 - 255]`
-- **diameter**: Object diameter (positive value)
-- **height**: Object height (positive value)
-
-**Bonus Parameters:**
-- **specular**: Specular reflection coefficient `[0.0 - 1.0]`
-- **shininess**: Material shininess/glossiness `[2.0 - 200.0]`
-- **texture**: Texture type (`checker` or `xpm path`)
+| Property | Format | Range/Options | Description |
+|----------|--------|---------------|-------------|
+| **specular** | Add after color:  `R,G,B specular` | `[0.0 - 1.0]` | Specular reflection coefficient for shiny surfaces |
+| **shininess** | Add after specular: `specular shininess` | `[2.0 - 200.0]` | Material shininess/glossiness (higher = shinier) |
+| **texture** | Add at end:  `[texture_type] [path]` | `checker` or `xpm path/to/file.xpm` | Texture mapping (procedural or image-based) |
 
 ### Format Rules
 
