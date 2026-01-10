@@ -6,7 +6,7 @@
 /*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:10:02 by yingzhan          #+#    #+#             */
-/*   Updated: 2026/01/08 12:10:03 by yingzhan         ###   ########.fr       */
+/*   Updated: 2026/01/10 19:01:29 by yingzhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
  */
 static int	handle_close(t_mlx_data *data)
 {
+	t_object	*obj;
+	obj = data->scene->objects;
 	if (data->image)
 		mlx_destroy_image(data->mlx, data->image);
 	if (data->window)
@@ -25,7 +27,15 @@ static int	handle_close(t_mlx_data *data)
 		data->window = NULL;
 	}
 	if (data->scene)
+	{
+		while (obj)
+		{
+			if (data->scene->objects->material.texture == TEXTURE_XPM)
+				mlx_destroy_image(data->mlx, obj->material.img.xpm_img);
+			obj = obj->next;
+		}
 		free_scene(data->scene);
+	}
 	if (data->mlx)
 	{
 		mlx_destroy_display(data->mlx);
