@@ -62,6 +62,9 @@ The basic ray tracing algorithm works as follows:
 <img width="1440" height="847" alt="Screenshot 2026-01-11 at 20 18 55" src="https://github.com/user-attachments/assets/dadcf7b3-4fa3-428c-8f80-1bbb59b9116f" />
 <p align="center"><i>Sphere and plane showcasing procedural checkerboard pattern</i></p>
 
+<img width="1440" height="847" alt="Screenshot 2026-01-11 at 21 24 53" src="https://github.com/user-attachments/assets/0064ce5b-0935-40eb-bb4e-ef9fe38368ef" />
+<p align="center"><i>Multiple spheres casting shadow on the checkerboard plane</i></p>
+
 ---
 
 ## 🚀 Installation
