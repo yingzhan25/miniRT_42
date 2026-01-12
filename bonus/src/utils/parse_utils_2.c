@@ -6,7 +6,7 @@
 /*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:09:44 by yingzhan          #+#    #+#             */
-/*   Updated: 2026/01/08 12:09:45 by yingzhan         ###   ########.fr       */
+/*   Updated: 2026/01/10 18:49:51 by yingzhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void	free_scene(t_scene *scene)
 	while (scene->objects)
 	{
 		next_obj = scene->objects->next;
+		if (scene->objects->material.texture == TEXTURE_XPM)
+		{
+			free(scene->objects->material.xpm_path);
+		}
 		free (scene->objects);
 		scene->objects = next_obj;
 	}

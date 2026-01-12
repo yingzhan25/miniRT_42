@@ -6,7 +6,7 @@
 /*   By: yingzhan <yingzhan@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:10:12 by yingzhan          #+#    #+#             */
-/*   Updated: 2026/01/08 12:10:13 by yingzhan         ###   ########.fr       */
+/*   Updated: 2026/01/12 11:19:50 by yingzhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ void	load_all_textures(t_scene *scene, void *mlx)
 	{
 		if (obj->material.texture == TEXTURE_XPM && obj->material.xpm_path)
 			load_texture_for_material(&obj->material, mlx);
+		else
+		{
+			obj->material.img.xpm_img = NULL;
+			obj->material.img.img_data = NULL;
+		}
 		obj = obj->next;
 	}
 }
